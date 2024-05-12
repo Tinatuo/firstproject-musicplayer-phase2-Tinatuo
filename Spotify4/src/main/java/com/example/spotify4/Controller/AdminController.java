@@ -1,5 +1,6 @@
 package com.example.spotify4.Controller;
 
+import com.example.spotify4.Controller.Exception.UserNotFoundException;
 import com.example.spotify4.Model.*;
 import com.example.spotify4.Model.Audio.Audio;
 import com.example.spotify4.Model.User.Admin;
@@ -23,12 +24,12 @@ public class AdminController extends UserController {
         return string;
     }
 
-    public String logIn(String userName, String password) {
+    public String logIn(String userName, String password) throws UserNotFoundException {
         String string = "";
         if (Objects.equals(Admin.getAdmin().getUserName(), userName) && Objects.equals(Admin.getAdmin().getPassword(), password)) {
             string = "Successful login enter";
         } else {
-            string = "this user doesn't exist or incorrect userName or password";
+            throw new UserNotFoundException();
         }
         return string;
     }

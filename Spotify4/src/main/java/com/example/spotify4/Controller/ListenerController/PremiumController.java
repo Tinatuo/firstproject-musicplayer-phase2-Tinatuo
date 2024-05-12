@@ -1,5 +1,6 @@
 package com.example.spotify4.Controller.ListenerController;
 
+import com.example.spotify4.Controller.Exception.LackOfCredit;
 import com.example.spotify4.Model.*;
 import com.example.spotify4.Model.Audio.Audio;
 import com.example.spotify4.Model.User.Listener.FreeListener;
@@ -36,7 +37,7 @@ public class PremiumController extends ListenerController {
     }
 
     @Override
-    public Listener purchaseOrRenewSubscription(String packageName) {
+    public Listener purchaseOrRenewSubscription(String packageName) throws LackOfCredit {
         Premium premium = null;
         PackageType package1=null;
         for (PackageType package2:PackageType.values()){
@@ -68,6 +69,8 @@ public class PremiumController extends ListenerController {
                 getListener().setAccountCredit(credit - 14);
                 return premiumListener;
             }
+        }else{
+            throw new LackOfCredit();
         }
         int remainingDays1= premium.getRemainingDays();
         premium.setRemainingDays(remainingDays1--);

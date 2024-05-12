@@ -1,7 +1,8 @@
 package com.example.spotify4.View;
 
 
-
+import com.example.spotify4.Controller.Exception.FreeAccountLimitException;
+import com.example.spotify4.Controller.Exception.LackOfCredit;
 import com.example.spotify4.Controller.ListenerController.FreeListenerController;
 import com.example.spotify4.Controller.ListenerController.ListenerController;
 import com.example.spotify4.Controller.ListenerController.PremiumController;
@@ -17,7 +18,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class ListenerView {
-    private static ListenerView listenerView=new ListenerView();
+    private static ListenerView listenerView = new ListenerView();
 
     private ListenerView() {
     }
@@ -44,7 +45,7 @@ public class ListenerView {
         } else if (Objects.equals(strCommand1[0], "ShowPlaylists ") || Objects.equals(strCommand1[0], "NewPlaylist ") || Objects.equals(strCommand1[0], "Add ") || Objects.equals(strCommand1[0], "Followings ")) {
             library(strCommand1);
         } else if (Objects.equals(strCommand1[0], "AccountInfo ")) {
-             ListenerController.getListenerController().showUserInfo();
+            ListenerController.getListenerController().showUserInfo();
         }
     }
 
@@ -66,7 +67,11 @@ public class ListenerView {
         String command2 = sc.nextLine();
         String[] strCommand2 = command2.split("-");
         if (Objects.equals(strCommand2[0], "Add ")) {
-            ListenerController.getListenerController().addAudioToPlayList(string2, Integer.parseInt(string3));
+            try {
+                ListenerController.getListenerController().addAudioToPlayList(string2, Integer.parseInt(string3));
+            } catch (FreeAccountLimitException e) {
+                System.out.println(e.getMessage());
+            }
         } else if (Objects.equals(strCommand2[0], "Play ")) {
             ListenerController.getListenerController().playAudio(Integer.parseInt(strCommand2[1]));
             System.out.println("you can: \n1)like the Audio \n2)see the lyric");
@@ -114,13 +119,21 @@ public class ListenerView {
             if (ListenerController.getListenerController().listener instanceof Premium) {
                 PremiumController.getPremiumController().makePlayList(strCommand1[1]);
             } else if (ListenerController.getListenerController().listener instanceof FreeListener) {
-                FreeListenerController.getFreeListenerController().makePlayList(strCommand1[1]);
+                try {
+                    FreeListenerController.getFreeListenerController().makePlayList(strCommand1[1]);
+                } catch (FreeAccountLimitException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         } else if (Objects.equals(strCommand1[0], "Add ")) {
             if (ListenerController.getListenerController().listener instanceof Premium) {
                 PremiumController.getPremiumController().addAudioToPlayList(strCommand1[1], Integer.valueOf(strCommand1[2]));
             } else if (ListenerController.getListenerController().listener instanceof FreeListener) {
-                FreeListenerController.getFreeListenerController().addAudioToPlayList(strCommand1[1], Integer.valueOf(strCommand1[2]));
+                try {
+                    FreeListenerController.getFreeListenerController().addAudioToPlayList(strCommand1[1], Integer.valueOf(strCommand1[2]));
+                } catch (FreeAccountLimitException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         } else if (Objects.equals(strCommand1[0], "Followings ")) {
             System.out.println(ListenerController.getListenerController().showFollowing());
@@ -143,13 +156,21 @@ public class ListenerView {
                 if (Objects.equals(strCommand7[0], "IncreaseCredit ")) {
                     FreeListenerController.getFreeListenerController().increaseCredit(Double.valueOf(strCommand7[1]));
                 } else if (Objects.equals(strCommand7[0], "GetPremium ")) {
-                    FreeListenerController.getFreeListenerController().purchaseOrRenewSubscription(strCommand7[1]);
+                    try {
+                        FreeListenerController.getFreeListenerController().purchaseOrRenewSubscription(strCommand7[1]);
+                    } catch (LackOfCredit e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
             } else if (ListenerController.getListenerController().listener instanceof Premium) {
                 if (Objects.equals(strCommand7[0], "IncreaseCredit ")) {
                     PremiumController.getPremiumController().increaseCredit(Double.parseDouble(strCommand7[1]));
                 } else if (Objects.equals(strCommand7[0], "GetPremium ")) {
-                    PremiumController.getPremiumController().purchaseOrRenewSubscription(strCommand7[1]);
+                    try {
+                        PremiumController.getPremiumController().purchaseOrRenewSubscription(strCommand7[1]);
+                    } catch (LackOfCredit e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
         }
@@ -173,9 +194,9 @@ public class ListenerView {
         } else if (Objects.equals(strCommand11[0], "Follow ")) {
             for (User user2 : DataBase.getDataBase().users) {
                 if (Objects.equals(user2.getUserName(), strCommand11[1])) {
-                  if(user2 instanceof Artist){
-                      ((Artist) user2).followers.add(ListenerController.getListenerController().listener);
-                  }
+                    if (user2 instanceof Artist) {
+                        ((Artist) user2).followers.add(ListenerController.getListenerController().listener);
+                    }
                 }
             }
         }

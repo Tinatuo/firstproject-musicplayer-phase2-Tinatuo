@@ -1,5 +1,7 @@
 package com.example.spotify4.Controller.ListenerController;
 
+import com.example.spotify4.Controller.Exception.FreeAccountLimitException;
+import com.example.spotify4.Controller.Exception.LackOfCredit;
 import com.example.spotify4.Model.*;
 import com.example.spotify4.Model.Audio.Audio;
 import com.example.spotify4.Model.User.Listener.FreeListener;
@@ -16,23 +18,29 @@ public class FreeListenerController extends ListenerController {
         return freeListenerController;
     }
     @Override
-    public void makePlayList(String playListName) {
+    public void makePlayList(String playListName) throws FreeAccountLimitException {
         int limit=((FreeListener)getListener()).getLimitMakePlayList();
         if(((FreeListener) getListener()).getLimitAddMusicToPlayList()>0) {
             PlayList newPlaylist = new PlayList(playListName, getListener().getUserName());
             getListener().playLists.add(newPlaylist);
             ((FreeListener) getListener()).setLimitAddMusicToPlayList(limit--);
+        }else {
+            throw new FreeAccountLimitException();
         }
     }
 
     @Override
-    public void addAudioToPlayList(String playListName,int ID) {
+    public void addAudioToPlayList(String playListName,int ID) throws FreeAccountLimitException {
+        int limit=((FreeListener)getListener()).getLimitAddMusicToPlayList();
     for(PlayList playList:this.getListener().playLists){
         if(Objects.equals(playList.getName(), playListName)){
             for(Audio audio2:playList.getAudoisList()) {
                 if (audio2.getID() == ID) {
-                    for (int i = ((FreeListener) this.getListener()).getLimitAddMusicToPlayList(); i > 0; i--) {
-                        playList.getAudoisList().add(audio2);
+                    if(((FreeListener) getListener()).getLimitAddMusicToPlayList()>0){
+                        playList.getAudoisList().remove(audio2);
+                        ((FreeListener) getListener()).setLimitAddMusicToPlayList(limit--);
+                    }else {
+                        throw new FreeAccountLimitException();
                     }
                 }
             }
@@ -41,7 +49,7 @@ public class FreeListenerController extends ListenerController {
     }
 
     @Override
-    public Listener purchaseOrRenewSubscription(String packageName) {
+    public Listener purchaseOrRenewSubscription(String packageName) throws LackOfCredit {
         Premium premium = null;
         PackageType package1=null;
         for (PackageType package2:PackageType.values()){
@@ -80,6 +88,8 @@ public class FreeListenerController extends ListenerController {
                 getListener().setAccountCredit(credit - 14);
                 return premiumListener;
             }
+        }else{
+            throw new LackOfCredit();
         }
         return premium;
     }

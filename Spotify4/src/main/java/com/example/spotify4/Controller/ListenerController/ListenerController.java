@@ -1,6 +1,7 @@
 package com.example.spotify4.Controller.ListenerController;
 
 import com.example.spotify4.Controller.*;
+import com.example.spotify4.Controller.Exception.*;
 import com.example.spotify4.Model.*;
 import com.example.spotify4.Model.Audio.Audio;
 import com.example.spotify4.Model.User.Artist.Artist;
@@ -39,7 +40,7 @@ public class ListenerController extends UserController {
         return this.listener;
     }
 
-    public String signUp(String userName, String password, String firstAndLastname, String email, String phoneNumber, int year, int mounth, int day, String biography) {
+    public String signUp(String userName, String password, String firstAndLastname, String email, String phoneNumber, int year, int mounth, int day, String biography) throws WrongPasswordException, InvalidFormatException {
         Date endDate = new Date(this.date.getYear(), this.date.getMonth() + 1, this.date.getDay());
         boolean flag = true;
         String string = null;
@@ -66,11 +67,11 @@ public class ListenerController extends UserController {
                 this.index = DataBase.getDataBase().users.indexOf(newListener);
                 string = "the registration operation was successful";
             } else if (!matcher1.matches()) {
-                string = "the password is invalid";
+                throw new WrongPasswordException();
             } else if (!matcher2.matches()) {
-                string = "the email is invalid";
+                throw new InvalidFormatException();
             } else if (!matcher3.matches()) {
-                string = "the phonenumber is invalid";
+                throw new InvalidFormatException();
             }
         }
 
@@ -104,7 +105,7 @@ public class ListenerController extends UserController {
         return favoriteGenre1;
     }
 
-    public String logIn(String userName, String password) {
+    public String logIn(String userName, String password) throws UserNotFoundException {
         String string = "";
         for (User user : DataBase.getDataBase().users) {
             if (user instanceof Listener) {
@@ -113,18 +114,18 @@ public class ListenerController extends UserController {
                     string = "Successful login enter";
                     this.listener.setFavoriteGenre(favGenre);
                 } else {
-                    string = "this user doesn't exist or incorrect userName or password";
+                    throw new UserNotFoundException();
                 }
             }
         }
         return string;
     }
 
-    public void makePlayList(String playListName) {
+    public void makePlayList(String playListName) throws FreeAccountLimitException {
 
     }
 
-    public void addAudioToPlayList(String playListName, int ID) {
+    public void addAudioToPlayList(String playListName, int ID) throws FreeAccountLimitException {
 
     }
 
@@ -296,7 +297,7 @@ public class ListenerController extends UserController {
         return string;
     }
 
-    public Listener purchaseOrRenewSubscription(String package1) {
+    public Listener purchaseOrRenewSubscription(String package1) throws LackOfCredit {
         Premium premium = null;
         return premium;
     }

@@ -1,5 +1,8 @@
 package com.example.spotify4.Controller.ArtistController;
 
+import com.example.spotify4.Controller.Exception.InvalidFormatException;
+import com.example.spotify4.Controller.Exception.UserNotFoundException;
+import com.example.spotify4.Controller.Exception.WrongPasswordException;
 import com.example.spotify4.Controller.UserController;
 import com.example.spotify4.Model.*;
 import com.example.spotify4.Model.Audio.Audio;
@@ -19,7 +22,7 @@ import java.util.regex.Pattern;
 
         return artistController;
     }
-    public  String signUp(String userName, String password, String firstAndLastname,String email, String phoneNumber, int year, int mounth, int day,String biography) {
+    public  String signUp(String userName, String password, String firstAndLastname,String email, String phoneNumber, int year, int mounth, int day,String biography) throws WrongPasswordException, InvalidFormatException {
         boolean flag = true;
         String string = null;
         Pattern pattern1 = Pattern.compile(User.regexPassword);
@@ -43,17 +46,17 @@ import java.util.regex.Pattern;
                 DataBase.getDataBase().users.add(newArtist);
                 string = "the registration operation was successful";
             } else if (!matcher1.matches()) {
-                string = "the password is invalid";
+                throw new WrongPasswordException();
             } else if (!matcher2.matches()) {
-                string = "the email is invalid";
+                throw new InvalidFormatException();
             } else if (matcher3.matches()) {
-                string = "the phonenumber is invalid";
+                throw new InvalidFormatException();
             }
         }
 
         return string;
     }
-    public String logIn(String userName, String password) {
+    public String logIn(String userName, String password) throws UserNotFoundException {
         String string = "";
         for (User user : DataBase.getDataBase().users) {
             if (user instanceof Artist) {
@@ -61,7 +64,7 @@ import java.util.regex.Pattern;
                     this.artist1=((Artist)user);
                     string = "Successful login enter";
                 } else {
-                    string = "this user doesn't exist or incorrect userName or password";
+                    throw new UserNotFoundException();
                 }
             }
         }
