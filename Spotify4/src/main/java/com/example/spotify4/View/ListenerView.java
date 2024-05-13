@@ -9,15 +9,18 @@ import com.example.spotify4.Controller.ListenerController.PremiumController;
 import com.example.spotify4.Model.Audio.Audio;
 import com.example.spotify4.Model.Audio.Music;
 import com.example.spotify4.Model.DataBase;
+import com.example.spotify4.Model.PlayList;
 import com.example.spotify4.Model.User.Artist.Artist;
 import com.example.spotify4.Model.User.Listener.FreeListener;
 import com.example.spotify4.Model.User.Listener.Premium;
 import com.example.spotify4.Model.User.User;
 
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
-public class ListenerView {
+public class ListenerView implements Iterable<PlayList> {
     private static ListenerView listenerView = new ListenerView();
 
     private ListenerView() {
@@ -96,7 +99,10 @@ public class ListenerView {
         System.out.println("----------------------------------");
         System.out.println("1)Show Playlist(use ShowPlaylists) \n2)Creat Playlist(use NewPlaylist -[playlist’s name]) \n3)add audio in playlist(use Add -[playlist’s name] -[audio’s ID]) \n4)Show followings \n5)Show user information(AccountInfo)");
         if (Objects.equals(strCommand1[0], "ShowPlaylists ")) {
-            System.out.println(ListenerController.getListenerController().showPlayLists());
+//            System.out.println(ListenerController.getListenerController().showPlayLists());
+            ListenerController.listenerController.listener.playLists.forEach(
+                    (playList)->{System.out.println(playList.getName());}
+            );
             System.out.println("Select the audio file to play");
             String command4 = sc.nextLine();
             String[] strCommand4 = command4.split("-");
@@ -201,5 +207,15 @@ public class ListenerView {
             }
         }
     }
+
+    @Override
+    public Iterator<PlayList> iterator() {
+        return null;
+    }
+
+    @Override
+    public void forEach(Consumer<? super PlayList> action) {
+        Iterable.super.forEach(action);
+    }//todo bepors
 }
 

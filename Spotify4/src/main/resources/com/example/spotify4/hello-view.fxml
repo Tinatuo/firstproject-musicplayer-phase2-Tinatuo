@@ -1,16 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.spotify4.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane fx:id="Anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="568.0" prefWidth="747.0" style="-fx-background-color: #191414.;" styleClass="-fx-background-color: #191414.;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify4.View.HelloController">
+   <children>
+      <ScrollPane hbarPolicy="NEVER" prefHeight="460.0" prefWidth="747.0" styleClass="root" AnchorPane.topAnchor="0.0">
+         <content>
+            <HBox prefHeight="459.0" prefWidth="747.0">
+               <children>
+                  <VBox prefHeight="459.0" prefWidth="102.0" styleClass="root">
+                     <children>
+                        <ImageView fitHeight="39.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Screenshot%202024-05-13%20074832.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <ImageView fx:id="homeButton" fitHeight="38.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Screenshot%202024-05-12%20213110.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <ImageView fx:id="searchButton1" fitHeight="38.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Screenshot%202024-05-12%20213145.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <ImageView fx:id="libraryButton" fitHeight="28.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Screenshot%202024-05-12%20213213.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Button fx:id="playListButon" blendMode="EXCLUSION" mnemonicParsing="false" prefHeight="29.0" prefWidth="89.0" stylesheets="@Style.css" text="PlayLists">
+                           <VBox.margin>
+                              <Insets left="5.0" right="2.0" top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="artistButton" blendMode="EXCLUSION" mnemonicParsing="false" prefHeight="29.0" prefWidth="89.0" text="Artist">
+                           <VBox.margin>
+                              <Insets left="5.0" right="2.0" top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="log" blendMode="EXCLUSION" cache="true" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Log in/out" textFill="#0e1d13" textOverrun="WORD_ELLIPSIS">
+                           <VBox.margin>
+                              <Insets left="5.0" right="2.0" top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="artistButton1" blendMode="EXCLUSION" layoutX="15.0" layoutY="199.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="89.0" text="Artist">
+                           <VBox.margin>
+                              <Insets left="5.0" right="2.0" top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="listsVbox" prefHeight="499.0" prefWidth="644.0" styleClass="root" stylesheets="@Style.css" />
+               </children>
+            </HBox>
+         </content>
+      </ScrollPane>
+      <HBox layoutX="1.0" layoutY="503.0" prefHeight="65.0" prefWidth="747.0" style="-fx-background-color: #191414.;">
+         <children>
+            <ImageView fx:id="songPhoto" fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="10.0" top="8.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+      <AnchorPane layoutX="30.0" layoutY="471.0" prefHeight="90.0" prefWidth="690.0">
+         <children>
+            <ImageView fx:id="playButton" fitHeight="47.0" fitWidth="47.0" layoutX="345.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" styleClass="MusicButton">
+               <image>
+                  <Image url="@Screenshot%202024-05-12%20223937.png" />
+               </image>
+            </ImageView>
+            <ImageView id="MusicButton" fx:id="previousButton" cache="true" fitHeight="47.0" fitWidth="47.0" layoutX="288.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" styleClass="MusicButton">
+               <image>
+                  <Image url="@Screenshot%202024-05-12%20224034.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="nextButton" fitHeight="47.0" fitWidth="47.0" layoutX="405.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" styleClass="MusicButton" AnchorPane.topAnchor="9.0">
+               <image>
+                  <Image url="@Screenshot%202024-05-12%20224405.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+   <stylesheets>
+      <URL value="@Style.css" />
+      <URL value="@Style.css" />
+      <URL value="@Style.css" />
+   </stylesheets>
+</AnchorPane>

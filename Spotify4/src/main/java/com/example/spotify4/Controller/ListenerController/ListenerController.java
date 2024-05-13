@@ -13,10 +13,11 @@ import com.example.spotify4.Model.User.User;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ListenerController extends UserController {
+public class ListenerController extends UserController  {
     public Listener listener;
     public static ListenerController listenerController;
     public Date date = new Date();
@@ -272,13 +273,14 @@ public class ListenerController extends UserController {
         return string;
     }
 
-    public String showPlayLists() {
-        String string = "Playlist:";
-        for (int j = 0; j < this.listener.playLists.size(); j++) {
-            string += "\n" + j + this.listener.playLists.get(j);
-        }
-        return string;
-    }
+//    public String showPlayLists() {
+//        String string = "Playlist:";
+//        for (int j = 0; j < this.listener.playLists.size(); j++) {
+//            string += "\n" + j + this.listener.playLists.get(j);
+//        }
+//        return string;
+//    }
+
 
     public String inSideOfPlayList(String playListName) {
         String string = "Audios:";
@@ -352,6 +354,7 @@ public class ListenerController extends UserController {
 
         return string;
     }
+
 
 
 }
