@@ -273,13 +273,22 @@ public class ListenerController extends UserController  {
         return string;
     }
 
-//    public String showPlayLists() {
-//        String string = "Playlist:";
-//        for (int j = 0; j < this.listener.playLists.size(); j++) {
-//            string += "\n" + j + this.listener.playLists.get(j);
-//        }
-//        return string;
-//    }
+    public String showPlayLists() {
+        String string = "Playlist:";
+        for (int j = 0; j < this.listener.playLists.size(); j++) {
+            string += "\n" + j + this.listener.playLists.get(j);
+        }
+        return string;
+    }
+    public int indexOfPlayList(String playListName){
+        int index=0;
+        for (int i = 0; i < this.listener.playLists.size(); i++) {
+            if (this.listener.playLists.get(i).getName().equals(playListName)) {
+                index=i;
+            }
+        }
+        return index;
+    }
 
 
     public String inSideOfPlayList(String playListName) {

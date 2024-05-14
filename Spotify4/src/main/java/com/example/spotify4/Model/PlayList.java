@@ -3,8 +3,9 @@ package com.example.spotify4.Model;
 import com.example.spotify4.Model.Audio.Audio;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class PlayList {
+public class PlayList implements Iterable<Audio> {
     private int ID=makeID();
     private String name;
     private String userCreatorName;
@@ -64,5 +65,24 @@ public class PlayList {
             id = (int) (id /Math.pow(10.0,length - Max_Length ));
         }
         return  id;
+    }
+int index=0;
+    @Override
+    public Iterator<Audio> iterator() {
+        return new Iterator<Audio>() {
+            @Override
+            public boolean hasNext() {
+                if(index<audoisList.size()){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
+            @Override
+            public Audio next() {
+                return audoisList.get(index++);
+            }
+        };
     }
 }

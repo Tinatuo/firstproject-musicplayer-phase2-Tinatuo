@@ -3,8 +3,18 @@
 }
 .button{
     -fx-background-color: #18c64c;
+    -fx-text-fill: #191414;
+    -fx-background-radius: 8%;
+    -fx-border-radius: 8%;
 }
 .PlayMusicBar
 {
     -fx-background-color: #18c64c;
+}
+.Label{
+    -fx-text-fill: #ffffff;
+}
+.MenuButton{
+    -fx-background-color: #18c64c;
+    -fx-text-fill: #191414;
 }

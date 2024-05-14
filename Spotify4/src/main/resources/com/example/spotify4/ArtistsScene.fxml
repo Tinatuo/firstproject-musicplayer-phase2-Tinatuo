@@ -7,10 +7,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="507.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify4.View.ArtistsScene">
+<AnchorPane prefHeight="507.0" prefWidth="742.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify4.View.ArtistsScene">
    <children>
-      <Label alignment="CENTER" layoutX="287.0" layoutY="13.0" prefHeight="61.0" prefWidth="187.0" text="Artists" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="287.0" layoutY="13.0" prefHeight="61.0" prefWidth="187.0" text="Artists" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Cambria Bold" size="32.0" />
          </font>

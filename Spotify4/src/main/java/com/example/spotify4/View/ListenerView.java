@@ -20,7 +20,7 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-public class ListenerView implements Iterable<PlayList> {
+public class ListenerView {
     private static ListenerView listenerView = new ListenerView();
 
     private ListenerView() {
@@ -99,10 +99,12 @@ public class ListenerView implements Iterable<PlayList> {
         System.out.println("----------------------------------");
         System.out.println("1)Show Playlist(use ShowPlaylists) \n2)Creat Playlist(use NewPlaylist -[playlist’s name]) \n3)add audio in playlist(use Add -[playlist’s name] -[audio’s ID]) \n4)Show followings \n5)Show user information(AccountInfo)");
         if (Objects.equals(strCommand1[0], "ShowPlaylists ")) {
-//            System.out.println(ListenerController.getListenerController().showPlayLists());
-            ListenerController.listenerController.listener.playLists.forEach(
-                    (playList)->{System.out.println(playList.getName());}
-            );
+            System.out.println(ListenerController.getListenerController().showPlayLists());
+            System.out.println("select a playlist");
+            String command2 = sc.nextLine();
+            for(Audio Audios:ListenerController.listenerController.getListener().playLists.get(ListenerController.getListenerController().indexOfPlayList(command2))){
+                System.out.println(Audios.getName());
+            }
             System.out.println("Select the audio file to play");
             String command4 = sc.nextLine();
             String[] strCommand4 = command4.split("-");
@@ -207,15 +209,5 @@ public class ListenerView implements Iterable<PlayList> {
             }
         }
     }
-
-    @Override
-    public Iterator<PlayList> iterator() {
-        return null;
-    }
-
-    @Override
-    public void forEach(Consumer<? super PlayList> action) {
-        Iterable.super.forEach(action);
-    }//todo bepors
 }
 
