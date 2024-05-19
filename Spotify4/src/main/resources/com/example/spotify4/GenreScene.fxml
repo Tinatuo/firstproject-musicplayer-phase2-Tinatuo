@@ -112,6 +112,7 @@
             </AnchorPane>
          </children>
       </GridPane>
+
       <Button fx:id="sub1" layoutX="295.0" layoutY="530.0" mnemonicParsing="false" onMouseClicked="#sub1" prefHeight="32.0" prefWidth="74.0" text="submit">
          <font>
             <Font name="System Bold" size="14.0" />
