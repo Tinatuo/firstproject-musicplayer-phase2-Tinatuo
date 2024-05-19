@@ -499,7 +499,12 @@ public class PlayScene implements  GeneralOperation {
                 try {
                     ChangeScene.homeScene();
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("error");
+                    alert.setContentText("RunTime exception");
+                    alert.show();
+                }finally {
+                    System.out.println("Have a good day");
                 }
             }
         });
@@ -511,7 +516,12 @@ public class PlayScene implements  GeneralOperation {
             try {
                 ChangeScene.entryScene();
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("error");
+                alert.setContentText("RunTime exception");
+                alert.show();
+            }finally {
+                System.out.println("Have a good day");
             }
         });
     }
@@ -522,7 +532,12 @@ public class PlayScene implements  GeneralOperation {
             try {
                 ChangeScene.signUpScene();
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("error");
+                alert.setContentText("RunTime exception");
+                alert.show();
+            }finally {
+                System.out.println("Have a good day");
             }
         });
     }
@@ -533,7 +548,12 @@ public class PlayScene implements  GeneralOperation {
             try {
                 ChangeScene.searchScene();
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("error");
+                alert.setContentText("RunTime exception");
+                alert.show();
+            }finally {
+                System.out.println("Have a good day");
             }
         });
     }

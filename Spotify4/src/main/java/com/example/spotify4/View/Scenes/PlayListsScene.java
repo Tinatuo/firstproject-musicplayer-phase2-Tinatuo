@@ -10,6 +10,7 @@ import com.example.spotify4.View.SceneStack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -154,7 +155,12 @@ public class PlayListsScene implements Initializable , GeneralOperation {
                 try {
                     ChangeScene.homeScene();
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("error");
+                    alert.setContentText("RunTime exception");
+                    alert.show();
+                }finally {
+                    System.out.println("Have a good day");
                 }
             }
         });
@@ -167,7 +173,12 @@ public class PlayListsScene implements Initializable , GeneralOperation {
                 try {
                     ChangeScene.entryScene();
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("error");
+                    alert.setContentText("RunTime exception");
+                    alert.show();
+                }finally {
+                    System.out.println("Have a good day");
                 }
             }
         });
@@ -187,7 +198,12 @@ public class PlayListsScene implements Initializable , GeneralOperation {
             try {
                 ChangeScene.ListenerPanelScene();
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("error");
+                alert.setContentText("RunTime exception");
+                alert.show();
+            }finally {
+                System.out.println("Have a good day");
             }
         });
     }
@@ -230,7 +246,12 @@ public class PlayListsScene implements Initializable , GeneralOperation {
                 try {
                     ChangeScene.audioOfPlayListScene();
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("error");
+                    alert.setContentText("RunTime exception");
+                    alert.show();
+                }finally {
+                    System.out.println("Have a good day");
                 }
             });
         }

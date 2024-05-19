@@ -7,6 +7,7 @@ import com.example.spotify4.View.SceneStack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -69,68 +70,6 @@ public class SearchScene implements Initializable {
             ChangeScene.stage.setScene(SceneStack.sceneStack.pop());
             ChangeScene.stage.show();
     }
-//    @FXML
-//    static void nextButton(javafx.scene.input.MouseEvent event) {
-//        int index;
-//        if (audio5IsPlaying) {
-//            index =searchArray.indexOf(audio5);
-//            audio5 = searchArray.get(++index);
-//            audio5.getMediaPlayer().play();
-//            songPhoto.setImage(audio5.getImage());
-//            musicName.setText(audio5.getName());
-//        } else if (HomeScene.audio1IsPlaying) {
-//            HomeScene.nextButton(event);
-//        } else if (AudiosScene.audio2IsPlaying) {
-//            AudiosScene.nextButton(event);
-//        } else if (AudiosOfPlaylist.audio6IsPlaying) {
-//            AudiosOfPlaylist.nextButton(event);
-//        }
-//    }
-
-//    @FXML
-//    static void playButton(javafx.scene.input.MouseEvent event) {
-//        String path1 = Main.class.getResource("61180").toExternalForm();
-//        String path2 = Main.class.getResource("Screenshot_2024-05-12_223937-removebg-preview (2)").toExternalForm();
-//        Image image1 = new Image(path1);
-//        Image image2 = new Image(path2);
-//        if (audio5IsPlaying) {
-//            if (playButton.getImage() == image2) {
-//                playButton.setImage(image1);
-//                audio5.getMediaPlayer().play();
-//                songPhoto.setImage(audio5.getImage());
-//                musicName.setText(audio5.getName());
-//            } else if (playButton.getImage() == image1) {
-//                playButton.setImage(image2);
-//                audio5.getMediaPlayer().pause();
-//                songPhoto.setImage(audio5.getImage());
-//                musicName.setText(audio5.getName());
-//            }
-//        } else if (HomeScene.audio1IsPlaying) {
-//            HomeScene.playButton(event);
-//        } else if (AudiosScene.audio2IsPlaying) {
-//            AudiosScene.playButton(event);
-//        } else if(AudiosOfPlaylist.audio6IsPlaying) {
-//            AudiosScene.playButton(event);
-//        }
-//    }
-
-//    @FXML
-//    static void previousButton(javafx.scene.input.MouseEvent event) {
-//        int index;
-//        if (audio5IsPlaying) {
-//            index =searchArray.indexOf(audio5);
-//            audio5 = searchArray.get(--index);
-//            audio5.getMediaPlayer().play();
-//            songPhoto.setImage(audio5.getImage());
-//            musicName.setText(audio5.getName());
-//        } else if (HomeScene.audio1IsPlaying) {
-//            HomeScene.previousButton(event);
-//        } else if (AudiosScene.audio2IsPlaying) {
-//            AudiosScene.previousButton(event);
-//        } else if (AudiosOfPlaylist.audio6IsPlaying){
-//            AudiosScene.previousButton(event);
-//        }
-//    }
 
 
     public HBox setHBox(Audio audio) {
@@ -159,7 +98,12 @@ public class SearchScene implements Initializable {
             try {
                 ChangeScene.playScene();
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("error");
+                alert.setContentText("RunTime exception");
+                alert.show();
+            }finally {
+                System.out.println("Have a good day");
             }
         });
         return hBox;

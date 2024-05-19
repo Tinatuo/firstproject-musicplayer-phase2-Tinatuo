@@ -137,7 +137,12 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
             try {
                 ChangeScene.ListenerPanelScene();
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("error");
+                alert.setContentText("RunTime exception");
+                alert.show();
+            }finally {
+                System.out.println("Have a good day");
             }
         });
     }
@@ -152,6 +157,8 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setContentText("You don't have enough free playlists to add playlist");
+                }finally {
+                    System.out.println("Have a good day");
                 }
             });
         } else if (ListenerController.getListenerController().listener instanceof Premium) {
@@ -194,7 +201,12 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
                 try {
                     ChangeScene.homeScene();
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("error");
+                    alert.setContentText("RunTime exception");
+                    alert.show();
+                }finally {
+                    System.out.println("Have a good day");
                 }
             }
         });
@@ -207,7 +219,12 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
                 try {
                     ChangeScene.entryScene();
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("error");
+                    alert.setContentText("RunTime exception");
+                    alert.show();
+                }finally {
+                    System.out.println("Have a good day");
                 }
             }
         });
@@ -257,7 +274,12 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
                 try {
                     ChangeScene.audioOfPlayListScene();
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("error");
+                    alert.setContentText("RunTime exception");
+                    alert.show();
+                }finally {
+                    System.out.println("Have a good day");
                 }
             });
         }
@@ -268,7 +290,12 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
                 try {
                     ChangeScene.artistInfoScene();
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("error");
+                    alert.setContentText("RunTime exception");
+                    alert.show();
+                }finally {
+                    System.out.println("Have a good day");
                 }
             });
         }

@@ -202,7 +202,10 @@ public class SignUpScene implements Initializable {
                 try {
                     ChangeScene.genreScene();
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("error");
+                    alert.setContentText("RunTime exception");
+                    alert.show();
                 }
             } else if (Objects.equals(typeOfUser.getSelectionModel().getSelectedItem(), "Artist")) {
                 try {
@@ -212,12 +215,18 @@ public class SignUpScene implements Initializable {
                     alert.setContentText("successfully signed up");
                     alert.show();
                 } catch (WrongPasswordException | InvalidFormatException e) {
-                    throw new RuntimeException(e);
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("error");
+                    alert.setContentText("RunTime exception");
+                    alert.show();
                 }
                 try {
                     ChangeScene.homeScene();
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("error");
+                    alert.setContentText("RunTime exception");
+                    alert.show();
                 }
             } else if (Objects.equals(typeOfUser.getSelectionModel().getSelectedItem(), "Admin")) {
 
@@ -228,12 +237,18 @@ public class SignUpScene implements Initializable {
                     alert.setContentText("successfully signed up");
                     alert.show();
                 } catch (WrongPasswordException | InvalidFormatException e) {
-                    throw new RuntimeException(e);
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("error");
+                    alert.setContentText("RunTime exception");
+                    alert.show();
                 }
                 try {
                     ChangeScene.homeScene();
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("error");
+                    alert.setContentText("RunTime exception");
+                    alert.show();
                 }
 
             }
