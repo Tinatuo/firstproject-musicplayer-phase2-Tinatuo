@@ -1,28 +1,82 @@
 package com.example.spotify4.Model.Audio;
 
+import com.example.spotify4.Main;
 import com.example.spotify4.Model.Genre;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.util.Date;
 
-public abstract class Audio {
-    private int ID=makeID();
+public class Audio implements Comparable<Audio> {
+    private int ID = makeID();
     private String name;
     private String artistName;
-    private long numberOfPlay=0;
-    private long numberOfLike=0;
+    private long numberOfPlay = 0;
+    private long numberOfLike = 0;
     private Date release;
     private Genre genre;
     private String link;
     private String cover;
+    private ImageView audioPhoto;
+    private Media audio;
+    private MediaPlayer mediaPlayer;
+    Audio audio1;
 
-    public Audio(String name, String artistName, int year,int mounth,int day, Genre genre, String link, String cover) {
+    public void setRelease(Date release) {
+        this.release = release;
+    }
+
+    public void setAudio(Media audio) {
+        this.audio = audio;
+    }
+
+    public void setMediaPlayer(MediaPlayer mediaPlayer) {
+        this.mediaPlayer = mediaPlayer;
+    }
+
+    public Media getAudio() {
+        return audio;
+    }
+
+    public MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
+    }
+
+    public ImageView getAudioPhoto() {
+        return audioPhoto;
+    }
+
+    public void setAudioPhoto(ImageView audioPhoto) {
+        this.audioPhoto = audioPhoto;
+    }
+
+    private Image image;
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public Audio(String name, String artistName, int year, int mounth, int day, Genre genre, String link, String cover, String imageView) {
         this.name = name;
         this.artistName = artistName;
-        this.release = new Date(year,mounth,day);
+        this.release = new Date(year, mounth, day);
         this.genre = genre;
         this.link = link;
         this.cover = cover;
+        String path = (Main.class.getResource(imageView)).toExternalForm();
+        image = new Image(path);
+        audioPhoto = new ImageView(image);
+        this.audio = new Media(link);
+        this.mediaPlayer = new MediaPlayer(audio);
+        this.audio1 = new Audio(name, artistName, year, mounth, day, genre, link, cover, imageView);
     }
+
     public void setID(int ID) {
         this.ID = ID;
     }
@@ -43,8 +97,8 @@ public abstract class Audio {
         this.numberOfLike = numberOfLike;
     }
 
-    public void setRelease(int year,int mounth,int day) {
-        this.release =new Date(year,mounth,day) ;
+    public void setRelease(int year, int mounth, int day) {
+        this.release = new Date(year, mounth, day);
     }
 
     public void setGenre(Genre genre) {
@@ -94,20 +148,53 @@ public abstract class Audio {
     public String getCover() {
         return cover;
     }
-    public String toString(){
+
+    public String toString() {
         String string;
-        string="name:"+name+"\nID:"+ID+"\nModel.User.Artist's name:"+artistName+"\nThe number of play:"+numberOfPlay+"\nThe number of likes"+numberOfLike+"\nData of release:"+release+"\ngenre:"+genre+"\nLink:"+link+"\nCover:"+cover;
+        string = "name:" + name + "\nID:" + ID + "\nModel.User.Artist's name:" + artistName + "\nThe number of play:" + numberOfPlay + "\nThe number of likes" + numberOfLike + "\nData of release:" + release + "\ngenre:" + genre + "\nLink:" + link + "\nCover:" + cover;
         return string;
     }
+
     public int makeID() {
 
         int id = this.name.hashCode() + this.getArtistName().hashCode();
         int length = String.valueOf(id).length();
         int Max_Length = 5;
-        if(String.valueOf(id).length()>Max_Length)
-        {
-            id = (int) (id /Math.pow(10.0,length - Max_Length ));
+        if (String.valueOf(id).length() > Max_Length) {
+            id = (int) (id / Math.pow(10.0, length - Max_Length));
         }
-        return  id;
+        return id;
+    }
+
+    @Override
+    public int compareTo(Audio audio) {
+        for (int i = 0; i < audio.name.length(); i++) {
+            if (this.name.charAt(i) > audio.name.charAt(i)) {
+                return 1;
+            } else if (this.name.charAt(i) < audio.name.charAt(i)) {
+                return -1;
+            } else if (this.name.charAt(i) == audio.name.charAt(i)) {
+                if (this.numberOfLike > audio.numberOfLike) {
+                    return 1;
+                } else if (this.numberOfLike < audio.numberOfLike) {
+                    return -1;
+                } else if (this.numberOfLike == audio.numberOfLike) {
+                    if ((audio instanceof Podcast) && (audio1 instanceof Music)) {
+                        return 1;
+                    } else if ((audio instanceof Music) && (audio1 instanceof Podcast)) {
+                        return -1;
+                    } else {
+                        if (this.numberOfPlay > audio.numberOfPlay) {
+                            return 1;
+                        } else if (audio.numberOfPlay > this.numberOfPlay) {
+                            return -1;
+                        } else if (this.numberOfPlay == audio.numberOfPlay) {
+                            return 0;
+                        }
+                    }
+                }
+            }
+        }
+        return 0;
     }
 }

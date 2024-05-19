@@ -19,23 +19,23 @@ public class PodcasterController extends ArtistController {
     @Override
     public double calculateIncome() {
         double inCome1 = 0;
-        if(artist1 instanceof Podcaster){
+        if(artistController.getArtist1() instanceof Podcaster){
             for (Audio audio: DataBase.getDataBase().audios){
-                if(Objects.equals(audio.getArtistName(), artist1.getUserName())){
+                if(Objects.equals(audio.getArtistName(), artistController.getArtist1().getUserName())){
                     inCome1+=(audio.getNumberOfPlay()*0.5);
                 }
             }
         }
         return inCome1;
     }
-    public void publishPodcast(String title, String genreName, String caption, String link, String cover){
+    public void publishPodcast(String title, String genreName, String caption, String link, String cover,String imageView){
         Genre genre = null;
         for(Genre genre1:Genre.values()){
             if(genre1.name().equals(genreName)){
                 genre=genre1;
             }
         }
-        Podcast newPodcast=new Podcast(title,artist1.getUserName(),date2.getYear(), date2.getMonth(),date2.getDay(),genre,link,cover,caption);
-        ((Podcaster)artist1).podcasts.add(newPodcast);
+        Podcast newPodcast=new Podcast(title,artistController.getArtist1().getUserName(),date2.getYear(), date2.getMonth(),date2.getDay(),genre,link,cover,caption,imageView);
+        ((Podcaster)artistController.getArtist1()).podcasts.add(newPodcast);
     }
 }

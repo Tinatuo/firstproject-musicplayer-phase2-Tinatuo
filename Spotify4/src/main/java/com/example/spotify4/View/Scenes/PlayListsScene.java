@@ -1,0 +1,253 @@
+package com.example.spotify4.View.Scenes;
+
+import com.example.spotify4.Controller.AdminController;
+import com.example.spotify4.Controller.ArtistController.ArtistController;
+import com.example.spotify4.Controller.ListenerController.ListenerController;
+import com.example.spotify4.Model.GeneralOperation;
+import com.example.spotify4.Model.PlayList;
+import com.example.spotify4.Model.User.Artist.Artist;
+import com.example.spotify4.View.SceneStack;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class PlayListsScene implements Initializable , GeneralOperation {
+
+    @FXML
+    private AnchorPane Anchorpane;
+
+    @FXML
+    private Button login;
+
+    @FXML
+    private Button logout;
+
+    @FXML
+    private Button audiosButton1;
+
+    @FXML
+    private Button backButton;
+
+    @FXML
+    private ImageView homeButton;
+
+    @FXML
+    private ImageView libraryButton;
+
+    @FXML
+    private VBox listsVbox;
+
+
+    @FXML
+    private Label musicName;
+
+    @FXML
+    private ImageView nextButton;
+
+    @FXML
+    private ImageView playButton;
+
+    @FXML
+    private Button playListButton;
+
+    @FXML
+    private Label playLists;
+
+    @FXML
+    private ImageView previousButton;
+
+    @FXML
+    private ImageView searchButton1;
+
+    @FXML
+    private Button signUpButton;
+
+    @FXML
+    private ImageView songPhoto;
+
+    @FXML
+    private ImageView songPhoto1;
+
+    @FXML
+    private VBox vBox;
+
+
+    @FXML
+    void audiosButton1(MouseEvent event) throws IOException {
+        ChangeScene.audiosScene();
+    }
+
+
+    @FXML
+    void nextButton(MouseEvent event) {
+        if (HomeScene.audio1IsPlaying) {
+            HomeScene.nextButton(event);
+        } else if (AudiosScene.audio2IsPlaying) {
+            AudiosScene.audiosScene.nextButton(event);
+        } else if (ArtistInfoScene.audio3IsPlaying) {
+            ArtistInfoScene.nextButton(event);
+        } else if (AudiosOfPlaylist.audio6IsPlaying) {
+            AudiosOfPlaylist.nextButton(event);
+        }
+    }
+
+    @FXML
+    void playButton(MouseEvent event) {
+        if (HomeScene.audio1IsPlaying) {
+            HomeScene.playButton(event);
+        } else if (AudiosScene.audio2IsPlaying) {
+            AudiosScene.audiosScene.playButton(event);
+        } else if (ArtistInfoScene.audio3IsPlaying) {
+            ArtistInfoScene.playButton(event);
+        } else if (AudiosOfPlaylist.audio6IsPlaying) {
+            AudiosOfPlaylist.playButton(event);
+        }
+    }
+
+    @FXML
+    void playListButton(MouseEvent event) throws IOException {
+        ChangeScene.plaListsScene();
+    }
+
+    @FXML
+    void previousButton(MouseEvent event) {
+        if (HomeScene.audio1IsPlaying) {
+            HomeScene.previousButton(event);
+        } else if (AudiosScene.audio2IsPlaying) {
+            AudiosScene.audiosScene.previousButton(event);
+        } else if (ArtistInfoScene.audio3IsPlaying) {
+            ArtistInfoScene.previousButton(event);
+        } else if (AudiosOfPlaylist.audio6IsPlaying) {
+            AudiosOfPlaylist.previousButton(event);
+        }
+    }
+    @FXML
+    void musicName(MouseEvent event) throws IOException {
+        ChangeScene.playScene();
+    }
+    @Override
+    public void backTo() {
+        backButton.setOnMouseClicked((e)->{
+            ChangeScene.stage.setScene(SceneStack.sceneStack.pop());
+        });
+    }
+
+    @Override
+    public void logout() {
+        logout.setOnMouseClicked((e)->{
+            if(!(ListenerController.listenerController.getListener() == null && AdminController.getAdminController().getAdmin() == null && ArtistController.getArtistController().getArtist1()==null)) {
+                ListenerController.listenerController.setListener(null);
+                ArtistController.getArtistController().setArtist1(null);
+                AdminController.adminController.setAdmin(null);
+                try {
+                    ChangeScene.homeScene();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void login() {
+        login.setOnMouseClicked((e) -> {
+            if((ListenerController.listenerController.getListener() == null && AdminController.getAdminController().getAdmin() == null && ArtistController.getArtistController().getArtist1()==null)) {
+                try {
+                    ChangeScene.entryScene();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void signup() throws IOException {
+        ChangeScene.signUpScene();
+    }
+
+    @Override
+    public void search() throws IOException {
+        ChangeScene.searchScene();
+    }
+    public void library() {
+        libraryButton.setOnMouseClicked((e) -> {
+            try {
+                ChangeScene.ListenerPanelScene();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+    }
+    @FXML
+    void login(MouseEvent event) {
+        login();
+    }
+
+    @FXML
+    void logout(MouseEvent event) {
+        logout();
+    }
+
+    @FXML
+    void signup(MouseEvent event) throws IOException {
+        signup();
+    }
+    @FXML
+    void homeButton(MouseEvent event) throws IOException {
+        ChangeScene.homeScene();
+    }
+    @FXML
+    void search(MouseEvent event) throws IOException {
+        search();
+    }
+    @FXML
+    void backTo(MouseEvent event) {
+        backTo();
+    }
+    @FXML
+    void library(MouseEvent event) {
+        library();
+    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        for(PlayList playList:ListenerController.getListenerController().getListener().getPlayLists()) {
+            vBox.getChildren().add(setHBOx(playList));
+            vBox.setOnMouseClicked((e)->{
+                AudiosOfPlaylist.setPlayList(playList);
+                try {
+                    ChangeScene.audioOfPlayListScene();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+        }
+    }
+    public HBox setHBOx(PlayList playList) {
+        Label playListName = new Label();
+        playListName.setText(playList.getName());
+        HBox hBox = new HBox(playListName);
+        hBox.setAlignment(Pos.CENTER_LEFT);
+        hBox.setSpacing(15);
+        return hBox;
+    }
+
+    public void log(MouseEvent mouseEvent) {
+    }
+
+    public void backButton(MouseEvent mouseEvent) {
+
+    }
+}

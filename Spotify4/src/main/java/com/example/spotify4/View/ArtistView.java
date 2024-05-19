@@ -32,24 +32,24 @@ public class ArtistView {
         } else if (Objects.equals(strCommand10[0], "ViewsStatistics ")) {
             System.out.println(ArtistController.getArtistController().numberOfPlay());
         } else if (Objects.equals(strCommand10[0], "CalculateEarnings ")) {
-            if (ArtistController.getArtistController().artist1 instanceof Singer) {
+            if (ArtistController.getArtistController().getArtist1() instanceof Singer) {
                 System.out.println(SingerController.getSingerController().calculateIncome());
-            } else if (ArtistController.getArtistController().artist1 instanceof Podcaster) {
+            } else if (ArtistController.getArtistController().getArtist1() instanceof Podcaster) {
                 System.out.println(PodcasterController.getPodcasterController().calculateIncome());
             }
         } else if (Objects.equals(strCommand10[0], "AccountInfo ")) {
             System.out.println(ArtistController.getArtistController().showArtistInfo());
         } else if (Objects.equals(strCommand10[0], "NewAlbum ")) {
-            if (ArtistController.getArtistController().artist1 instanceof Singer) {
+            if (ArtistController.getArtistController().getArtist1() instanceof Singer) {
                 System.out.println("Album ID:");
                 System.out.println(SingerController.getSingerController().makeAlbum(strCommand10[1]).getID());
             }
         } else if (Objects.equals(strCommand10[0], "Publish ")) {
             if (Objects.equals(strCommand10[1], "M ")) {
                 System.out.println("Music ID:");
-                System.out.println(SingerController.getSingerController().publishMusic(strCommand10[2], strCommand10[3], strCommand10[4], strCommand10[5], strCommand10[6], Integer.parseInt(strCommand10[7])));
+                System.out.println(SingerController.getSingerController().publishMusic(strCommand10[2], strCommand10[3], strCommand10[4], strCommand10[5], strCommand10[6], Integer.parseInt(strCommand10[7]),strCommand10[8]));
             } else if (Objects.equals(strCommand10[1], "P ")) {
-                PodcasterController.getPodcasterController().publishPodcast(strCommand10[2], strCommand10[3], strCommand10[4], strCommand10[5], strCommand10[6]);
+                PodcasterController.getPodcasterController().publishPodcast(strCommand10[2], strCommand10[3], strCommand10[4], strCommand10[5], strCommand10[6],strCommand10[7]);
             }
         }
     }

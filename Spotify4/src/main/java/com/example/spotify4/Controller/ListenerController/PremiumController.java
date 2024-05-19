@@ -48,21 +48,21 @@ public class PremiumController extends ListenerController {
         double credit = getListener().getAccountCredit();
         if (getListener().getAccountCredit() >= package1.value) {
             if (package1.value == 5) {
-                Premium premiumListener = new Premium(getListener().getAccountCredit(), date.getYear(), date.getMonth() + 1, date.getDay(), getListener().getFavoriteGenre(), getListener().getUserName(), getListener().getPassword(), getListener().getFirstAndLastname(), getListener().getPhoneNumber(), getListener().getBirthDate().getYear(), getListener().getBirthDate().getMonth(), getListener().getBirthDate().getDay(), getListener().getEmail(), 30);
+                Premium premiumListener = new Premium(getListener().getAccountCredit(), date.getYear(), date.getMonth() + 1, date.getDay(), getListener().getFavoriteGenre(), getListener().getUserName(), getListener().getPassword(), getListener().getFirstAndLastname(), getListener().getPhoneNumber(), getListener().getBirthDate().getYear(), getListener().getBirthDate().getMonth(), getListener().getBirthDate().getDay(), getListener().getEmail(), 30,getListener().getImage().getUrl());
                 premiumListener.setFavoriteGenre(getListener().getFavoriteGenre());
                 premiumListener.setAccountCredit(getListener().getAccountCredit());
                 premiumListener.setPlayLists(getListener().getPlayLists());
                 getListener().setAccountCredit(credit - 5);
                 return premiumListener;
             } else if (package1.value == 9) {
-                Premium premiumListener = new Premium(getListener().getAccountCredit(), date.getYear(), date.getMonth() + 2, date.getDay(), getListener().getFavoriteGenre(), getListener().getUserName(), getListener().getPassword(), getListener().getFirstAndLastname(), getListener().getPhoneNumber(), getListener().getBirthDate().getYear(), getListener().getBirthDate().getMonth(), getListener().getBirthDate().getDay(), getListener().getEmail(), 30);
+                Premium premiumListener = new Premium(getListener().getAccountCredit(), date.getYear(), date.getMonth() + 2, date.getDay(), getListener().getFavoriteGenre(), getListener().getUserName(), getListener().getPassword(), getListener().getFirstAndLastname(), getListener().getPhoneNumber(), getListener().getBirthDate().getYear(), getListener().getBirthDate().getMonth(), getListener().getBirthDate().getDay(), getListener().getEmail(), 30,getListener().getImage().getUrl());
                 premiumListener.setFavoriteGenre(getListener().getFavoriteGenre());
                 premiumListener.setAccountCredit(getListener().getAccountCredit());
                 premiumListener.setPlayLists(getListener().getPlayLists());
                 getListener().setAccountCredit(credit - 9);
                 return premiumListener;
             } else if (package1.value == 14) {
-                Premium premiumListener = new Premium(getListener().getAccountCredit(), date.getYear(), date.getMonth() + 6, date.getDay(), getListener().getFavoriteGenre(), getListener().getUserName(), getListener().getPassword(), getListener().getFirstAndLastname(), getListener().getPhoneNumber(), getListener().getBirthDate().getYear(), getListener().getBirthDate().getMonth(), getListener().getBirthDate().getDay(), getListener().getEmail(), 30);
+                Premium premiumListener = new Premium(getListener().getAccountCredit(), date.getYear(), date.getMonth() + 6, date.getDay(), getListener().getFavoriteGenre(), getListener().getUserName(), getListener().getPassword(), getListener().getFirstAndLastname(), getListener().getPhoneNumber(), getListener().getBirthDate().getYear(), getListener().getBirthDate().getMonth(), getListener().getBirthDate().getDay(), getListener().getEmail(), 30,getListener().getImage().getUrl());
                 premiumListener.setFavoriteGenre(getListener().getFavoriteGenre());
                 premiumListener.setAccountCredit(getListener().getAccountCredit());
                 premiumListener.setPlayLists(getListener().getPlayLists());
@@ -75,7 +75,7 @@ public class PremiumController extends ListenerController {
         int remainingDays1= premium.getRemainingDays();
         premium.setRemainingDays(remainingDays1--);
         if(remainingDays1==0){
-            FreeListener freeListener=new FreeListener(getListener().getAccountCredit(), date.getYear(), date.getMonth() + 1, date.getDay(), getListener().getFavoriteGenre(), getListener().getUserName(), getListener().getPassword(), getListener().getFirstAndLastname(), getListener().getPhoneNumber(), getListener().getBirthDate().getYear(), getListener().getBirthDate().getMonth(), getListener().getBirthDate().getDay(), getListener().getEmail());
+            FreeListener freeListener=new FreeListener(getListener().getAccountCredit(), date.getYear(), date.getMonth() + 1, date.getDay(), getListener().getFavoriteGenre(), getListener().getUserName(), getListener().getPassword(), getListener().getFirstAndLastname(), getListener().getPhoneNumber(), getListener().getBirthDate().getYear(), getListener().getBirthDate().getMonth(), getListener().getBirthDate().getDay(), getListener().getEmail(),getListener().getImage().getUrl());
             freeListener.setPlayLists(premium.getPlayLists());
             freeListener.setAccountCredit(premium.getAccountCredit());
             freeListener.setFavoriteGenre(premium.getFavoriteGenre());

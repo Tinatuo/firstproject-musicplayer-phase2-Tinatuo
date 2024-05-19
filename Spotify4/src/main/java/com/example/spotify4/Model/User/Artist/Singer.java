@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class Singer extends Artist {
 
      public ArrayList<Album> albums=new ArrayList<Album>();
-    public Singer(String userName, String password, String firstAndLastname, String phoneNumber, int year,int mounth,int day,String email,String biography) {
-        super(userName, password, firstAndLastname, phoneNumber,year,mounth,day,email,biography);
+    public Singer(String userName, String password, String firstAndLastname, String phoneNumber, int year,int mounth,int day,String email,String biography,String imageView) {
+        super(userName, password, firstAndLastname, phoneNumber,year,mounth,day,email,biography,imageView);
     }
     @Override
     public String toString(){

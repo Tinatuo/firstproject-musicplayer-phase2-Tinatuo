@@ -4,8 +4,8 @@ import com.example.spotify4.Model.Genre;
 
 public class Podcast extends Audio {
    private String caption;
-    public Podcast(String name, String artistName, int year, int mounth, int day, Genre genre, String link, String cover, String caption) {
-        super(name, artistName,year,mounth,day, genre, link, cover);
+    public Podcast(String name, String artistName, int year, int mounth, int day, Genre genre, String link, String cover, String caption,String imageView) {
+        super(name, artistName,year,mounth,day, genre, link, cover, imageView);
         this.caption=caption;
     }
 @Override

@@ -4,25 +4,25 @@ import com.example.spotify4.Controller.*;
 import com.example.spotify4.Controller.Exception.*;
 import com.example.spotify4.Model.*;
 import com.example.spotify4.Model.Audio.Audio;
+import com.example.spotify4.Model.Audio.Music;
+import com.example.spotify4.Model.Audio.Podcast;
 import com.example.spotify4.Model.User.Artist.Artist;
 import com.example.spotify4.Model.User.Listener.FreeListener;
 import com.example.spotify4.Model.User.Listener.Listener;
 import com.example.spotify4.Model.User.Listener.Premium;
 import com.example.spotify4.Model.User.User;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ListenerController extends UserController  {
+public class ListenerController extends UserController {
     public Listener listener;
     public static ListenerController listenerController;
     public Date date = new Date();
     public int index;
-  private ArrayList<Genre> favGenre = new ArrayList<Genre>();
+    private ArrayList<Genre> favGenre = new ArrayList<Genre>();
 
     public static ListenerController getListenerController() {
         if (listenerController == null)
@@ -63,7 +63,7 @@ public class ListenerController extends UserController  {
         if (flag) {
             if (matcher1.matches() && matcher2.matches() && matcher3.matches()) {
                 double accountCredit = 50;
-                FreeListener newListener = new FreeListener(accountCredit, date.getYear(), date.getMonth() + 1, date.getDay(), favGenre, userName, password, firstAndLastname, phoneNumber, year, mounth, day, email);
+                FreeListener newListener = new FreeListener(accountCredit, date.getYear(), date.getMonth() + 1, date.getDay(), favGenre, userName, password, firstAndLastname, phoneNumber, year, mounth, day, email,getListener().getImage().getUrl());
                 DataBase.getDataBase().users.add(newListener);
                 this.index = DataBase.getDataBase().users.indexOf(newListener);
                 string = "the registration operation was successful";
@@ -102,7 +102,7 @@ public class ListenerController extends UserController  {
             }
         }
 
-        favGenre=favoriteGenre1;
+        favGenre = favoriteGenre1;
         return favoriteGenre1;
     }
 
@@ -199,6 +199,42 @@ public class ListenerController extends UserController  {
         }
         return DataBase.getDataBase().audios;
     }
+    public ArrayList<Audio> sort2(ArrayList<Audio> audios){
+        Collections.sort(audios, new Comparator<Audio>() {
+            @Override
+            public int compare(Audio o1, Audio o2) {
+                for (int i = 0; i < o2.getName().length(); i++) {
+                    if (o1.getName().charAt(i) > o2.getName().charAt(i)) {
+                        return 1;
+                    } else if (o1.getName().charAt(i) <o2.getName().charAt(i)) {
+                        return -1;
+                    } else if (o1.getName().charAt(i) == o2.getName().charAt(i)) {
+                        if (o1.getNumberOfLike()> o2.getNumberOfLike()) {
+                            return 1;
+                        } else if (o1.getNumberOfLike() < o2.getNumberOfLike()) {
+                            return -1;
+                        } else if (o1.getNumberOfLike() == o2.getNumberOfLike()) {
+                            if ((o2 instanceof Podcast) && (o1 instanceof Music)) {
+                                return 1;
+                            } else if ((o2 instanceof Music) && (o1 instanceof Podcast)) {
+                                return -1;
+                            } else {
+                                if (o1.getNumberOfPlay() > o2.getNumberOfPlay()) {
+                                    return 1;
+                                } else if (o2.getNumberOfPlay() > o1.getNumberOfPlay()) {
+                                    return -1;
+                                } else if (o1.getNumberOfPlay() == o2.getNumberOfPlay()) {
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+            }
+                return 0;
+        }
+    });
+    return audios;
+    }
 
     public ArrayList<Audio> filter(String filteringMethod, Object obj) {
         ArrayList<Audio> audio = new ArrayList<>();
@@ -231,7 +267,19 @@ public class ListenerController extends UserController  {
         }
         return string;
     }
-
+public ArrayList<User> arrayFollowing(){
+        ArrayList<User> arrayFollowing = new ArrayList<>();
+    for (User user : DataBase.getDataBase().users) {
+        if (user instanceof Artist) {
+            for (User user1 : ((Artist) user).followers) {
+                if (Objects.equals(user1.getUserName(), this.listener.getUserName())) {
+                    arrayFollowing.add(user1);
+                }
+            }
+        }
+    }
+    return arrayFollowing;
+}
     public Report artistReport(String artistUserName, String explanation) {
         Report report1 = null;
         for (User user : DataBase.getDataBase().users) {
@@ -280,11 +328,12 @@ public class ListenerController extends UserController  {
         }
         return string;
     }
-    public int indexOfPlayList(String playListName){
-        int index=0;
+
+    public int indexOfPlayList(String playListName) {
+        int index = 0;
         for (int i = 0; i < this.listener.playLists.size(); i++) {
             if (this.listener.playLists.get(i).getName().equals(playListName)) {
-                index=i;
+                index = i;
             }
         }
         return index;
@@ -294,7 +343,7 @@ public class ListenerController extends UserController  {
     public String inSideOfPlayList(String playListName) {
         String string = "Audios:";
         for (PlayList playList : this.listener.playLists) {
-            if (playList.getName() == playListName) {
+            if (playListName == playList.getName()) {
                 for (Audio audio : playList.getAudoisList()) {
                     string += "\n" + audio.getName();
                 }
@@ -325,7 +374,7 @@ public class ListenerController extends UserController  {
         return string;
     }
 
-    public String getSuggestions() {
+    public ArrayList<Audio> getSuggestions() {
         String string = "Suggestions: ";
         ArrayList<Audio> suggestAudio = new ArrayList<>();
         for (Audio audios : DataBase.getDataBase().audios) {
@@ -335,35 +384,34 @@ public class ListenerController extends UserController  {
                 }
             }
         }
-            for (User user : DataBase.getDataBase().users) {
-                if (user instanceof Artist) {
-                    for (User listener1 : ((Artist) user).followers) {
-                        if (Objects.equals(listener1.getUserName(), this.listener.getUserName())) {
-                            for (Audio audio : DataBase.getDataBase().audios) {
-                                if (Objects.equals(audio.getArtistName(), ((Artist) user).getUserName())) {
-                                    for (int i =5; i > 0; i--) {
-                                        for (int j = 0; j < 5; j++) {
-                                            for (Audio audio1Tekrar : suggestAudio) {
-                                                if (audio1Tekrar != likeAudio(audio.getID()).get(j))
-                                                    suggestAudio.add(likeAudio(audio.getID()).get(j));
-                                            }
-                                        }
+        for (User user : DataBase.getDataBase().users) {
+            if (user instanceof Artist) {
+                for (User listener1 : ((Artist) user).followers) {
+                    if (Objects.equals(listener1.getUserName(), this.listener.getUserName())) {
+                        for (Audio audio : DataBase.getDataBase().audios) {
+                            if (Objects.equals(audio.getArtistName(), ((Artist) user).getUserName())) {
+//                                    for (int i =5; i > 0; i--) {
+                                for (int j = 0; j < 5; j++) {
+                                    for (Audio audio1Tekrar : suggestAudio) {
+                                        if (audio1Tekrar != likeAudio(audio.getID()).get(j))
+                                            suggestAudio.add(likeAudio(audio.getID()).get(j));
                                     }
+                                    //  }
                                 }
                             }
                         }
                     }
-                }else {
-                    continue;
                 }
+            } else {
+                continue;
             }
-            for (int k = 0; k < 10; k++) {
-                string += "\n" + suggestAudio.get(k).getName();
-            }
-
-        return string;
+        }
+//            for (int k = 0; k < 10; k++) {
+//                string += "\n" + suggestAudio.get(k).getName();
+//            }
+        return suggestAudio;
+//        return string;
     }
-
 
 
 }

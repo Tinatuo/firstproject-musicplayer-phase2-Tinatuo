@@ -7,26 +7,40 @@ import com.example.spotify4.Model.User.Admin;
 import com.example.spotify4.Model.User.Artist.Artist;
 import com.example.spotify4.Model.User.User;
 
+import java.util.ArrayList;
 import java.util.Objects;
+
+import static com.example.spotify4.Model.User.Admin.getAdmin;
 
 public class AdminController extends UserController {
     public static AdminController adminController;
+    private Admin admin;
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
     public static AdminController getAdminController() {
         if (adminController == null)
             adminController = new AdminController();
         return adminController;
     }
     @Override
-    public String signUp(String userName, String password, String firstAndLastname, String email, String phoneNumber, int year, int mounth, int day, String biography) {
+    public String signUp(String userName, String password, String firstAndLastname, String email, String phoneNumber, int year, int mounth, int day, String biograph) {
        String string="";
-        Admin.getAdmin(userName,password,firstAndLastname,phoneNumber,year,mounth,day,email);
+        Admin.getAdmin(userName,password,firstAndLastname,phoneNumber,year,mounth,day,email,getAdmin().getImage().getUrl());
         string="the registration operation was successful";
         return string;
     }
 
     public String logIn(String userName, String password) throws UserNotFoundException {
         String string = "";
-        if (Objects.equals(Admin.getAdmin().getUserName(), userName) && Objects.equals(Admin.getAdmin().getPassword(), password)) {
+        if (Objects.equals(getAdmin().getUserName(), userName) && Objects.equals(getAdmin().getPassword(), password)) {
+            this.admin = getAdmin();
             string = "Successful login enter";
         } else {
             throw new UserNotFoundException();
@@ -35,6 +49,13 @@ public class AdminController extends UserController {
     }
 
     public String mostPopularAudioFile() {
+       String string = "";
+        for (int i = 0; i < DataBase.getDataBase().audios.size(); i++) {
+            string += "\n" + String.valueOf(i + 1) + ":" + mostPopularAudioFileArray().get(i).getName();
+        }
+        return string;
+    }
+    public ArrayList<Audio> mostPopularAudioFileArray() {
         Audio audio;
         String string = "";
         for (int i = 0; i < DataBase.getDataBase().audios.size() - 1; i++) {
@@ -46,10 +67,7 @@ public class AdminController extends UserController {
                 }
             }
         }
-        for (int i = 0; i < DataBase.getDataBase().audios.size(); i++) {
-            string += "\n" + String.valueOf(i + 1) + ":" + DataBase.getDataBase().audios.get(i).getName();
-        }
-        return string;
+        return DataBase.getDataBase().audios;
     }
     public String showReports(){
         String string="Reports:";
@@ -59,7 +77,7 @@ public class AdminController extends UserController {
         return string;
     }
     public String showUserInfo(){
-      return Admin.getAdmin().toString();
+      return getAdmin().toString();
     }
     public String showAudioInfo(int ID){
         String string="";

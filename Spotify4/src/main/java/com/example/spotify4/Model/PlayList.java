@@ -1,6 +1,7 @@
 package com.example.spotify4.Model;
 
 import com.example.spotify4.Model.Audio.Audio;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,6 +11,7 @@ public class PlayList implements Iterable<Audio> {
     private String name;
     private String userCreatorName;
     private ArrayList<Audio> audoisList=new ArrayList<Audio>();
+
 
     public PlayList( String name, String userCreatorName) {
         this.name = name;

@@ -1,5 +1,9 @@
 package com.example.spotify4.Model.User;
 
+import com.example.spotify4.Main;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import java.util.Date;
 
 public abstract class User {
@@ -9,24 +13,47 @@ public abstract class User {
     private String email;
     private String phoneNumber;
     private Date birthDate;
-    public static String regexPassword="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{5,20}$";
-   public static String regexEmail="^[A-Za-z0-9._%+-]+@[a-z]+\\.com $";
+    public static String regexPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{5,20}$";
+    public static String regexEmail = "^[A-Za-z0-9._%+-]+@[a-z]+\\.com $";
+    public static String phoneNumberRegex = "09[0-9]{9} $";
+    private ImageView userPhoto;
 
-    public static String phoneNumberRegex="09[0-9]{9} $";
-    public User(String userName, String password, String firstAndLastname, String phoneNumber,int year,int mounth,int day,String email) {
+    public ImageView getUserPhoto() {
+        return userPhoto;
+    }
+
+    public void setArtistPhoto(ImageView artistPhoto) {
+        this.userPhoto = artistPhoto;
+    }
+
+    private Image image;
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+    public User(String userName, String password, String firstAndLastname, String phoneNumber, int year, int mounth, int day, String email,String imageView) {
         this.userName = userName;
         this.password = password;
         this.firstAndLastname = firstAndLastname;
         this.phoneNumber = phoneNumber;
-        this.birthDate = new Date(year,mounth,day);
-        this.email=email;
+        this.birthDate = new Date(year, mounth, day);
+        this.email = email;
+        String path = (Main.class.getResource(imageView)).toExternalForm();
+        image = new Image(path);
+        userPhoto = new ImageView(image);
 
     }
-  public String toString(){
-        String string="";
-        string="Username: "+userName+"\nPassword: "+password+"\nFirstname and Lastname: "+firstAndLastname+"\nPhonenumber: "+phoneNumber+"\nBirthdate: "+birthDate;
+
+    public String toString() {
+        String string = "";
+        string = "Username: " + userName + "\nPassword: " + password + "\nFirstname and Lastname: " + firstAndLastname + "\nPhonenumber: " + phoneNumber + "\nBirthdate: " + birthDate;
         return string;
-  }
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -43,8 +70,8 @@ public abstract class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setBirthDate(int year,int mounth,int day) {
-        this.birthDate = new Date(year,mounth,day);
+    public void setBirthDate(int year, int mounth, int day) {
+        this.birthDate = new Date(year, mounth, day);
     }
 
     public String getUserName() {

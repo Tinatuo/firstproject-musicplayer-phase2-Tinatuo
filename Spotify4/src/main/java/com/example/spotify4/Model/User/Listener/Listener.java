@@ -19,8 +19,8 @@ public abstract class Listener extends User {
     private Date endSubscription;
     private ArrayList<Genre> favoriteGenre=new ArrayList<Genre>();
 
-    public Listener(double accountCredit,int endYear,int endMounth,int endDay, ArrayList<Genre> favoriteGenre , String userName, String password, String firstAndLastname, String phoneNumber,int year,int mounth,int day,String email) {
-        super(userName, password, firstAndLastname, phoneNumber,year,mounth,day,email);
+    public Listener(double accountCredit,int endYear,int endMounth,int endDay, ArrayList<Genre> favoriteGenre , String userName, String password, String firstAndLastname, String phoneNumber,int year,int mounth,int day,String email,String imageView) {
+        super(userName, password, firstAndLastname, phoneNumber,year,mounth,day,email,imageView);
         this.accountCredit=accountCredit;
         this.endSubscription=new Date(endYear,endMounth,endDay);
         if(ListenerController.listenerController.listener instanceof FreeListener){

@@ -12,8 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="700.0" prefWidth="747.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify4.View.SignUpScene">
+<AnchorPane prefHeight="700.0" prefWidth="747.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify4.View.Scenes.SignUpScene">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#18c64c" height="700.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#18c64c" height="700.0" layoutX="731.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
@@ -131,7 +130,12 @@
                <children>
                   <AnchorPane prefHeight="64.0" prefWidth="551.0">
                      <children>
-                        <Button fx:id="submitButton" layoutX="221.0" layoutY="32.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" text="submit">
+                        <Button fx:id="submitButton" layoutX="259.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#submitButton" prefHeight="31.0" prefWidth="65.0" text="submit">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="backButton" layoutX="376.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#backTo" prefHeight="31.0" prefWidth="65.0" text="back">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>

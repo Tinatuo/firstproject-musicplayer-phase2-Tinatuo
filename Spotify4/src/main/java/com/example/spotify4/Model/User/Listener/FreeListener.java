@@ -30,8 +30,8 @@ public String toString(){
         this.limitMakePlayList = limitMakePlayList;
     }
 
-    public FreeListener(double accountCredit, int endYear, int endMounth, int endDay, ArrayList<Genre> favoriteGenre, String userName, String password, String firstAndLastname, String phoneNumber, int year, int mounth, int day, String email) {
-        super(accountCredit,endYear,endMounth,endDay , favoriteGenre, userName, password, firstAndLastname, phoneNumber,year,mounth,day,email);
+    public FreeListener(double accountCredit, int endYear, int endMounth, int endDay, ArrayList<Genre> favoriteGenre, String userName, String password, String firstAndLastname, String phoneNumber, int year, int mounth, int day, String email,String imageView) {
+        super(accountCredit,endYear,endMounth,endDay , favoriteGenre, userName, password, firstAndLastname, phoneNumber,year,mounth,day,email,imageView);
     }
 
 }

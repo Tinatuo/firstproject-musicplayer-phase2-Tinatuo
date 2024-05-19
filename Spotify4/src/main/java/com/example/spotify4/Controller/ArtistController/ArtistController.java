@@ -14,7 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
  public class ArtistController extends UserController {
-   public Artist artist1;
+   private Artist artist1;
    public static ArtistController artistController;
     public static ArtistController getArtistController() {
         if (artistController == null)
@@ -22,7 +22,16 @@ import java.util.regex.Pattern;
 
         return artistController;
     }
-    public  String signUp(String userName, String password, String firstAndLastname,String email, String phoneNumber, int year, int mounth, int day,String biography) throws WrongPasswordException, InvalidFormatException {
+
+     public Artist getArtist1() {
+         return artist1;
+     }
+
+     public void setArtist1(Artist artist1) {
+         this.artist1 = artist1;
+     }
+
+     public  String signUp(String userName, String password, String firstAndLastname, String email, String phoneNumber, int year, int mounth, int day, String biography,String link) throws WrongPasswordException, InvalidFormatException {
         boolean flag = true;
         String string = null;
         Pattern pattern1 = Pattern.compile(User.regexPassword);
@@ -42,7 +51,7 @@ import java.util.regex.Pattern;
         }
         if (flag) {
             if (matcher1.matches() && matcher2.matches() && matcher3.matches()) {
-                Artist newArtist = new Artist(userName, password, firstAndLastname, phoneNumber, year, mounth, day, email,biography);
+                Artist newArtist = new Artist(userName, password, firstAndLastname, phoneNumber, year, mounth, day, email,biography,link);
                 DataBase.getDataBase().users.add(newArtist);
                 string = "the registration operation was successful";
             } else if (!matcher1.matches()) {

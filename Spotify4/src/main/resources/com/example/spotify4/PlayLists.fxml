@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="747.0" style="-fx-background-color: #191414;" styleClass="-fx-background-color: #191414.;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify4.View.Scenes.ArtistsScene">
+<AnchorPane fx:id="Anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="747.0" style="-fx-background-color: #191414;" styleClass="-fx-background-color: #191414.;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify4.View.Scenes.PlayListsScene">
    <children>
       <ScrollPane hbarPolicy="NEVER" prefHeight="460.0" prefWidth="747.0" styleClass="root" AnchorPane.topAnchor="0.0">
          <content>
@@ -36,7 +36,7 @@
                               <Insets left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </ImageView>
-                        <ImageView fx:id="searchButton1" fitHeight="38.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="searchButton1" fitHeight="38.0" fitWidth="91.0" onMouseClicked="#search" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@Screenshot 2024-05-12 213145.png" />
                            </image>
@@ -44,7 +44,7 @@
                               <Insets left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </ImageView>
-                        <ImageView fx:id="libraryButton" fitHeight="28.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="libraryButton" fitHeight="28.0" fitWidth="98.0" onMouseClicked="#library" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@Screenshot 2024-05-12 213213.png" />
                            </image>
@@ -84,7 +84,7 @@
                               <Insets left="5.0" right="2.0" top="5.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="signUpButton" blendMode="EXCLUSION" cache="true" mnemonicParsing="false" onMouseClicked="#login" prefHeight="30.0" prefWidth="90.0" text="Sign up" textFill="#0e1d13" textOverrun="WORD_ELLIPSIS">
+                        <Button fx:id="signUpButton" blendMode="EXCLUSION" cache="true" mnemonicParsing="false" onMouseClicked="#signup" prefHeight="30.0" prefWidth="90.0" text="Sign up" textFill="#0e1d13" textOverrun="WORD_ELLIPSIS">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -92,7 +92,7 @@
                               <Insets left="5.0" right="2.0" top="5.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="backButton" blendMode="EXCLUSION" cache="true" mnemonicParsing="false" onMouseClicked="#backButton" prefHeight="30.0" prefWidth="90.0" text="Back" textFill="#0e1d13" textOverrun="WORD_ELLIPSIS">
+                        <Button fx:id="backButton" blendMode="EXCLUSION" cache="true" mnemonicParsing="false" onMouseClicked="#backTo" prefHeight="30.0" prefWidth="90.0" text="Back" textFill="#0e1d13" textOverrun="WORD_ELLIPSIS">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -106,7 +106,7 @@
                      <children>
                         <AnchorPane prefHeight="466.0" prefWidth="644.0">
                            <children>
-                              <Label layoutX="249.0" layoutY="14.0" styleClass="Label" text="Artists">
+                              <Label fx:id="playLists" layoutX="249.0" layoutY="14.0" styleClass="Label" text="Playlists">
                                  <font>
                                     <Font name="Cambria Bold" size="30.0" />
                                  </font>
@@ -114,12 +114,13 @@
                               <VBox fx:id="vBox" layoutX="-3.0" layoutY="70.0" prefHeight="389.0" prefWidth="645.0" />
                            </children>
                         </AnchorPane>
-                     </children></VBox>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
          </content>
       </ScrollPane>
-      <HBox layoutX="1.0" layoutY="488.0" prefHeight="2.0" prefWidth="747.0" style="-fx-background-color: #191414;">
+      <HBox layoutY="488.0" prefHeight="40.0" prefWidth="747.0" style="-fx-background-color: #191414;">
          <children>
             <ImageView fx:id="songPhoto" fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
@@ -145,7 +146,8 @@
                   <Image url="@../../../../../../../../../Users/WDC/Downloads/Screenshot_2024-05-12_224220-removebg-preview.png" />
                </image>
             </ImageView>
-            <Label fx:id="musicName" layoutX="90.0" layoutY="13.0" onMouseClicked="#musicName" prefHeight="35.0" prefWidth="109.0" text="Label" />
+            <Label fx:id="musicName" layoutX="97.0" layoutY="13.0" onMouseClicked="#musicName" prefHeight="35.0" prefWidth="109.0" text="Label" />
+            <ImageView fx:id="songPhoto1" fitHeight="47.0" fitWidth="47.0" layoutX="14.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </children>
