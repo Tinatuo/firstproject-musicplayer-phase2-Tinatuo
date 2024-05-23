@@ -5,8 +5,6 @@ import com.example.spotify4.Controller.ArtistController.ArtistController;
 import com.example.spotify4.Controller.ListenerController.ListenerController;
 import com.example.spotify4.Model.GeneralOperation;
 import com.example.spotify4.Model.PlayList;
-import com.example.spotify4.Model.User.Artist.Artist;
-import com.example.spotify4.View.SceneStack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -18,7 +16,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -96,11 +93,13 @@ public class PlayListsScene implements Initializable , GeneralOperation {
         if (HomeScene.audio1IsPlaying) {
             HomeScene.nextButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.nextButton(event);
+            AudiosScene.getAudiosScene().nextButton(event);
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.nextButton(event);
+            ArtistInfoScene.getArtistInfoScene().nextButton(event);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.nextButton(event);
+            AudiosOfPlaylist.getAudiosOfPlaylist().nextButton(event);
+        } else if (SearchScene.audio5IsPlaying) {
+            SearchScene.getSearchScene().nextButton(event);
         }
     }
 
@@ -109,11 +108,13 @@ public class PlayListsScene implements Initializable , GeneralOperation {
         if (HomeScene.audio1IsPlaying) {
             HomeScene.playButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.playButton(event);
+            AudiosScene.getAudiosScene().playButton(event);
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.playButton(event);
+            ArtistInfoScene.getArtistInfoScene().playButton(event);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.playButton(event);
+            AudiosOfPlaylist.getAudiosOfPlaylist().playButton(event);
+        } else if (SearchScene.audio5IsPlaying) {
+            SearchScene.getSearchScene().playButton(event);
         }
     }
 
@@ -127,11 +128,13 @@ public class PlayListsScene implements Initializable , GeneralOperation {
         if (HomeScene.audio1IsPlaying) {
             HomeScene.previousButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.previousButton(event);
+            AudiosScene.getAudiosScene().previousButton(event);
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.previousButton(event);
+            ArtistInfoScene.getArtistInfoScene().previousButton(event);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.previousButton(event);
+            AudiosOfPlaylist.getAudiosOfPlaylist().previousButton(event);
+        }else if(SearchScene.audio5IsPlaying){
+           SearchScene.getSearchScene().previousButton(event);
         }
     }
     @FXML

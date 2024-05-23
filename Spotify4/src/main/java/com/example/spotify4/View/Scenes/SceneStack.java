@@ -1,4 +1,4 @@
-package com.example.spotify4.View;
+package com.example.spotify4.View.Scenes;
 
 import javafx.scene.Scene;
 

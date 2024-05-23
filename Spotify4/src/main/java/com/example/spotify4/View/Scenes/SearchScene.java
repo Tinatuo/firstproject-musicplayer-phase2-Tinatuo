@@ -3,7 +3,6 @@ package com.example.spotify4.View.Scenes;
 import com.example.spotify4.Controller.ListenerController.ListenerController;
 import com.example.spotify4.Main;
 import com.example.spotify4.Model.Audio.Audio;
-import com.example.spotify4.View.SceneStack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -21,13 +20,12 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SearchScene implements Initializable {
     public static Audio audio5;
     public static boolean audio5IsPlaying = false;
-    static ArrayList<Audio> searchArray=new ArrayList<>();
+    static ArrayList<Audio> searchArray = new ArrayList<>();
     @FXML
     private TextArea searchBox = new TextArea();
     @FXML
@@ -36,15 +34,27 @@ public class SearchScene implements Initializable {
     private ImageView nextButton;
 
     @FXML
-    private static ImageView playButton;
+    private ImageView playButton;
 
     @FXML
     private ImageView previousButton;
     @FXML
-    private static Label musicName;
+    private Label musicName;
 
     @FXML
-    private static ImageView songPhoto;
+    private ImageView songPhoto;
+
+    @FXML
+    private VBox vBox;
+    private static SearchScene searchScene;
+
+    public static SearchScene getSearchScene() {
+        if (searchScene == null) {
+            searchScene = new SearchScene();
+            return searchScene;
+        }
+        return searchScene;
+    }
 
     public TextArea getSearchBox() {
         return searchBox;
@@ -53,9 +63,6 @@ public class SearchScene implements Initializable {
     public void setSearchBox(TextArea searchBox) {
         this.searchBox = searchBox;
     }
-
-    @FXML
-    private VBox vBox;
 
     public VBox getVBox() {
         return vBox;
@@ -67,8 +74,8 @@ public class SearchScene implements Initializable {
 
     @FXML
     void backButton(MouseEvent event) {
-            ChangeScene.stage.setScene(SceneStack.sceneStack.pop());
-            ChangeScene.stage.show();
+        ChangeScene.stage.setScene(SceneStack.sceneStack.pop());
+        ChangeScene.stage.show();
     }
 
 
@@ -87,6 +94,7 @@ public class SearchScene implements Initializable {
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setOnMouseClicked((e) -> {
             audio.getMediaPlayer().play();
+            PlayScene.audio4 = audio;
             audio5 = audio;
             songPhoto = audio.getAudioPhoto();
             musicName.setText(audio.getName());
@@ -98,11 +106,11 @@ public class SearchScene implements Initializable {
             try {
                 ChangeScene.playScene();
             } catch (IOException ex) {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
                 alert.setContentText("RunTime exception");
                 alert.show();
-            }finally {
+            } finally {
                 System.out.println("Have a good day");
             }
         });
@@ -113,7 +121,7 @@ public class SearchScene implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         searchBox.textProperty().addListener((p, o, n) -> {
             String search = searchBox.getText();
-            searchArray=ListenerController.getListenerController().searchAudio(search);
+            searchArray = ListenerController.getListenerController().searchAudio(search);
             for (Audio audio : ListenerController.listenerController.searchAudio(search)) {
                 vBox.getChildren().add(setHBox(audio));
             }
@@ -127,60 +135,63 @@ public class SearchScene implements Initializable {
     public void nextButton(javafx.scene.input.MouseEvent mouseEvent) {
         int index;
         if (audio5IsPlaying) {
-            index =searchArray.indexOf(audio5);
+            index = searchArray.indexOf(audio5);
             audio5 = searchArray.get(++index);
             audio5.getMediaPlayer().play();
-            songPhoto.setImage(audio5.getImage());
-            musicName.setText(audio5.getName());
+            PlayScene.audio4 = audio5;
+            searchScene.songPhoto.setImage(audio5.getImage());
+            searchScene.musicName.setText(audio5.getName());
         } else if (HomeScene.audio1IsPlaying) {
             HomeScene.nextButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.nextButton(mouseEvent);
+            AudiosScene.getAudiosScene().nextButton(mouseEvent);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.nextButton(mouseEvent);
+            AudiosOfPlaylist.getAudiosOfPlaylist().nextButton(mouseEvent);
         }
     }
 
-    public void previousButton(javafx.scene.input.MouseEvent mouseEvent) {
+    public  void previousButton(javafx.scene.input.MouseEvent mouseEvent) {
         int index;
         if (audio5IsPlaying) {
-            index =searchArray.indexOf(audio5);
+            index = searchArray.indexOf(audio5);
             audio5 = searchArray.get(--index);
             audio5.getMediaPlayer().play();
-            songPhoto.setImage(audio5.getImage());
-            musicName.setText(audio5.getName());
+            PlayScene.audio4 = audio5;
+            searchScene.songPhoto.setImage(audio5.getImage());
+            searchScene.musicName.setText(audio5.getName());
         } else if (HomeScene.audio1IsPlaying) {
             HomeScene.previousButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.previousButton(mouseEvent);
-        } else if (AudiosOfPlaylist.audio6IsPlaying){
-            AudiosOfPlaylist.previousButton(mouseEvent);
+            AudiosScene.getAudiosScene().previousButton(mouseEvent);
+        } else if (AudiosOfPlaylist.audio6IsPlaying) {
+            AudiosOfPlaylist.getAudiosOfPlaylist().previousButton(mouseEvent);
         }
     }
 
-    public void playButton(javafx.scene.input.MouseEvent mouseEvent) {
+    public  void playButton(javafx.scene.input.MouseEvent mouseEvent) {
         String path1 = Main.class.getResource("61180").toExternalForm();
         String path2 = Main.class.getResource("Screenshot_2024-05-12_223937-removebg-preview (2)").toExternalForm();
         Image image1 = new Image(path1);
         Image image2 = new Image(path2);
         if (audio5IsPlaying) {
-            if (playButton.getImage() == image2) {
-                playButton.setImage(image1);
+            if (searchScene.playButton.getImage() == image2) {
+                searchScene.playButton.setImage(image1);
                 audio5.getMediaPlayer().play();
-                songPhoto.setImage(audio5.getImage());
-                musicName.setText(audio5.getName());
-            } else if (playButton.getImage() == image1) {
-                playButton.setImage(image2);
+                PlayScene.audio4 = audio5;
+                searchScene.songPhoto.setImage(audio5.getImage());
+                searchScene.musicName.setText(audio5.getName());
+            } else if (searchScene.playButton.getImage() == image1) {
+                searchScene.playButton.setImage(image2);
                 audio5.getMediaPlayer().pause();
-                songPhoto.setImage(audio5.getImage());
-                musicName.setText(audio5.getName());
+                searchScene.songPhoto.setImage(audio5.getImage());
+                searchScene.musicName.setText(audio5.getName());
             }
         } else if (HomeScene.audio1IsPlaying) {
             HomeScene.playButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.playButton(mouseEvent);
-        } else if(AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.playButton(mouseEvent);
+            AudiosScene.getAudiosScene().playButton(mouseEvent);
+        } else if (AudiosOfPlaylist.audio6IsPlaying) {
+            AudiosOfPlaylist.getAudiosOfPlaylist().playButton(mouseEvent);
         }
     }
 }

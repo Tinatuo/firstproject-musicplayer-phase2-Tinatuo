@@ -11,8 +11,6 @@ import com.example.spotify4.Model.GeneralOperation;
 import com.example.spotify4.Model.User.Artist.Artist;
 import com.example.spotify4.Model.User.Artist.Podcaster;
 import com.example.spotify4.Model.User.Artist.Singer;
-import com.example.spotify4.Model.User.User;
-import com.example.spotify4.View.SceneStack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -52,6 +50,17 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
         ArtistInfoScene.audio3 = audio3;
     }
 
+    private static ArtistInfoScene artistInfoScene;
+
+    public static ArtistInfoScene getArtistInfoScene() {
+        if (artistInfoScene == null) {
+            artistInfoScene = new ArtistInfoScene();
+            return artistInfoScene;
+        }else {
+            return artistInfoScene;
+        }
+    }
+
     @FXML
     private AnchorPane Anchorpane;
 
@@ -78,14 +87,12 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
     @FXML
     private VBox listsVbox;
 
-    @FXML
-    private Button log;
 
     @FXML
     private ImageView nextButton;
 
     @FXML
-    private static ImageView playButton;
+    private ImageView playButton;
 
     @FXML
     private Button playListButton;
@@ -100,7 +107,7 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
     private ImageView searchButton1;
 
     @FXML
-    private static ImageView songPhoto;
+    private ImageView songPhoto1;
 
     @FXML
     private Circle userPhoto;
@@ -121,7 +128,7 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
     @FXML
     private Label birthdateLabel;
     @FXML
-    private static Label musicName;
+    private Label musicName;
     @FXML
     private Button login;
 
@@ -162,9 +169,6 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
         this.listsVbox = listsVbox;
     }
 
-    public void setLog(Button log) {
-        this.log = log;
-    }
 
     public void setNextButton(ImageView nextButton) {
         this.nextButton = nextButton;
@@ -191,7 +195,7 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
     }
 
     public void setSongPhoto(ImageView songPhoto) {
-        this.songPhoto = songPhoto;
+        this.songPhoto1 = songPhoto;
     }
 
     public void setUserPhoto(Circle userPhoto) {
@@ -235,9 +239,6 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
         return listsVbox;
     }
 
-    public Button getLog() {
-        return log;
-    }
 
     public ImageView getNextButton() {
         return nextButton;
@@ -264,7 +265,7 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
     }
 
     public ImageView getSongPhoto() {
-        return songPhoto;
+        return songPhoto1;
     }
 
     public Circle getUserPhoto() {
@@ -276,8 +277,8 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
     }
 
     @FXML
-    void followButton(MouseEvent event, Artist artist) {
-        artist.followers.add(ListenerController.getListenerController().listener);
+    void followButton(MouseEvent event) {
+        this.artist1.followers.add(ListenerController.getListenerController().listener);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("was successfully");
         alert.setContentText("followed");
@@ -286,14 +287,15 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
 
 
     @FXML
-    void reportButton(MouseEvent event, Artist artist) {
+    void reportButton(MouseEvent event) {
         Scanner sc = new Scanner(System.in);
-        ListenerController.getListenerController().artistReport(artist.getUserName(), sc.nextLine());
+        ListenerController.getListenerController().artistReport(this.artist1.getUserName(), sc.nextLine());
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("was successfully");
         alert.setContentText("Report was recorded");
         alert.show();
     }
+
     @FXML
     void musicName(MouseEvent event) throws IOException {
         ChangeScene.playScene();
@@ -309,7 +311,7 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
 
     @Override
     public void logout() {
-        log.setOnMouseClicked((e) -> {
+        logout.setOnMouseClicked((e) -> {
             if (!(ListenerController.listenerController.getListener() == null && AdminController.getAdminController().getAdmin() == null && ArtistController.getArtistController().getArtist1() == null)) {
                 ListenerController.listenerController.setListener(null);
                 ArtistController.getArtistController().setArtist1(null);
@@ -317,11 +319,11 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
                 try {
                     ChangeScene.homeScene();
                 } catch (IOException ex) {
-                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("error");
                     alert.setContentText("RunTime exception");
                     alert.show();
-                }finally {
+                } finally {
                     System.out.println("Have a good day");
                 }
             }
@@ -331,80 +333,87 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
     //todo
     @Override
     public void login() {
-        log.setOnMouseClicked((e) -> {
+        login.setOnMouseClicked((e) -> {
             try {
                 ChangeScene.entryScene();
             } catch (IOException ex) {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
                 alert.setContentText("RunTime exception");
                 alert.show();
-            }finally {
+            } finally {
                 System.out.println("Have a good day");
             }
         });
     }
 
     @FXML
-    static void playButton(MouseEvent event) {
+     void playButton(MouseEvent event) {
         String path1 = Main.class.getResource("61180").toExternalForm();
         String path2 = Main.class.getResource("Screenshot_2024-05-12_223937-removebg-preview (2)").toExternalForm();
         Image image1 = new Image(path1);
         Image image2 = new Image(path2);
         if (audio3IsPlaying) {
-            if (playButton.getImage() == image2) {
-                playButton.setImage(image1);
+            if (artistInfoScene.playButton.getImage() == image2) {
+                artistInfoScene.playButton.setImage(image1);
                 audio3.getMediaPlayer().play();
-                songPhoto.setImage(audio3.getImage());
-                musicName.setText(audio3.getName());
-            } else if (playButton.getImage() == image1) {
-                playButton.setImage(image2);
+                PlayScene.audio4 = audio3;
+                artistInfoScene.songPhoto1.setImage(audio3.getImage());
+                artistInfoScene.musicName.setText(audio3.getName());
+            } else if (artistInfoScene.playButton.getImage() == image1) {
+                artistInfoScene.playButton.setImage(image2);
                 audio3.getMediaPlayer().pause();
-                songPhoto.setImage(audio3.getImage());
-                musicName.setText(audio3.getName());
+                artistInfoScene.songPhoto1.setImage(audio3.getImage());
+                artistInfoScene.musicName.setText(audio3.getName());
             }
         } else if (HomeScene.audio1IsPlaying) {
             HomeScene.playButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.playButton(event);
+            AudiosScene.getAudiosScene().playButton(event);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.playButton(event);
+            AudiosOfPlaylist.getAudiosOfPlaylist().playButton(event);
+        } else if (SearchScene.audio5IsPlaying) {
+            SearchScene.getSearchScene().playButton(event);
         }
     }
 
     @FXML
-    static void nextButton(MouseEvent event) {
+     void nextButton(MouseEvent event) {
         int index;
         if (audio3IsPlaying) {
             index = artistSongs.indexOf(audio3);
             audio3 = artistSongs.get(++index);
             audio3.getMediaPlayer().play();
-            songPhoto.setImage(audio3.getImage());
-            musicName.setText(audio3.getName());
+            PlayScene.audio4 = audio3;
+            artistInfoScene.songPhoto1.setImage(audio3.getImage());
+            artistInfoScene.musicName.setText(audio3.getName());
         } else if (HomeScene.audio1IsPlaying) {
             HomeScene.nextButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.nextButton(event);
+            AudiosScene.getAudiosScene().nextButton(event);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.nextButton(event);
+            AudiosOfPlaylist.getAudiosOfPlaylist().nextButton(event);
+        } else if (SearchScene.audio5IsPlaying) {
+            SearchScene.getSearchScene().nextButton(event);
         }
     }
 
     @FXML
-    static void previousButton(MouseEvent event) {
+     void previousButton(MouseEvent event) {
         int index;
         if (audio3IsPlaying) {
             index = artistSongs.indexOf(audio3);
             audio3 = artistSongs.get(--index);
             audio3.getMediaPlayer().play();
-            songPhoto.setImage(audio3.getImage());
-            musicName.setText(audio3.getName());
+            PlayScene.audio4 = audio3;
+            artistInfoScene.songPhoto1.setImage(audio3.getImage());
+            artistInfoScene.musicName.setText(audio3.getName());
         } else if (HomeScene.audio1IsPlaying) {
             HomeScene.previousButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.previousButton(event);
+            AudiosScene.getAudiosScene().previousButton(event);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.previousButton(event);
+            AudiosOfPlaylist.getAudiosOfPlaylist().previousButton(event);
         }
     }
 
@@ -414,11 +423,11 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
             try {
                 ChangeScene.signUpScene();
             } catch (IOException ex) {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
                 alert.setContentText("RunTime exception");
                 alert.show();
-            }finally {
+            } finally {
                 System.out.println("Have a good day");
             }
         });
@@ -430,11 +439,11 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
             try {
                 ChangeScene.searchScene();
             } catch (IOException ex) {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
                 alert.setContentText("RunTime exception");
                 alert.show();
-            }finally {
+            } finally {
                 System.out.println("Have a good day");
             }
         });
@@ -489,11 +498,6 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
     }
 
     @FXML
-    void log(MouseEvent event) {
-//todo
-    }
-
-    @FXML
     void artistButton(MouseEvent event) throws IOException {
         ChangeScene.artistsScene();
     }
@@ -518,11 +522,11 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
             try {
                 ChangeScene.ListenerPanelScene();
             } catch (IOException ex) {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
                 alert.setContentText("RunTime exception");
                 alert.show();
-            }finally {
+            } finally {
                 System.out.println("Have a good day");
             }
         });
@@ -553,17 +557,19 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
         hBox.setSpacing(15);
         hBox.setOnMouseClicked((e) -> {
             audio.getMediaPlayer().play();
+            PlayScene.audio4 = audio;
             audio3 = audio;
-            songPhoto = audio.getAudioPhoto();
+            songPhoto1 = audio.getAudioPhoto();
             musicName.setText(audio.getName());
             playButton.setImage(image1);
             audio3IsPlaying = true;
             HomeScene.audio1IsPlaying = false;
             AudiosScene.audio2IsPlaying = false;
+            AudiosOfPlaylist.audio6IsPlaying = false;
             try {
                 ChangeScene.playScene();
             } catch (IOException ex) {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
                 alert.setContentText("RunTime exception");
                 alert.show();
@@ -571,11 +577,11 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
             try {
                 ChangeScene.playScene();
             } catch (IOException ex) {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
                 alert.setContentText("RunTime exception");
                 alert.show();
-            }finally {
+            } finally {
                 System.out.println("Have a good day");
             }
         });

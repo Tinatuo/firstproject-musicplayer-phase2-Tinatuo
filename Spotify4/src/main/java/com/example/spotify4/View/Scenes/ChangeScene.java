@@ -1,7 +1,6 @@
 package com.example.spotify4.View.Scenes;
 
 import com.example.spotify4.Main;
-import com.example.spotify4.View.SceneStack;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

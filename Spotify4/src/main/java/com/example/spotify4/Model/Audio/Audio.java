@@ -178,8 +178,8 @@ public class Audio implements Comparable<Audio> {
                     return 1;
                 } else if (this.numberOfLike < audio.numberOfLike) {
                     return -1;
-                } else if (this.numberOfLike == audio.numberOfLike) {
-                    if ((audio instanceof Podcast) && (audio1 instanceof Music)) {
+                } else {
+                    if ((audio instanceof Podcast) && (this instanceof Music)) {
                         return 1;
                     } else if ((audio instanceof Music) && (audio1 instanceof Podcast)) {
                         return -1;

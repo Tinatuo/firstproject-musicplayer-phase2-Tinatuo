@@ -51,7 +51,7 @@
                               <Font name="Cambria Bold" size="15.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nameBox" layoutX="218.0" layoutY="17.0" prefHeight="25.0" prefWidth="257.0" promptText="Password..." />
+                        <TextField fx:id="nameBox" layoutX="218.0" layoutY="17.0" prefHeight="25.0" prefWidth="257.0" promptText="Name..." />
                      </children>
                   </AnchorPane>
                </children>

@@ -114,7 +114,7 @@
                         <AnchorPane prefHeight="472.0" prefWidth="644.0">
                            <children>
                               <Circle fx:id="userPhoto" fill="#18c64c" layoutX="93.0" layoutY="80.0" radius="66.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Label layoutX="52.0" layoutY="168.0" styleClass="Label" stylesheets="@Style.css" text="username">
+                              <Label fx:id="usernameLabel" layoutX="52.0" layoutY="168.0" styleClass="Label" stylesheets="@Style.css" text="username">
                                  <font>
                                     <Font name="Cambria Bold" size="18.0" />
                                  </font>
@@ -135,7 +135,7 @@
                                     </RadialGradient>
                                  </textFill>
                               </Label>
-                              <Label layoutX="67.0" layoutY="207.0" styleClass="Label" stylesheets="@Style.css" text="name">
+                              <Label fx:id="nameLabel" layoutX="67.0" layoutY="207.0" styleClass="Label" stylesheets="@Style.css" text="name">
                                  <font>
                                     <Font name="Cambria Bold" size="18.0" />
                                  </font>

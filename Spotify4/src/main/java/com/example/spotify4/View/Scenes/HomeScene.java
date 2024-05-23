@@ -6,8 +6,6 @@ import com.example.spotify4.Controller.ListenerController.ListenerController;
 import com.example.spotify4.Main;
 import com.example.spotify4.Model.Audio.Audio;
 import com.example.spotify4.Model.GeneralOperation;
-import com.example.spotify4.Model.User.Admin;
-import com.example.spotify4.View.SceneStack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -30,6 +28,8 @@ import java.util.ResourceBundle;
 public class HomeScene implements Initializable, GeneralOperation {
     public static Audio audio1;
     public static boolean audio1IsPlaying = false;
+    private static HomeScene homeScene;
+
     @FXML
     private AnchorPane Anchorpane;
 
@@ -62,7 +62,7 @@ public class HomeScene implements Initializable, GeneralOperation {
     private ImageView nextButton;
 
     @FXML
-    private static ImageView playButton;
+    private  ImageView playButton;
 
     @FXML
     private Button playListButton;
@@ -76,17 +76,24 @@ public class HomeScene implements Initializable, GeneralOperation {
     @FXML
     private Button signUpButton;
 
-    @FXML
-    private static ImageView songPhoto;
 
     @FXML
-    private static Label musicName;
+    private  Label musicName;
 
     @FXML
     private Button login;
 
     @FXML
     private Button logout;
+    @FXML
+    private  ImageView songPhoto;;
+
+    public static HomeScene getHomeScene() {
+        if(homeScene == null) {
+            homeScene = new HomeScene();
+        }
+        return homeScene;
+    }
 
     public VBox getVBox() {
         return vBox;
@@ -395,6 +402,7 @@ public class HomeScene implements Initializable, GeneralOperation {
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setOnMouseClicked((e) -> {
             audio.getMediaPlayer().play();
+            PlayScene.audio4=audio;
             songPhoto = audio.getAudioPhoto();
             musicName.setText(audio.getName());
             playButton.setImage(image1);
@@ -426,21 +434,25 @@ public class HomeScene implements Initializable, GeneralOperation {
                 index = AdminController.getAdminController().mostPopularAudioFileArray().indexOf(audio1);
                 audio1 = AdminController.getAdminController().mostPopularAudioFileArray().get(++index);
                 audio1.getMediaPlayer().play();
-                songPhoto.setImage(audio1.getImage());
-                musicName.setText(audio1.getName());
+                PlayScene.audio4=audio1;
+                homeScene.songPhoto.setImage(audio1.getImage());
+                homeScene.musicName.setText(audio1.getName());
             } else {
                 index = ListenerController.getListenerController().getSuggestions().indexOf(audio1);
                 audio1 = ListenerController.getListenerController().getSuggestions().get(++index);
                 audio1.getMediaPlayer().play();
-                songPhoto.setImage(audio1.getImage());
-                musicName.setText(audio1.getName());
+                PlayScene.audio4=audio1;
+                homeScene.songPhoto.setImage(audio1.getImage());
+                homeScene.musicName.setText(audio1.getName());
             }
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.nextButton(mouseEvent);
+            ArtistInfoScene.getArtistInfoScene().nextButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.nextButton(mouseEvent);
+            AudiosScene.getAudiosScene().nextButton(mouseEvent);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.nextButton(mouseEvent);
+            AudiosOfPlaylist.getAudiosOfPlaylist().nextButton(mouseEvent);
+        } else if (SearchScene.audio5IsPlaying) {
+            SearchScene.getSearchScene().nextButton(mouseEvent);
         }
     }
 
@@ -452,21 +464,25 @@ public class HomeScene implements Initializable, GeneralOperation {
                 index = AdminController.getAdminController().mostPopularAudioFileArray().indexOf(audio1);
                 audio1 = AdminController.getAdminController().mostPopularAudioFileArray().get(--index);
                 audio1.getMediaPlayer().play();
-                songPhoto.setImage(audio1.getImage());
-                musicName.setText(audio1.getName());
+                PlayScene.audio4=audio1;
+                homeScene.songPhoto.setImage(audio1.getImage());
+                homeScene.musicName.setText(audio1.getName());
             } else {
                 index = ListenerController.getListenerController().getSuggestions().indexOf(audio1);
                 audio1 = ListenerController.getListenerController().getSuggestions().get(--index);
                 audio1.getMediaPlayer().play();
-                songPhoto.setImage(audio1.getImage());
-                musicName.setText(audio1.getName());
+                PlayScene.audio4=audio1;
+                homeScene.songPhoto.setImage(audio1.getImage());
+                homeScene.musicName.setText(audio1.getName());
             }
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.previousButton(mouseEvent);
+            ArtistInfoScene.getArtistInfoScene().previousButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.previousButton(mouseEvent);
+            AudiosScene.getAudiosScene().previousButton(mouseEvent);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.previousButton(mouseEvent);
+            AudiosOfPlaylist.getAudiosOfPlaylist().previousButton(mouseEvent);
+        } else if (SearchScene.audio5IsPlaying) {
+            SearchScene.getSearchScene().previousButton(mouseEvent);
         }
 
     }
@@ -477,23 +493,26 @@ public class HomeScene implements Initializable, GeneralOperation {
         Image image1 = new Image(path1);
         Image image2 = new Image(path2);
         if (audio1IsPlaying) {
-            if (Objects.equals(playButton.getImage(), image2)) {
-                playButton.setImage(image1);
+            if (Objects.equals(homeScene.playButton.getImage(), image2)) {
+                homeScene.playButton.setImage(image1);
                 audio1.getMediaPlayer().play();
-                songPhoto.setImage(audio1.getImage());
-                musicName.setText(audio1.getName());
-            } else if (Objects.equals(playButton.getImage(), image1)) {
-                playButton.setImage(image2);
+                PlayScene.audio4=audio1;
+                homeScene.songPhoto.setImage(audio1.getImage());
+                homeScene.musicName.setText(audio1.getName());
+            } else if (Objects.equals(homeScene.playButton.getImage(), image1)) {
+                homeScene.playButton.setImage(image2);
                 audio1.getMediaPlayer().pause();
-                songPhoto.setImage(audio1.getImage());
-                musicName.setText(audio1.getName());
+                homeScene.songPhoto.setImage(audio1.getImage());
+                homeScene.musicName.setText(audio1.getName());
             }
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.playButton(mouseEvent);
+            AudiosOfPlaylist.getAudiosOfPlaylist().playButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.playButton(mouseEvent);
+            AudiosScene.getAudiosScene().playButton(mouseEvent);
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.playButton(mouseEvent);
+            ArtistInfoScene.getArtistInfoScene().playButton(mouseEvent);
+        } else if (SearchScene.audio5IsPlaying) {
+            SearchScene.getSearchScene().playButton(mouseEvent);
         }
 
 

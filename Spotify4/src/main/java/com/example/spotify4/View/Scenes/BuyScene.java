@@ -9,7 +9,6 @@ import com.example.spotify4.Controller.ListenerController.PremiumController;
 import com.example.spotify4.Model.GeneralOperation;
 import com.example.spotify4.Model.User.Listener.FreeListener;
 import com.example.spotify4.Model.User.Listener.Premium;
-import com.example.spotify4.View.SceneStack;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -22,6 +21,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 public class BuyScene implements GeneralOperation {
+    String packageSpotify;
 
     @FXML
     private AnchorPane Anchorpane;
@@ -89,7 +89,8 @@ public class BuyScene implements GeneralOperation {
 
     @FXML
     void ThirtyDayLabel(MouseEvent event) {
-        buyButton(event,"THIRTYDAYS");
+        packageSpotify="THIRTYDAYS";
+        buyButton(event);
     }
 
     @FXML
@@ -99,7 +100,7 @@ public class BuyScene implements GeneralOperation {
 
 
     @FXML
-    void buyButton(MouseEvent event , String packageSpotify) {
+    void buyButton(MouseEvent event) {
         if(ListenerController.getListenerController().listener instanceof FreeListener) {
             try {
                 ListenerController.getListenerController().listener = FreeListenerController.getFreeListenerController().purchaseOrRenewSubscription(packageSpotify);
@@ -135,11 +136,13 @@ public class BuyScene implements GeneralOperation {
         if (HomeScene.audio1IsPlaying) {
             HomeScene.nextButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.nextButton(event);
+            AudiosScene.getAudiosScene().nextButton(event);
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.nextButton(event);
+            ArtistInfoScene.getArtistInfoScene().nextButton(event);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.nextButton(event);
+            AudiosOfPlaylist.getAudiosOfPlaylist().nextButton(event);
+        } else if (SearchScene.audio5IsPlaying) {
+            SearchScene.getSearchScene().nextButton(event);
         }
     }
     @FXML
@@ -174,7 +177,8 @@ public class BuyScene implements GeneralOperation {
     }
     @FXML
     void oneHundredEightyDays(MouseEvent event) {
-        buyButton(event,"ONEHUNDREDEIGHTYDAYS");
+        packageSpotify="ONEHUNDREDEIGHTYDAYS";
+        buyButton(event);
     }
 
     @FXML
@@ -182,11 +186,13 @@ public class BuyScene implements GeneralOperation {
         if (HomeScene.audio1IsPlaying) {
             HomeScene.playButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.playButton(event);
+            AudiosScene.getAudiosScene().playButton(event);
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.playButton(event);
+            ArtistInfoScene.getArtistInfoScene().playButton(event);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.playButton(event);
+            AudiosOfPlaylist.getAudiosOfPlaylist().playButton(event);
+        } else if (SearchScene.audio5IsPlaying) {
+            SearchScene.getSearchScene().playButton(event);
         }
     }
 
@@ -200,16 +206,19 @@ public class BuyScene implements GeneralOperation {
         if (HomeScene.audio1IsPlaying) {
             HomeScene.previousButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.previousButton(event);
+            AudiosScene.getAudiosScene().previousButton(event);
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.previousButton(event);
+            ArtistInfoScene.getArtistInfoScene().previousButton(event);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.previousButton(event);
+            AudiosOfPlaylist.getAudiosOfPlaylist().previousButton(event);
+        } else if (SearchScene.audio5IsPlaying) {
+            SearchScene.getSearchScene().previousButton(event);
         }
     }
     @FXML
     void sixtyDayLabel(MouseEvent event) {
-        buyButton(event,"SIXTYDAYS");
+        packageSpotify="SIXTYDAYS";
+        buyButton(event);
     }
 
     @Override

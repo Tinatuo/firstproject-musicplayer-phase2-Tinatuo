@@ -4,7 +4,6 @@ import com.example.spotify4.Controller.ArtistController.ArtistController;
 import com.example.spotify4.Controller.Exception.InvalidFormatException;
 import com.example.spotify4.Controller.Exception.WrongPasswordException;
 import com.example.spotify4.Controller.ListenerController.ListenerController;
-import com.example.spotify4.View.SceneStack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -197,14 +196,14 @@ public class SignUpScene implements Initializable {
                     alert.setContentText("successfully signed up");
                     alert.show();
                 } catch (WrongPasswordException | InvalidFormatException e) {
-                  System.out.println("RunTime");
+                  System.out.println(e.getMessage());
                 }
                 try {
                     ChangeScene.genreScene();
                 } catch (IOException e) {
                     Alert alert=new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("error");
-                    alert.setContentText("RunTime exception");
+                    alert.setContentText(e.getMessage());
                     alert.show();
                 }
             } else if (Objects.equals(typeOfUser.getSelectionModel().getSelectedItem(), "Artist")) {
@@ -217,7 +216,7 @@ public class SignUpScene implements Initializable {
                 } catch (WrongPasswordException | InvalidFormatException e) {
                     Alert alert=new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("error");
-                    alert.setContentText("RunTime exception");
+                    alert.setContentText(e.getMessage());
                     alert.show();
                 }
                 try {
@@ -225,7 +224,7 @@ public class SignUpScene implements Initializable {
                 } catch (IOException e) {
                     Alert alert=new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("error");
-                    alert.setContentText("RunTime exception");
+                    alert.setContentText(e.getMessage());
                     alert.show();
                 }
             } else if (Objects.equals(typeOfUser.getSelectionModel().getSelectedItem(), "Admin")) {
@@ -239,7 +238,7 @@ public class SignUpScene implements Initializable {
                 } catch (WrongPasswordException | InvalidFormatException e) {
                     Alert alert=new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("error");
-                    alert.setContentText("RunTime exception");
+                    alert.setContentText(e.getMessage());
                     alert.show();
                 }
                 try {
@@ -247,7 +246,7 @@ public class SignUpScene implements Initializable {
                 } catch (IOException e) {
                     Alert alert=new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("error");
-                    alert.setContentText("RunTime exception");
+                    alert.setContentText(e.getMessage());
                     alert.show();
                 }
 

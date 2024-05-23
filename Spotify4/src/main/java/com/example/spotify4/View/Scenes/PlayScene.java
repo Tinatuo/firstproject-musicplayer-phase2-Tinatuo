@@ -3,18 +3,15 @@ package com.example.spotify4.View.Scenes;
 import com.example.spotify4.Controller.AdminController;
 import com.example.spotify4.Controller.ArtistController.ArtistController;
 import com.example.spotify4.Controller.ListenerController.ListenerController;
-import com.example.spotify4.Main;
 import com.example.spotify4.Model.Audio.Audio;
 import com.example.spotify4.Model.Audio.Music;
 import com.example.spotify4.Model.Audio.Podcast;
 import com.example.spotify4.Model.GeneralOperation;
-import com.example.spotify4.View.SceneStack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
@@ -22,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PlayScene implements  GeneralOperation {
+public class PlayScene implements  GeneralOperation , Initializable {
     public static Audio audio4;
     @FXML
     private Button artistButton;
@@ -299,7 +296,7 @@ public class PlayScene implements  GeneralOperation {
                 lyricLabel.setText(((Podcast) audio4).getCaption());
             }
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.nextButton(event);
+            AudiosScene.getAudiosScene().nextButton(event);
             audio4 = AudiosScene.audio2;
             songCover.setImage(audio4.getImage());
             musicID.setText(audio4.getName());
@@ -314,7 +311,7 @@ public class PlayScene implements  GeneralOperation {
                 lyricLabel.setText(((Podcast) audio4).getCaption());
             }
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.nextButton(event);
+            ArtistInfoScene.getArtistInfoScene().nextButton(event);
             audio4 = ArtistInfoScene.audio3;
             songCover.setImage(audio4.getImage());
             musicID.setText(audio4.getName());
@@ -329,7 +326,7 @@ public class PlayScene implements  GeneralOperation {
                 lyricLabel.setText(((Podcast) audio4).getCaption());
             }
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.nextButton(event);
+            AudiosOfPlaylist.getAudiosOfPlaylist().nextButton(event);
             audio4 = AudiosOfPlaylist.audio6;
             songCover.setImage(audio4.getImage());
             musicID.setText(audio4.getName());
@@ -364,7 +361,7 @@ public class PlayScene implements  GeneralOperation {
                 lyricLabel.setText(((Podcast) audio4).getCaption());
             }
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.playButton(event);
+            AudiosScene.getAudiosScene().playButton(event);
             audio4 = AudiosScene.audio2;
             songCover.setImage(audio4.getImage());
             musicID.setText(audio4.getName());
@@ -379,7 +376,7 @@ public class PlayScene implements  GeneralOperation {
                 lyricLabel.setText(((Podcast) audio4).getCaption());
             }
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.playButton(event);
+            ArtistInfoScene.getArtistInfoScene().playButton(event);
             audio4 = ArtistInfoScene.audio3;
             songCover.setImage(audio4.getImage());
             musicID.setText(audio4.getName());
@@ -394,7 +391,7 @@ public class PlayScene implements  GeneralOperation {
                 lyricLabel.setText(((Podcast) audio4).getCaption());
             }
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.playButton(event);
+            AudiosOfPlaylist.getAudiosOfPlaylist().playButton(event);
             audio4 = AudiosOfPlaylist.audio6;
             songCover.setImage(audio4.getImage());
             musicID.setText(audio4.getName());
@@ -434,7 +431,7 @@ public class PlayScene implements  GeneralOperation {
                 lyricLabel.setText(((Podcast) audio4).getCaption());
             }
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.previousButton(event);
+            AudiosScene.getAudiosScene().previousButton(event);
             audio4 = AudiosScene.audio2;
             songCover.setImage(audio4.getImage());
             musicID.setText(audio4.getName());
@@ -449,7 +446,7 @@ public class PlayScene implements  GeneralOperation {
                 lyricLabel.setText(((Podcast) audio4).getCaption());
             }
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.previousButton(event);
+            ArtistInfoScene.getArtistInfoScene().previousButton(event);
             audio4 = ArtistInfoScene.audio3;
             songCover.setImage(audio4.getImage());
             musicID.setText(audio4.getName());
@@ -464,7 +461,7 @@ public class PlayScene implements  GeneralOperation {
                 lyricLabel.setText(((Podcast) audio4).getCaption());
             }
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
-            AudiosOfPlaylist.previousButton(event);
+            AudiosOfPlaylist.getAudiosOfPlaylist().previousButton(event);
             audio4 = AudiosOfPlaylist.audio6;
             songCover.setImage(audio4.getImage());
             musicID.setText(audio4.getName());
@@ -559,4 +556,19 @@ public class PlayScene implements  GeneralOperation {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        songCover.setImage(audio4.getImage());
+        musicID.setText(audio4.getName());
+        musicID.setStyle(".label");
+        artistID.setText(audio4.getArtistName());
+        artistID.setStyle(".label");
+        genreID.setText(String.valueOf(audio4.getGenre()));
+        genreID.setStyle(".label");
+        if (audio4 instanceof Music) {
+            lyricLabel.setText(((Music) audio4).getLyric());
+        } else if (audio4 instanceof Podcast) {
+            lyricLabel.setText(((Podcast) audio4).getCaption());
+        }
+    }
 }

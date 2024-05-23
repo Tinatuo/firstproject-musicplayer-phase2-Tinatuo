@@ -12,7 +12,6 @@ import com.example.spotify4.Model.User.Artist.Artist;
 import com.example.spotify4.Model.User.Listener.FreeListener;
 import com.example.spotify4.Model.User.Listener.Premium;
 import com.example.spotify4.Model.User.User;
-import com.example.spotify4.View.SceneStack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -29,6 +28,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ListenerPanelScene implements GeneralOperation, Initializable {
+    //todo artist tarif kon
     @FXML
     private AnchorPane Anchorpane;
 
@@ -251,6 +251,19 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
         HBox hBox = new HBox(imageView, artistName);
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setSpacing(15);
+        hBox.setOnMouseClicked((e) -> {
+            ArtistInfoScene.setArtist1(artist);
+            try {
+                ChangeScene.artistInfoScene();
+            } catch (IOException ex) {
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("error");
+                alert.setContentText("RunTime exception");
+                alert.show();
+            }finally {
+                System.out.println("Have a good day");
+            }
+        });
         return hBox;
     }
     @FXML
@@ -285,19 +298,6 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
         }
         for (User artist : ListenerController.getListenerController().arrayFollowing()) {
             VBoxFollowing.getChildren().add(setHBOx((Artist) artist));
-            VBoxFollowing.setOnMouseClicked((e) -> {
-                ArtistInfoScene.setArtist1((Artist) artist);
-                try {
-                    ChangeScene.artistInfoScene();
-                } catch (IOException ex) {
-                    Alert alert=new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("error");
-                    alert.setContentText("RunTime exception");
-                    alert.show();
-                }finally {
-                    System.out.println("Have a good day");
-                }
-            });
         }
     }
 }

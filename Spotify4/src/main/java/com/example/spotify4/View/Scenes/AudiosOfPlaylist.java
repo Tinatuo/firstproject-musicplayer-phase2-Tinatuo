@@ -5,10 +5,8 @@ import com.example.spotify4.Controller.ArtistController.ArtistController;
 import com.example.spotify4.Controller.ListenerController.ListenerController;
 import com.example.spotify4.Main;
 import com.example.spotify4.Model.Audio.Audio;
-import com.example.spotify4.Model.DataBase;
 import com.example.spotify4.Model.GeneralOperation;
 import com.example.spotify4.Model.PlayList;
-import com.example.spotify4.View.SceneStack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -28,8 +26,6 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static com.example.spotify4.View.Scenes.AudiosScene.audio2;
-
 public class AudiosOfPlaylist implements Initializable, GeneralOperation {
 
     @FXML
@@ -41,7 +37,7 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
     @FXML
     private Button backButton;
     @FXML
-    private static ImageView playButton;
+    private ImageView playButton;
 
 
     @FXML
@@ -80,7 +76,7 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
     private Button signUpButton;
 
     @FXML
-    private static ImageView songPhoto;
+    private ImageView songPhoto;
 
     @FXML
     private VBox vBox;
@@ -89,8 +85,18 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
     static boolean audio6IsPlaying = false;
 
     @FXML
-    private static Label musicName;
+    private Label musicName;
     private static PlayList playList;
+    private static AudiosOfPlaylist audiosOfPlaylist;
+
+    public static AudiosOfPlaylist getAudiosOfPlaylist() {
+        if(audiosOfPlaylist==null){
+            audiosOfPlaylist=new AudiosOfPlaylist();
+            return audiosOfPlaylist;
+        }else {
+            return audiosOfPlaylist;
+        }
+    }
 
     public static PlayList getPlayList() {
         return playList;
@@ -133,11 +139,11 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
                 try {
                     ChangeScene.homeScene();
                 } catch (IOException ex) {
-                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("error");
                     alert.setContentText("RunTime exception");
                     alert.show();
-                }finally {
+                } finally {
                     System.out.println("Have a good day");
                 }
             }
@@ -181,11 +187,11 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
             try {
                 ChangeScene.signUpScene();
             } catch (IOException ex) {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
                 alert.setContentText("RunTime exception");
                 alert.show();
-            }finally {
+            } finally {
                 System.out.println("Have a good day");
             }
         });
@@ -207,11 +213,11 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
             try {
                 ChangeScene.searchScene();
             } catch (IOException ex) {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
                 alert.setContentText("RunTime exception");
                 alert.show();
-            }finally {
+            } finally {
                 System.out.println("Have a good day");
             }
         });
@@ -222,11 +228,11 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
             try {
                 ChangeScene.ListenerPanelScene();
             } catch (IOException ex) {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
                 alert.setContentText("RunTime exception");
                 alert.show();
-            }finally {
+            } finally {
                 System.out.println("Have a good day");
             }
         });
@@ -253,6 +259,7 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
         hBox.setSpacing(15);
         hBox.setOnMouseClicked((e) -> {
             audio.getMediaPlayer().play();
+            PlayScene.audio4 = audio;
             songPhoto = audio.getAudioPhoto();
             musicName.setText(audio.getName());
             playButton.setImage(image1);
@@ -264,11 +271,11 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
             try {
                 ChangeScene.playScene();
             } catch (IOException ex) {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
                 alert.setContentText("RunTime exception");
                 alert.show();
-            }finally {
+            } finally {
                 System.out.println("Have a good day");
             }
         });
@@ -287,69 +294,78 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
     }
 
 
-
     @FXML
     void musicName(MouseEvent event) throws IOException {
         ChangeScene.playScene();
     }
-    public static void playButton(MouseEvent mouseEvent) {
+
+    public void playButton(MouseEvent mouseEvent) {
         String path1 = Main.class.getResource("61180").toExternalForm();
         String path2 = Main.class.getResource("Screenshot_2024-05-12_223937-removebg-preview (2)").toExternalForm();
         Image image1 = new Image(path1);
         Image image2 = new Image(path2);
         if (audio6IsPlaying) {
-            if (Objects.equals(playButton.getImage(), image2)) {
-                playButton.setImage(image1);
+            if (Objects.equals(audiosOfPlaylist.playButton.getImage(), image2)) {
+                audiosOfPlaylist.playButton.setImage(image1);
                 audio6.getMediaPlayer().play();
-                songPhoto.setImage(audio6.getImage());
-                musicName.setText(audio6.getName());
-            } else if (Objects.equals(playButton.getImage(), image1)) {
-                playButton.setImage(image2);
+                PlayScene.audio4 = audio6;
+                audiosOfPlaylist.songPhoto.setImage(audio6.getImage());
+                audiosOfPlaylist.musicName.setText(audio6.getName());
+            } else if (Objects.equals(audiosOfPlaylist.playButton.getImage(), image1)) {
+                audiosOfPlaylist.playButton.setImage(image2);
                 audio6.getMediaPlayer().pause();
-                songPhoto.setImage(audio6.getImage());
-                musicName.setText(audio6.getName());
+                audiosOfPlaylist.songPhoto.setImage(audio6.getImage());
+                audiosOfPlaylist.musicName.setText(audio6.getName());
             }
         } else if (HomeScene.audio1IsPlaying) {
             HomeScene.playButton(mouseEvent);
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.playButton(mouseEvent);
+            ArtistInfoScene.getArtistInfoScene().playButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.playButton(mouseEvent);
+            AudiosScene.getAudiosScene().playButton(mouseEvent);
+        } else if (SearchScene.audio5IsPlaying) {
+            SearchScene.getSearchScene().playButton(mouseEvent);
         }
 
     }
 
-    public static void previousButton(MouseEvent mouseEvent) {
+    public void previousButton(MouseEvent mouseEvent) {
         int index;
         if (audio6IsPlaying) {
             index = playList.getAudoisList().indexOf(audio6);
             audio6 = playList.getAudoisList().get(--index);
             audio6.getMediaPlayer().play();
-            songPhoto.setImage(audio6.getImage());
-            musicName.setText(audio6.getName());
+            PlayScene.audio4 = audio6;
+            audiosOfPlaylist.songPhoto.setImage(audio6.getImage());
+            audiosOfPlaylist.musicName.setText(audio6.getName());
         } else if (HomeScene.audio1IsPlaying) {
             HomeScene.previousButton(mouseEvent);
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.previousButton(mouseEvent);
+            ArtistInfoScene.getArtistInfoScene().previousButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.previousButton(mouseEvent);
+            AudiosScene.getAudiosScene().previousButton(mouseEvent);
+        } else if (SearchScene.audio5IsPlaying) {
+            SearchScene.getSearchScene().previousButton(mouseEvent);
         }
     }
 
-    public static void nextButton(MouseEvent mouseEvent) {
+    public  void nextButton(MouseEvent mouseEvent) {
         int index;
         if (audio6IsPlaying) {
             index = playList.getAudoisList().indexOf(audio6);
             audio6 = playList.getAudoisList().get(++index);
             audio6.getMediaPlayer().play();
-            songPhoto.setImage(audio6.getImage());
-            musicName.setText(audio6.getName());
+            PlayScene.audio4 = audio6;
+            audiosOfPlaylist.songPhoto.setImage(audio6.getImage());
+            audiosOfPlaylist.musicName.setText(audio6.getName());
         } else if (HomeScene.audio1IsPlaying) {
             HomeScene.nextButton(mouseEvent);
         } else if (ArtistInfoScene.audio3IsPlaying) {
-            ArtistInfoScene.nextButton(mouseEvent);
+            ArtistInfoScene.getArtistInfoScene().nextButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
-            AudiosScene.audiosScene.nextButton(mouseEvent);
+            AudiosScene.getAudiosScene().nextButton(mouseEvent);
+        } else if (SearchScene.audio5IsPlaying) {
+            SearchScene.getSearchScene().nextButton(mouseEvent);
         }
     }
 }

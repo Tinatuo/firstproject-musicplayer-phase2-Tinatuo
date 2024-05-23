@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="747.0" style="-fx-background-color: #191414;" styleClass="-fx-background-color: #191414.;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify4.View.ArtistInfoScene">
+<AnchorPane fx:id="Anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="747.0" style="-fx-background-color: #191414;" styleClass="-fx-background-color: #191414.;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify4.View.Scenes.ArtistInfoScene">
    <children>
       <ScrollPane hbarPolicy="NEVER" prefHeight="460.0" prefWidth="747.0" styleClass="root" AnchorPane.topAnchor="0.0">
          <content>
@@ -251,15 +251,7 @@
             </HBox>
          </content>
       </ScrollPane>
-      <HBox layoutX="1.0" layoutY="503.0" prefHeight="65.0" prefWidth="747.0" style="-fx-background-color: #191414.;">
-         <children>
-            <ImageView fx:id="songPhoto" fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
-               <HBox.margin>
-                  <Insets left="10.0" top="8.0" />
-               </HBox.margin>
-            </ImageView>
-         </children>
-      </HBox>
+      <HBox layoutX="1.0" layoutY="503.0" prefHeight="40.0" prefWidth="747.0" style="-fx-background-color: #191414;" />
       <AnchorPane cache="true" cacheHint="SPEED" layoutY="460.0" prefHeight="65.0" prefWidth="747.0" styleClass="PlayMusicBar">
          <children>
             <ImageView fx:id="playButton" fitHeight="40.0" fitWidth="44.0" layoutX="353.0" layoutY="11.0" onMouseClicked="#playButton" pickOnBounds="true" preserveRatio="true" styleClass="MusicButton">
@@ -277,8 +269,8 @@
                   <Image url="@../../../../../../../../../Users/WDC/Downloads/Screenshot_2024-05-12_224220-removebg-preview.png" />
                </image>
             </ImageView>
-            <Label fx:id="musicName" layoutX="88.0" layoutY="15.0" prefHeight="35.0" prefWidth="109.0" text="Label" />
-            <ImageView fx:id="songPhoto" fitHeight="47.0" fitWidth="47.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="musicName" layoutX="88.0" layoutY="15.0" onMouseClicked="#musicName" prefHeight="35.0" prefWidth="109.0" text="Label" />
+            <ImageView fx:id="songPhoto1" fitHeight="47.0" fitWidth="47.0" layoutX="14.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </children>
