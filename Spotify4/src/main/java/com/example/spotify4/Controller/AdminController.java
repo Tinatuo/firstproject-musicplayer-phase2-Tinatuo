@@ -37,15 +37,16 @@ public class AdminController extends UserController {
         return string;
     }
 
-    public String logIn(String userName, String password) throws UserNotFoundException {
-        String string = "";
+    public boolean logIn(String userName, String password) throws UserNotFoundException {
+        boolean flag=false;
         if (Objects.equals(Admin.getAdmin().getUserName(), userName) && Objects.equals(getAdmin().getPassword(), password)) {
             this.admin = getAdmin();
-            string = "Successful login enter";
+            flag = true;
         } else {
+            flag = false;
             throw new UserNotFoundException();
         }
-        return string;
+        return flag;
     }
 
     public String mostPopularAudioFile() {

@@ -191,20 +191,16 @@ public class SignUpScene implements Initializable {
             if (Objects.equals(typeOfUser.getSelectionModel().getSelectedItem(), "Listener")) {
                 try {
                     ListenerController.getListenerController().signUp(usernameBox.getText(), passwordBox.getText(), nameBox.getText(), emailBox.getText(), phonenumberBox.getText(), date.getYear(), date.getMonthValue(), date.getDayOfMonth(), biographyBox.getText());
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Success");
-                    alert.setContentText("successfully signed up");
-                    alert.show();
-                } catch (WrongPasswordException | InvalidFormatException e) {
-                  System.out.println(e.getMessage());
-                }
-                try {
                     ChangeScene.genreScene();
-                } catch (IOException e) {
-                    Alert alert=new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("error");
-                    alert.setContentText(e.getMessage());
-                    alert.show();
+//                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//                    alert.setTitle("Success");
+//                    alert.setContentText("successfully signed up");
+//                    alert.show();
+                } catch (WrongPasswordException | InvalidFormatException e) {
+                  Alert alert=new Alert(Alert.AlertType.ERROR);
+                  alert.setTitle("Error");
+                  alert.setContentText(e.getMessage());
+                  alert.show();
                 }
             } else if (Objects.equals(typeOfUser.getSelectionModel().getSelectedItem(), "Artist")) {
                 try {
@@ -219,14 +215,7 @@ public class SignUpScene implements Initializable {
                     alert.setContentText(e.getMessage());
                     alert.show();
                 }
-                try {
-                    ChangeScene.homeScene();
-                } catch (IOException e) {
-                    Alert alert=new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("error");
-                    alert.setContentText(e.getMessage());
-                    alert.show();
-                }
+              ChangeScene.homeScene();
             } else if (Objects.equals(typeOfUser.getSelectionModel().getSelectedItem(), "Admin")) {
 
                 try {
@@ -241,17 +230,9 @@ public class SignUpScene implements Initializable {
                     alert.setContentText(e.getMessage());
                     alert.show();
                 }
-                try {
-                    ChangeScene.homeScene();
-                } catch (IOException e) {
-                    Alert alert=new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("error");
-                    alert.setContentText(e.getMessage());
-                    alert.show();
-                }
-
+                ChangeScene.homeScene();
             }
-            ChangeScene.homeScene();
+
         }
     }
 

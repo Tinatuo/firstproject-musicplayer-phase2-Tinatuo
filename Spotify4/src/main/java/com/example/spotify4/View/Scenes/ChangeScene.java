@@ -138,6 +138,7 @@ public class ChangeScene {
         SceneStack.sceneStack.push(scene);
         String css=Main.class.getResource("Style.css").toExternalForm();
         scene.getStylesheets().add(css);
+        System.out.println("bye");
         stage.setScene(scene);
         stage.setTitle("Genres");
 //        stage.show();

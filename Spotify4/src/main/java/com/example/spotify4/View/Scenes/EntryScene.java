@@ -41,13 +41,13 @@ public class EntryScene {
             alert.setContentText("Please fill all the fields");
             alert.showAndWait();
         }
-        if (Objects.equals(ListenerController.getListenerController().logIn(nameBox.getText(), passwordBox.getText()), "Successful login enter")) {
+        if (ListenerController.getListenerController().logIn(nameBox.getText(),passwordBox.getText())) {
             ListenerController.getListenerController().logIn(nameBox.getText(), passwordBox.getText());
             ChangeScene.homeScene();
-        } else if (Objects.equals(ArtistController.getArtistController().logIn(nameBox.getText(), passwordBox.getText()), "Successful login enter")) {
+        } else if (ArtistController.artistController.logIn(nameBox.getText(),passwordBox.getText())) {
             ArtistController.getArtistController().logIn(nameBox.getText(), passwordBox.getText());
             ChangeScene.homeScene();
-        } else if (Objects.equals(AdminController.getAdminController().logIn(nameBox.getText(), passwordBox.getText()), "Successful login enter")) {
+        } else if (AdminController.getAdminController().logIn(nameBox.getText(),passwordBox.getText())) {
             AdminController.adminController.logIn(nameBox.getText(), passwordBox.getText());
             ChangeScene.homeScene();
         } else {

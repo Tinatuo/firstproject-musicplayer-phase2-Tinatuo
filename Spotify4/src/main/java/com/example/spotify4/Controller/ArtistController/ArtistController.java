@@ -65,19 +65,18 @@ import java.util.regex.Pattern;
 
         return string;
     }
-    public String logIn(String userName, String password) throws UserNotFoundException {
-        String string = "";
+    public boolean logIn(String userName, String password) throws UserNotFoundException {
         for (User user : DataBase.getDataBase().users) {
             if (user instanceof Artist) {
                 if (Objects.equals(((Artist) user).getUserName(), userName) && Objects.equals(((Artist) user).getPassword(), password)) {
                     this.artist1=((Artist)user);
-                    string = "Successful login enter";
+                    return true;
                 } else {
                     throw new UserNotFoundException();
                 }
             }
         }
-        return string;
+        return false;
     }
     public String showFollowers(){
         String string="Followers: ";

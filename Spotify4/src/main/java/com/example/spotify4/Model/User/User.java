@@ -14,8 +14,8 @@ public abstract class User {
     private String phoneNumber;
     private Date birthDate;
     public static String regexPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{5,20}$";
-    public static String regexEmail = "^[A-Za-z0-9._%+-]+@[a-z]+\\.com $";
-    public static String phoneNumberRegex = "09[0-9]{9} $";
+    public static String regexEmail = "^[A-Za-z0-9._%+-]+@[a-z]+\\.com$";
+    public static String phoneNumberRegex = "09[0-9]{9}$";
     private ImageView userPhoto;
 
     public ImageView getUserPhoto() {

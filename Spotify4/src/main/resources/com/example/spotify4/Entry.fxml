@@ -42,12 +42,12 @@
                <children>
                   <Button fx:id="submitButton" blendMode="EXCLUSION" layoutX="315.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#submitButton" text="submit">
                      <font>
-                        <Font name="Cambria Bold" size="17.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
                   <Button fx:id="backButton" blendMode="EXCLUSION" layoutX="244.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#backButton" text="Back">
                      <font>
-                        <Font name="Cambria Bold" size="17.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
                </children>
