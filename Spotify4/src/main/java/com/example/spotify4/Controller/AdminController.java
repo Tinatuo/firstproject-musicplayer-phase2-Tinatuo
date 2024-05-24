@@ -39,11 +39,10 @@ public class AdminController extends UserController {
 
     public boolean logIn(String userName, String password) throws UserNotFoundException {
         boolean flag=false;
-        if (Objects.equals(Admin.getAdmin().getUserName(), userName) && Objects.equals(getAdmin().getPassword(), password)) {
+        if (Objects.equals(Admin.getAdmin().getUserName(), userName) && Objects.equals(Admin.getAdmin().getPassword(), password)) {
             this.admin = getAdmin();
             flag = true;
         } else {
-            flag = false;
             throw new UserNotFoundException();
         }
         return flag;

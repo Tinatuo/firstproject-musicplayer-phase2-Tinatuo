@@ -11,6 +11,7 @@ import com.example.spotify4.Model.User.Listener.FreeListener;
 import com.example.spotify4.Model.User.Listener.Listener;
 import com.example.spotify4.Model.User.Listener.Premium;
 import com.example.spotify4.Model.User.User;
+import javafx.scene.control.Alert;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -18,7 +19,7 @@ import java.util.regex.Pattern;
 
 public class ListenerController extends UserController {
     public Listener listener;
-    public static ListenerController listenerController;
+    private static ListenerController listenerController;
     public Date date = new Date();
     public int index;
     private ArrayList<Genre> favGenre = new ArrayList<Genre>();
@@ -51,6 +52,7 @@ public class ListenerController extends UserController {
         Pattern pattern3 = Pattern.compile(User.phoneNumberRegex);
         Matcher matcher3 = pattern3.matcher(phoneNumber);
         for (User userUserName : DataBase.getDataBase().users) {
+            System.out.println(userUserName.getUserName());
             if (Objects.equals(userUserName.getUserName(), userName)) {
                 flag = false;
                 string = "Duplicate Username";
@@ -60,21 +62,17 @@ public class ListenerController extends UserController {
             }
         }
         if (flag) {
-            if (matcher1.matches() && matcher2.matches() && matcher3.matches()) {
+            if ((matcher1.matches() && matcher2.matches()) && matcher3.matches()) {
                 double accountCredit = 50;
                 FreeListener newListener = new FreeListener(accountCredit, date.getYear(), date.getMonth() + 1, date.getDay(), favGenre, userName, password, firstAndLastname, phoneNumber, year, mounth, day, email,link);
                 DataBase.getDataBase().users.add(newListener);
                 this.index = DataBase.getDataBase().users.indexOf(newListener);
                 string = "the registration operation was successful";
             } else if (!matcher1.matches()) {
-                System.out.println("p");
                 throw new WrongPasswordException();
             } else if (!matcher2.matches()) {
-                System.out.println("E");
                 throw new InvalidFormatException();
             } else if (!matcher3.matches()) {
-                System.out.println("ph");
-                //todo
                 throw new InvalidFormatException();
             }
         }
@@ -110,18 +108,23 @@ public class ListenerController extends UserController {
     }
 
     public boolean logIn(String userName, String password) throws UserNotFoundException {
+        boolean flag=false;
         for (User user : DataBase.getDataBase().users) {
             if (user instanceof Listener) {
                 if (Objects.equals(((Listener) user).getUserName(), userName) && Objects.equals(((Listener) user).getPassword(), password)) {
                     this.listener = ((Listener) user);
                     this.listener.setFavoriteGenre(favGenre);
-                    return true;
+                    flag=true;
                 } else {
+                    flag=false;
                     throw new UserNotFoundException();
                 }
             }
         }
-        return false;
+        Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("you logged in");
+        alert.show();
+        return flag;
     }
 
     public void makePlayList(String playListName) throws FreeAccountLimitException {

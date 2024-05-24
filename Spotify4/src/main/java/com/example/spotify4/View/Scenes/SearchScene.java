@@ -1,7 +1,7 @@
 package com.example.spotify4.View.Scenes;
 
 import com.example.spotify4.Controller.ListenerController.ListenerController;
-import com.example.spotify4.Main;
+import com.example.spotify4.Application;
 import com.example.spotify4.Model.Audio.Audio;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -80,7 +80,7 @@ public class SearchScene implements Initializable {
 
 
     public HBox setHBox(Audio audio) {
-        String path1 = Main.class.getResource("61180").toExternalForm();
+        String path1 = Application.class.getResource("61180.png").toExternalForm();
         Image image1 = new Image(path1);
         HBox hBox = new HBox();
         ImageView imageView = audio.getAudioPhoto();
@@ -122,7 +122,7 @@ public class SearchScene implements Initializable {
         searchBox.textProperty().addListener((p, o, n) -> {
             String search = searchBox.getText();
             searchArray = ListenerController.getListenerController().searchAudio(search);
-            for (Audio audio : ListenerController.listenerController.searchAudio(search)) {
+            for (Audio audio : ListenerController.getListenerController().searchAudio(search)) {
                 vBox.getChildren().add(setHBox(audio));
             }
         });
@@ -169,8 +169,8 @@ public class SearchScene implements Initializable {
     }
 
     public  void playButton(javafx.scene.input.MouseEvent mouseEvent) {
-        String path1 = Main.class.getResource("61180").toExternalForm();
-        String path2 = Main.class.getResource("Screenshot_2024-05-12_223937-removebg-preview (2)").toExternalForm();
+        String path1 = Application.class.getResource("61180.png").toExternalForm();
+        String path2 = Application.class.getResource("Screenshot_2024-05-12_223937-removebg-preview (2)").toExternalForm();
         Image image1 = new Image(path1);
         Image image2 = new Image(path2);
         if (audio5IsPlaying) {

@@ -102,7 +102,7 @@ public class ListenerView {
             System.out.println(ListenerController.getListenerController().showPlayLists());
             System.out.println("select a playlist");
             String command2 = sc.nextLine();
-            for(Audio Audios:ListenerController.listenerController.getListener().playLists.get(ListenerController.getListenerController().indexOfPlayList(command2))){
+            for(Audio Audios:ListenerController.getListenerController().getListener().playLists.get(ListenerController.getListenerController().indexOfPlayList(command2))){
                 System.out.println(Audios.getName());
             }
             System.out.println("Select the audio file to play");

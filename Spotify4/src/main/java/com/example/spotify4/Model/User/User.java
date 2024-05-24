@@ -1,6 +1,6 @@
 package com.example.spotify4.Model.User;
 
-import com.example.spotify4.Main;
+import com.example.spotify4.Application;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -42,7 +42,7 @@ public abstract class User {
         this.phoneNumber = phoneNumber;
         this.birthDate = new Date(year, mounth, day);
         this.email = email;
-        String path = (Main.class.getResource(imageView)).toExternalForm();
+        String path = (Application.class.getResource(imageView)).toExternalForm();
         image = new Image(path);
         userPhoto = new ImageView(image);
 

@@ -3,7 +3,7 @@ package com.example.spotify4.View.Scenes;
 import com.example.spotify4.Controller.AdminController;
 import com.example.spotify4.Controller.ArtistController.ArtistController;
 import com.example.spotify4.Controller.ListenerController.ListenerController;
-import com.example.spotify4.Main;
+import com.example.spotify4.Application;
 import com.example.spotify4.Model.Audio.Audio;
 import com.example.spotify4.Model.DataBase;
 import com.example.spotify4.Model.GeneralOperation;
@@ -254,8 +254,8 @@ public class AudiosScene implements Initializable, GeneralOperation {
     @Override
     public void logout() {
         logout.setOnMouseClicked((e) -> {
-            if (!(ListenerController.listenerController.getListener() == null && AdminController.getAdminController().getAdmin() == null && ArtistController.getArtistController().getArtist1() == null)) {
-                ListenerController.listenerController.setListener(null);
+            if (!(ListenerController.getListenerController().getListener() == null && AdminController.getAdminController().getAdmin() == null && ArtistController.getArtistController().getArtist1() == null)) {
+                ListenerController.getListenerController().setListener(null);
                 ArtistController.getArtistController().setArtist1(null);
                 AdminController.adminController.setAdmin(null);
                 try {
@@ -338,7 +338,7 @@ public class AudiosScene implements Initializable, GeneralOperation {
 
     public HBox setHBOx(Audio audio) {
         ImageView imageView = audio.getAudioPhoto();
-        String path1 = Main.class.getResource("61180").toExternalForm();
+        String path1 = Application.class.getResource("61180.png").toExternalForm();
         Image image1 = new Image(path1);
         imageView.setFitHeight(40);
         imageView.setFitWidth(40);
@@ -398,8 +398,8 @@ public class AudiosScene implements Initializable, GeneralOperation {
 
 
     public void playButton(MouseEvent mouseEvent) {
-        String path1 = Main.class.getResource("61180").toExternalForm();
-        String path2 = Main.class.getResource("Screenshot_2024-05-12_223937-removebg-preview (2)").toExternalForm();
+        String path1 = Application.class.getResource("61180.png").toExternalForm();
+        String path2 = Application.class.getResource("Screenshot_2024-05-12_223937-removebg-preview (2)").toExternalForm();
         Image image1 = new Image(path1);
         Image image2 = new Image(path2);
         if (audio2IsPlaying) {

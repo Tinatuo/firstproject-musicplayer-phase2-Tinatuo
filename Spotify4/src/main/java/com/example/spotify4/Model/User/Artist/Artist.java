@@ -1,9 +1,6 @@
 package com.example.spotify4.Model.User.Artist;
 
-import com.example.spotify4.Main;
 import com.example.spotify4.Model.User.User;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 

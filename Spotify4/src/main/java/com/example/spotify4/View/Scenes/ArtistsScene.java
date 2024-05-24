@@ -268,8 +268,8 @@ public class ArtistsScene implements Initializable, GeneralOperation {
     @Override
     public void logout() {
         logout.setOnMouseClicked((e)->{
-            if(!(ListenerController.listenerController.getListener() == null && AdminController.getAdminController().getAdmin() == null && ArtistController.getArtistController().getArtist1()==null)) {
-                ListenerController.listenerController.setListener(null);
+            if(!(ListenerController.getListenerController().getListener() == null && AdminController.getAdminController().getAdmin() == null && ArtistController.getArtistController().getArtist1()==null)) {
+                ListenerController.getListenerController().setListener(null);
                 ArtistController.getArtistController().setArtist1(null);
                 AdminController.adminController.setAdmin(null);
                 try {

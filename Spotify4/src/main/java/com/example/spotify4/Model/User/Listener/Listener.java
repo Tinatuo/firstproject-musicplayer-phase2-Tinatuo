@@ -23,8 +23,8 @@ public abstract class Listener extends User {
         super(userName, password, firstAndLastname, phoneNumber,year,mounth,day,email,imageView);
         this.accountCredit=accountCredit;
         this.endSubscription=new Date(endYear,endMounth,endDay);
-        if(ListenerController.listenerController.listener instanceof FreeListener){
-            ListenerController.listenerController.listener.endSubscription=null;
+        if(ListenerController.getListenerController().listener instanceof FreeListener){
+            ListenerController.getListenerController().listener.endSubscription=null;
         }
         this.favoriteGenre=favoriteGenre;
     }

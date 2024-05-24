@@ -1,6 +1,6 @@
 package com.example.spotify4.Model.Audio;
 
-import com.example.spotify4.Main;
+import com.example.spotify4.Application;
 import com.example.spotify4.Model.Genre;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,7 +10,7 @@ import javafx.scene.media.MediaPlayer;
 import java.util.Date;
 
 public class Audio implements Comparable<Audio> {
-    private int ID = makeID();
+    private int ID;
     private String name;
     private String artistName;
     private long numberOfPlay = 0;
@@ -22,7 +22,7 @@ public class Audio implements Comparable<Audio> {
     private ImageView audioPhoto;
     private Media audio;
     private MediaPlayer mediaPlayer;
-    Audio audio1;
+
 
     public void setRelease(Date release) {
         this.release = release;
@@ -69,12 +69,12 @@ public class Audio implements Comparable<Audio> {
         this.genre = genre;
         this.link = link;
         this.cover = cover;
-        String path = (Main.class.getResource(imageView)).toExternalForm();
+        String path = (Application.class.getResource(imageView)).toExternalForm();
         image = new Image(path);
         audioPhoto = new ImageView(image);
         this.audio = new Media(link);
         this.mediaPlayer = new MediaPlayer(audio);
-        this.audio1 = new Audio(name, artistName, year, mounth, day, genre, link, cover, imageView);
+        this.ID=makeID();
     }
 
     public void setID(int ID) {
@@ -156,7 +156,6 @@ public class Audio implements Comparable<Audio> {
     }
 
     public int makeID() {
-
         int id = this.name.hashCode() + this.getArtistName().hashCode();
         int length = String.valueOf(id).length();
         int Max_Length = 5;
@@ -181,7 +180,7 @@ public class Audio implements Comparable<Audio> {
                 } else {
                     if ((audio instanceof Podcast) && (this instanceof Music)) {
                         return 1;
-                    } else if ((audio instanceof Music) && (audio1 instanceof Podcast)) {
+                    } else if ((audio instanceof Music) && (this instanceof Podcast)) {
                         return -1;
                     } else {
                         if (this.numberOfPlay > audio.numberOfPlay) {

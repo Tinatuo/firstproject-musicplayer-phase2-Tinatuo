@@ -7,13 +7,16 @@ import com.example.spotify4.Model.Audio.Audio;
 import com.example.spotify4.Model.Audio.Music;
 import com.example.spotify4.Model.Audio.Podcast;
 import com.example.spotify4.Model.GeneralOperation;
+import com.example.spotify4.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
@@ -345,66 +348,77 @@ public class PlayScene implements  GeneralOperation , Initializable {
 
     @FXML
     void playButton(MouseEvent event) {
+//        if (HomeScene.audio1IsPlaying) {
+//            HomeScene.playButton(event);
+//            audio4 = HomeScene.audio1;
+//            songCover.setImage(audio4.getImage());
+//            musicID.setText(audio4.getName());
+//            musicID.setStyle(".label");
+//            artistID.setText(audio4.getArtistName());
+//            artistID.setStyle(".label");
+//            genreID.setText(String.valueOf(audio4.getGenre()));
+//            genreID.setStyle(".label");
+//            if (audio4 instanceof Music) {
+//                lyricLabel.setText(((Music) audio4).getLyric());
+//            } else if (audio4 instanceof Podcast) {
+//                lyricLabel.setText(((Podcast) audio4).getCaption());
+//            }
+//        } else if (AudiosScene.audio2IsPlaying) {
+//            AudiosScene.getAudiosScene().playButton(event);
+//            audio4 = AudiosScene.audio2;
+//            songCover.setImage(audio4.getImage());
+//            musicID.setText(audio4.getName());
+//            musicID.setStyle(".label");
+//            artistID.setText(audio4.getArtistName());
+//            artistID.setStyle(".label");
+//            genreID.setText(String.valueOf(audio4.getGenre()));
+//            genreID.setStyle(".label");
+//            if (audio4 instanceof Music) {
+//                lyricLabel.setText(((Music) audio4).getLyric());
+//            } else if (audio4 instanceof Podcast) {
+//                lyricLabel.setText(((Podcast) audio4).getCaption());
+//            }
+//        } else if (ArtistInfoScene.audio3IsPlaying) {
+//            ArtistInfoScene.getArtistInfoScene().playButton(event);
+//            audio4 = ArtistInfoScene.audio3;
+//            songCover.setImage(audio4.getImage());
+//            musicID.setText(audio4.getName());
+//            musicID.setStyle(".label");
+//            artistID.setText(audio4.getArtistName());
+//            artistID.setStyle(".label");
+//            genreID.setText(String.valueOf(audio4.getGenre()));
+//            genreID.setStyle(".label");
+//            if (audio4 instanceof Music) {
+//                lyricLabel.setText(((Music) audio4).getLyric());
+//            } else if (audio4 instanceof Podcast) {
+//                lyricLabel.setText(((Podcast) audio4).getCaption());
+//            }
+//        } else if (AudiosOfPlaylist.audio6IsPlaying) {
+//            AudiosOfPlaylist.getAudiosOfPlaylist().playButton(event);
+//            audio4 = AudiosOfPlaylist.audio6;
+//            songCover.setImage(audio4.getImage());
+//            musicID.setText(audio4.getName());
+//            musicID.setStyle(".label");
+//            artistID.setText(audio4.getArtistName());
+//            artistID.setStyle(".label");
+//            genreID.setText(String.valueOf(audio4.getGenre()));
+//            genreID.setStyle(".label");
+//            if (audio4 instanceof Music) {
+//                lyricLabel.setText(((Music) audio4).getLyric());
+//            } else if (audio4 instanceof Podcast) {
+//                lyricLabel.setText(((Podcast) audio4).getCaption());
+//            }
+//        }
         if (HomeScene.audio1IsPlaying) {
             HomeScene.playButton(event);
-            audio4 = HomeScene.audio1;
-            songCover.setImage(audio4.getImage());
-            musicID.setText(audio4.getName());
-            musicID.setStyle(".label");
-            artistID.setText(audio4.getArtistName());
-            artistID.setStyle(".label");
-            genreID.setText(String.valueOf(audio4.getGenre()));
-            genreID.setStyle(".label");
-            if (audio4 instanceof Music) {
-                lyricLabel.setText(((Music) audio4).getLyric());
-            } else if (audio4 instanceof Podcast) {
-                lyricLabel.setText(((Podcast) audio4).getCaption());
-            }
         } else if (AudiosScene.audio2IsPlaying) {
             AudiosScene.getAudiosScene().playButton(event);
-            audio4 = AudiosScene.audio2;
-            songCover.setImage(audio4.getImage());
-            musicID.setText(audio4.getName());
-            musicID.setStyle(".label");
-            artistID.setText(audio4.getArtistName());
-            artistID.setStyle(".label");
-            genreID.setText(String.valueOf(audio4.getGenre()));
-            genreID.setStyle(".label");
-            if (audio4 instanceof Music) {
-                lyricLabel.setText(((Music) audio4).getLyric());
-            } else if (audio4 instanceof Podcast) {
-                lyricLabel.setText(((Podcast) audio4).getCaption());
-            }
         } else if (ArtistInfoScene.audio3IsPlaying) {
             ArtistInfoScene.getArtistInfoScene().playButton(event);
-            audio4 = ArtistInfoScene.audio3;
-            songCover.setImage(audio4.getImage());
-            musicID.setText(audio4.getName());
-            musicID.setStyle(".label");
-            artistID.setText(audio4.getArtistName());
-            artistID.setStyle(".label");
-            genreID.setText(String.valueOf(audio4.getGenre()));
-            genreID.setStyle(".label");
-            if (audio4 instanceof Music) {
-                lyricLabel.setText(((Music) audio4).getLyric());
-            } else if (audio4 instanceof Podcast) {
-                lyricLabel.setText(((Podcast) audio4).getCaption());
-            }
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
             AudiosOfPlaylist.getAudiosOfPlaylist().playButton(event);
-            audio4 = AudiosOfPlaylist.audio6;
-            songCover.setImage(audio4.getImage());
-            musicID.setText(audio4.getName());
-            musicID.setStyle(".label");
-            artistID.setText(audio4.getArtistName());
-            artistID.setStyle(".label");
-            genreID.setText(String.valueOf(audio4.getGenre()));
-            genreID.setStyle(".label");
-            if (audio4 instanceof Music) {
-                lyricLabel.setText(((Music) audio4).getLyric());
-            } else if (audio4 instanceof Podcast) {
-                lyricLabel.setText(((Podcast) audio4).getCaption());
-            }
+        }else if(SearchScene.audio5IsPlaying){
+            SearchScene.getSearchScene().playButton(event);
         }
     }
 
@@ -489,8 +503,8 @@ public class PlayScene implements  GeneralOperation , Initializable {
     @Override
     public void logout() {
         logout.setOnMouseClicked((e) -> {
-            if (!(ListenerController.listenerController.getListener() == null && AdminController.getAdminController().getAdmin() == null && ArtistController.getArtistController().getArtist1() == null)) {
-                ListenerController.listenerController.setListener(null);
+            if (!(ListenerController.getListenerController().getListener() == null && AdminController.getAdminController().getAdmin() == null && ArtistController.getArtistController().getArtist1() == null)) {
+                ListenerController.getListenerController().setListener(null);
                 ArtistController.getArtistController().setArtist1(null);
                 AdminController.adminController.setAdmin(null);
                 try {
@@ -558,13 +572,30 @@ public class PlayScene implements  GeneralOperation , Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        String path= Application.class.getResource("61180.png").toExternalForm();
+        Image image1 = new Image(path);
+        if(!HomeScene.audio1.getMediaPlayer().isMute()) {
+            playButton.setImage(image1);
+        }
+        else if(!AudiosScene.audio2.getMediaPlayer().isMute()){
+            playButton.setImage(image1);
+        } else if (!AudiosOfPlaylist.audio6.getMediaPlayer().isMute()) {
+            playButton.setImage(image1);
+        } else if (!SearchScene.audio5.getMediaPlayer().isMute()) {
+            playButton.setImage(image1);
+        } else if (!ArtistInfoScene.audio3.getMediaPlayer().isMute()) {
+            playButton.setImage(image1);
+        }
         songCover.setImage(audio4.getImage());
         musicID.setText(audio4.getName());
         musicID.setStyle(".label");
+        musicID.setTextFill(Color.WHITE);
         artistID.setText(audio4.getArtistName());
         artistID.setStyle(".label");
+        artistID.setTextFill(Color.WHITE);
         genreID.setText(String.valueOf(audio4.getGenre()));
         genreID.setStyle(".label");
+        genreID.setTextFill(Color.WHITE);
         if (audio4 instanceof Music) {
             lyricLabel.setText(((Music) audio4).getLyric());
         } else if (audio4 instanceof Podcast) {

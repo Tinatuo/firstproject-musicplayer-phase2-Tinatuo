@@ -1,9 +1,12 @@
 package com.example.spotify4.View.Scenes;
 
+import com.example.spotify4.Controller.AdminController;
 import com.example.spotify4.Controller.ArtistController.ArtistController;
 import com.example.spotify4.Controller.Exception.InvalidFormatException;
+import com.example.spotify4.Controller.Exception.UserNotFoundException;
 import com.example.spotify4.Controller.Exception.WrongPasswordException;
 import com.example.spotify4.Controller.ListenerController.ListenerController;
+import com.example.spotify4.Model.User.Admin;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -190,12 +193,9 @@ public class SignUpScene implements Initializable {
         } else {
             if (Objects.equals(typeOfUser.getSelectionModel().getSelectedItem(), "Listener")) {
                 try {
-                    ListenerController.getListenerController().signUp(usernameBox.getText(), passwordBox.getText(), nameBox.getText(), emailBox.getText(), phonenumberBox.getText(), date.getYear(), date.getMonthValue(), date.getDayOfMonth(), biographyBox.getText());
+                    ListenerController.getListenerController().signUp(usernameBox.getText(), passwordBox.getText(), nameBox.getText(), emailBox.getText(), phonenumberBox.getText(), date.getYear(), date.getMonthValue(), date.getDayOfMonth(), biographyBox.getText(),"IMG_20240409_170754.jpg");
+                    System.out.println(ListenerController.getListenerController().signUp(usernameBox.getText(), passwordBox.getText(), nameBox.getText(), emailBox.getText(), phonenumberBox.getText(), date.getYear(), date.getMonthValue(), date.getDayOfMonth(), biographyBox.getText(),"IMG_20240409_170754.jpg"));
                     ChangeScene.genreScene();
-//                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//                    alert.setTitle("Success");
-//                    alert.setContentText("successfully signed up");
-//                    alert.show();
                 } catch (WrongPasswordException | InvalidFormatException e) {
                   Alert alert=new Alert(Alert.AlertType.ERROR);
                   alert.setTitle("Error");
@@ -204,7 +204,8 @@ public class SignUpScene implements Initializable {
                 }
             } else if (Objects.equals(typeOfUser.getSelectionModel().getSelectedItem(), "Artist")) {
                 try {
-                    ArtistController.getArtistController().signUp(usernameBox.getText(), passwordBox.getText(), nameBox.getText(), emailBox.getText(), phonenumberBox.getText(), date.getYear(), date.getMonthValue(), date.getDayOfMonth(), biographyBox.getText());
+                    ArtistController.getArtistController().signUp(usernameBox.getText(), passwordBox.getText(), nameBox.getText(), emailBox.getText(), phonenumberBox.getText(), date.getYear(), date.getMonthValue(), date.getDayOfMonth(), biographyBox.getText(),"ab6761610000e5eb7af76b827df15f2342833123.jpg" );
+                    System.out.println(ArtistController.getArtistController().signUp(usernameBox.getText(), passwordBox.getText(), nameBox.getText(), emailBox.getText(), phonenumberBox.getText(), date.getYear(), date.getMonthValue(), date.getDayOfMonth(), biographyBox.getText(),"ab6761610000e5eb7af76b827df15f2342833123.jpg"));
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Success");
                     alert.setContentText("successfully signed up");
@@ -217,9 +218,10 @@ public class SignUpScene implements Initializable {
                 }
               ChangeScene.homeScene();
             } else if (Objects.equals(typeOfUser.getSelectionModel().getSelectedItem(), "Admin")) {
-
                 try {
-                    ArtistController.getArtistController().signUp(usernameBox.getText(), passwordBox.getText(), nameBox.getText(), emailBox.getText(), phonenumberBox.getText(), date.getYear(), date.getMonthValue(), date.getDayOfMonth(), biographyBox.getText());
+                    ArtistController.getArtistController().signUp(usernameBox.getText(), passwordBox.getText(), nameBox.getText(), emailBox.getText(), phonenumberBox.getText(), date.getYear(), date.getMonthValue(), date.getDayOfMonth(), biographyBox.getText(),"ab6761610000e5eb7af76b827df15f2342833123.jpg");
+                    Admin.getAdmin(usernameBox.getText(),passwordBox.getText(),nameBox.getText(),phonenumberBox.getText(),date.getYear(),date.getMonthValue(),date.getDayOfMonth(),emailBox.getText(),"ab6761610000e5eb7af76b827df15f2342833123.jpg");
+                    AdminController.getAdminController().logIn(usernameBox.getText(),passwordBox.getText());
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Success");
                     alert.setContentText("successfully signed up");
@@ -229,6 +231,10 @@ public class SignUpScene implements Initializable {
                     alert.setTitle("error");
                     alert.setContentText(e.getMessage());
                     alert.show();
+                } catch (UserNotFoundException e) {
+                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("error");
+                    alert.setContentText(e.getMessage());
                 }
                 ChangeScene.homeScene();
             }
