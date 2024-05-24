@@ -19,7 +19,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.net.URL;
@@ -119,21 +121,31 @@ public class AudiosScene implements Initializable, GeneralOperation {
         return listsVbox;
     }
 
-
     public ImageView getNextButton() {
+        if(nextButton==null){
+            nextButton=new ImageView("Screenshot 2024-05-12 224220.png");
+        }
         return nextButton;
     }
 
     public ImageView getPlayButton() {
+        String path2 = Application.class.getResource("Screenshot 2024-05-12 223937.png").toExternalForm();
+        Image image1 = new Image(path2);
+        if(playButton==null){
+            playButton=new ImageView(image1);
+        }
         return playButton;
+    }
+
+    public ImageView getPreviousButton() {
+        if(previousButton==null){
+            previousButton=new ImageView("Screenshot 2024-05-12 224034.png");
+        }
+        return previousButton;
     }
 
     public Button getPlayListButton() {
         return playListButton;
-    }
-
-    public ImageView getPreviousButton() {
-        return previousButton;
     }
 
     public ImageView getSearchButton1() {
@@ -340,11 +352,13 @@ public class AudiosScene implements Initializable, GeneralOperation {
         ImageView imageView = audio.getAudioPhoto();
         String path1 = Application.class.getResource("61180.png").toExternalForm();
         Image image1 = new Image(path1);
-        imageView.setFitHeight(40);
-        imageView.setFitWidth(40);
-        Circle circle = new Circle(20, 20, 20);
+        imageView.setFitHeight(60);
+        imageView.setFitWidth(60);
+        Circle circle = new Circle(30, 30, 30);
         imageView.setClip(circle);
         Label audioName = new Label();
+        audioName.setFont(new Font(20));
+        audioName.setTextFill(Color.WHITE);
         audioName.setText(audio.getName());
         audioName.setStyle(".label");
         HBox hBox = new HBox(imageView, audioName);
@@ -427,7 +441,7 @@ public class AudiosScene implements Initializable, GeneralOperation {
                 musicName.setText(audio2.getName());
             }
         } else if (HomeScene.audio1IsPlaying) {
-            HomeScene.playButton(mouseEvent);
+            HomeScene.getHomeScene().playButton(mouseEvent);
         } else if (ArtistInfoScene.audio3IsPlaying) {
             ArtistInfoScene.getArtistInfoScene().playButton(mouseEvent);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
@@ -448,7 +462,7 @@ public class AudiosScene implements Initializable, GeneralOperation {
             songPhoto.setImage(audio2.getImage());
             musicName.setText(audio2.getName());
         } else if (HomeScene.audio1IsPlaying) {
-            HomeScene.nextButton(mouseEvent);
+            HomeScene.getHomeScene().nextButton(mouseEvent);
         } else if (ArtistInfoScene.audio3IsPlaying) {
             ArtistInfoScene.getArtistInfoScene().nextButton(mouseEvent);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
@@ -468,7 +482,7 @@ public class AudiosScene implements Initializable, GeneralOperation {
             songPhoto.setImage(audio2.getImage());
             musicName.setText(audio2.getName());
         } else if (HomeScene.audio1IsPlaying) {
-            HomeScene.previousButton(mouseEvent);
+            HomeScene.getHomeScene().previousButton(mouseEvent);
         } else if (ArtistInfoScene.audio3IsPlaying) {
             ArtistInfoScene.getArtistInfoScene().previousButton(mouseEvent);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {

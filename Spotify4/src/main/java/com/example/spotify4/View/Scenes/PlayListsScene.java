@@ -1,5 +1,6 @@
 package com.example.spotify4.View.Scenes;
 
+import com.example.spotify4.Application;
 import com.example.spotify4.Controller.AdminController;
 import com.example.spotify4.Controller.ArtistController.ArtistController;
 import com.example.spotify4.Controller.ListenerController.ListenerController;
@@ -11,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -81,6 +83,28 @@ public class PlayListsScene implements Initializable , GeneralOperation {
     @FXML
     private VBox vBox;
 
+    public ImageView getNextButton() {
+        if(nextButton==null){
+            nextButton=new ImageView("Screenshot 2024-05-12 224220.png");
+        }
+        return nextButton;
+    }
+
+    public ImageView getPlayButton() {
+        String path2 = Application.class.getResource("Screenshot 2024-05-12 223937.png").toExternalForm();
+        Image image1 = new Image(path2);
+        if(playButton==null){
+            playButton=new ImageView(image1);
+        }
+        return playButton;
+    }
+
+    public ImageView getPreviousButton() {
+        if(previousButton==null){
+            previousButton=new ImageView("Screenshot 2024-05-12 224034.png");
+        }
+        return previousButton;
+    }
 
     @FXML
     void audiosButton1(MouseEvent event) throws IOException {
@@ -91,7 +115,7 @@ public class PlayListsScene implements Initializable , GeneralOperation {
     @FXML
     void nextButton(MouseEvent event) {
         if (HomeScene.audio1IsPlaying) {
-            HomeScene.nextButton(event);
+            HomeScene.getHomeScene().nextButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
             AudiosScene.getAudiosScene().nextButton(event);
         } else if (ArtistInfoScene.audio3IsPlaying) {
@@ -106,7 +130,7 @@ public class PlayListsScene implements Initializable , GeneralOperation {
     @FXML
     void playButton(MouseEvent event) {
         if (HomeScene.audio1IsPlaying) {
-            HomeScene.playButton(event);
+            HomeScene.getHomeScene().playButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
             AudiosScene.getAudiosScene().playButton(event);
         } else if (ArtistInfoScene.audio3IsPlaying) {
@@ -126,7 +150,7 @@ public class PlayListsScene implements Initializable , GeneralOperation {
     @FXML
     void previousButton(MouseEvent event) {
         if (HomeScene.audio1IsPlaying) {
-            HomeScene.previousButton(event);
+            HomeScene.getHomeScene().previousButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
             AudiosScene.getAudiosScene().previousButton(event);
         } else if (ArtistInfoScene.audio3IsPlaying) {

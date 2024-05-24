@@ -195,20 +195,32 @@ public class PlayScene implements  GeneralOperation , Initializable {
     }
 
     public ImageView getNextButton() {
+        if(nextButton==null){
+            nextButton=new ImageView("Screenshot 2024-05-12 224220.png");
+        }
         return nextButton;
     }
 
     public ImageView getPlayButton() {
+        String path2 = Application.class.getResource("Screenshot 2024-05-12 223937.png").toExternalForm();
+        Image image1 = new Image(path2);
+        if(playButton==null){
+            playButton=new ImageView(image1);
+        }
         return playButton;
+    }
+
+    public ImageView getPreviousButton() {
+        if(previousButton==null){
+            previousButton=new ImageView("Screenshot 2024-05-12 224034.png");
+        }
+        return previousButton;
     }
 
     public Button getPlayListButton() {
         return playListButton;
     }
 
-    public ImageView getPreviousButton() {
-        return previousButton;
-    }
 
     public ImageView getSearchButton1() {
         return searchButton1;
@@ -284,7 +296,7 @@ public class PlayScene implements  GeneralOperation , Initializable {
     @FXML
     void nextButton(MouseEvent event) {
         if (HomeScene.audio1IsPlaying) {
-            HomeScene.nextButton(event);
+            HomeScene.getHomeScene().nextButton(event);
             audio4 = HomeScene.audio1;
             songCover.setImage(audio4.getImage());
             musicID.setText(audio4.getName());
@@ -410,7 +422,7 @@ public class PlayScene implements  GeneralOperation , Initializable {
 //            }
 //        }
         if (HomeScene.audio1IsPlaying) {
-            HomeScene.playButton(event);
+            HomeScene.getHomeScene().playButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
             AudiosScene.getAudiosScene().playButton(event);
         } else if (ArtistInfoScene.audio3IsPlaying) {
@@ -430,7 +442,7 @@ public class PlayScene implements  GeneralOperation , Initializable {
     @FXML
     void previousButton(MouseEvent event) {
         if (HomeScene.audio1IsPlaying) {
-            HomeScene.previousButton(event);
+            HomeScene.getHomeScene().previousButton(event);
             audio4 = HomeScene.audio1;
             songCover.setImage(audio4.getImage());
             musicID.setText(audio4.getName());
@@ -572,6 +584,7 @@ public class PlayScene implements  GeneralOperation , Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        getPlayButton();
         String path= Application.class.getResource("61180.png").toExternalForm();
         Image image1 = new Image(path);
         if(!HomeScene.audio1.getMediaPlayer().isMute()) {

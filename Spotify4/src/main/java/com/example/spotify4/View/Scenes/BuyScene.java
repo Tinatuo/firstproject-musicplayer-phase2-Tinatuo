@@ -134,7 +134,7 @@ public class BuyScene implements GeneralOperation {
     @FXML
     void nextButton(MouseEvent event) {
         if (HomeScene.audio1IsPlaying) {
-            HomeScene.nextButton(event);
+            HomeScene.getHomeScene().nextButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
             AudiosScene.getAudiosScene().nextButton(event);
         } else if (ArtistInfoScene.audio3IsPlaying) {
@@ -184,7 +184,7 @@ public class BuyScene implements GeneralOperation {
     @FXML
     void playButton(MouseEvent event) {
         if (HomeScene.audio1IsPlaying) {
-            HomeScene.playButton(event);
+            HomeScene.getHomeScene().playButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
             AudiosScene.getAudiosScene().playButton(event);
         } else if (ArtistInfoScene.audio3IsPlaying) {
@@ -204,7 +204,7 @@ public class BuyScene implements GeneralOperation {
     @FXML
     void previousButton(MouseEvent event) {
         if (HomeScene.audio1IsPlaying) {
-            HomeScene.previousButton(event);
+            HomeScene.getHomeScene().previousButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
             AudiosScene.getAudiosScene().previousButton(event);
         } else if (ArtistInfoScene.audio3IsPlaying) {

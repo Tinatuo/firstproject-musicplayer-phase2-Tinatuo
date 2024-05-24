@@ -240,19 +240,30 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
     }
 
 
-    public ImageView getNextButton() {
-        return nextButton;
-    }
-
-    public ImageView getPlayButton() {
-        return playButton;
-    }
-
     public Button getPlayListButton() {
         return playListButton;
     }
 
+    public ImageView getNextButton() {
+        if(nextButton==null){
+            nextButton=new ImageView("Screenshot 2024-05-12 224220.png");
+        }
+        return nextButton;
+    }
+
+    public ImageView getPlayButton() {
+        String path2 = Application.class.getResource("Screenshot 2024-05-12 223937.png").toExternalForm();
+        Image image1 = new Image(path2);
+        if(playButton==null){
+            playButton=new ImageView(image1);
+        }
+        return playButton;
+    }
+
     public ImageView getPreviousButton() {
+        if(previousButton==null){
+            previousButton=new ImageView("Screenshot 2024-05-12 224034.png");
+        }
         return previousButton;
     }
 
@@ -367,7 +378,7 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
                 artistInfoScene.musicName.setText(audio3.getName());
             }
         } else if (HomeScene.audio1IsPlaying) {
-            HomeScene.playButton(event);
+            HomeScene.getHomeScene().playButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
             AudiosScene.getAudiosScene().playButton(event);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
@@ -388,7 +399,7 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
             artistInfoScene.songPhoto1.setImage(audio3.getImage());
             artistInfoScene.musicName.setText(audio3.getName());
         } else if (HomeScene.audio1IsPlaying) {
-            HomeScene.nextButton(event);
+            HomeScene.getHomeScene().nextButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
             AudiosScene.getAudiosScene().nextButton(event);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
@@ -409,7 +420,7 @@ public class ArtistInfoScene implements Initializable, GeneralOperation {
             artistInfoScene.songPhoto1.setImage(audio3.getImage());
             artistInfoScene.musicName.setText(audio3.getName());
         } else if (HomeScene.audio1IsPlaying) {
-            HomeScene.previousButton(event);
+            HomeScene.getHomeScene().previousButton(event);
         } else if (AudiosScene.audio2IsPlaying) {
             AudiosScene.getAudiosScene().previousButton(event);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {

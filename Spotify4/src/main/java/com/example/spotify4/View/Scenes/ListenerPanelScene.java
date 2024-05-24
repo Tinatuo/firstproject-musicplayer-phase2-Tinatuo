@@ -1,5 +1,6 @@
 package com.example.spotify4.View.Scenes;
 
+import com.example.spotify4.Application;
 import com.example.spotify4.Controller.AdminController;
 import com.example.spotify4.Controller.ArtistController.ArtistController;
 import com.example.spotify4.Controller.Exception.FreeAccountLimitException;
@@ -17,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -103,6 +105,28 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
     @FXML
     private Button backButton;
     private Listener listener;
+    public ImageView getNextButton() {
+        if(nextButton==null){
+            nextButton=new ImageView("Screenshot 2024-05-12 224220.png");
+        }
+        return nextButton;
+    }
+
+    public ImageView getPlayButton() {
+        String path2 = Application.class.getResource("Screenshot 2024-05-12 223937.png").toExternalForm();
+        Image image1 = new Image(path2);
+        if(playButton==null){
+            playButton=new ImageView(image1);
+        }
+        return playButton;
+    }
+
+    public ImageView getPreviousButton() {
+        if(previousButton==null){
+            previousButton=new ImageView("Screenshot 2024-05-12 224034.png");
+        }
+        return previousButton;
+    }
     public Listener getListener() {
         if(listener == null) {
             this.listener=ListenerController.getListenerController().getListener();

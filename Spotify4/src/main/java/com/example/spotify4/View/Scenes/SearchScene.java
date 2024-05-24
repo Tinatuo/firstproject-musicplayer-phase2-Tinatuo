@@ -14,7 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -84,11 +86,13 @@ public class SearchScene implements Initializable {
         Image image1 = new Image(path1);
         HBox hBox = new HBox();
         ImageView imageView = audio.getAudioPhoto();
-        imageView.setFitWidth(20);
-        imageView.setFitHeight(20);
-        Circle circle = new Circle(imageView.getFitWidth() / 2);
+        imageView.setFitWidth(60);
+        imageView.setFitHeight(60);
+        Circle circle = new Circle(30,30,30);
         imageView.setClip(circle);
         Label label = new Label(audio.getName());
+        label.setFont(new Font(20));
+        label.setTextFill(Color.WHITE);
         hBox.getChildren().addAll(imageView, label);
         hBox.setSpacing(15);
         hBox.setAlignment(Pos.CENTER_LEFT);
@@ -153,7 +157,7 @@ public class SearchScene implements Initializable {
             searchScene.songPhoto.setImage(audio5.getImage());
             searchScene.musicName.setText(audio5.getName());
         } else if (HomeScene.audio1IsPlaying) {
-            HomeScene.nextButton(mouseEvent);
+            HomeScene.getHomeScene().nextButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
             AudiosScene.getAudiosScene().nextButton(mouseEvent);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
@@ -171,7 +175,7 @@ public class SearchScene implements Initializable {
             searchScene.songPhoto.setImage(audio5.getImage());
             searchScene.musicName.setText(audio5.getName());
         } else if (HomeScene.audio1IsPlaying) {
-            HomeScene.previousButton(mouseEvent);
+            HomeScene.getHomeScene().previousButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
             AudiosScene.getAudiosScene().previousButton(mouseEvent);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {
@@ -198,7 +202,7 @@ public class SearchScene implements Initializable {
                 searchScene.musicName.setText(audio5.getName());
             }
         } else if (HomeScene.audio1IsPlaying) {
-            HomeScene.playButton(mouseEvent);
+            HomeScene.getHomeScene().playButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
             AudiosScene.getAudiosScene().playButton(mouseEvent);
         } else if (AudiosOfPlaylist.audio6IsPlaying) {

@@ -83,6 +83,28 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
 
     static Audio audio6;
     static boolean audio6IsPlaying = false;
+    public ImageView getNextButton() {
+        if(nextButton==null){
+            nextButton=new ImageView("Screenshot 2024-05-12 224220.png");
+        }
+        return nextButton;
+    }
+
+    public ImageView getPlayButton() {
+        String path2 = Application.class.getResource("Screenshot 2024-05-12 223937.png").toExternalForm();
+        Image image1 = new Image(path2);
+        if(playButton==null){
+            playButton=new ImageView(image1);
+        }
+        return playButton;
+    }
+
+    public ImageView getPreviousButton() {
+        if(previousButton==null){
+            previousButton=new ImageView("Screenshot 2024-05-12 224034.png");
+        }
+        return previousButton;
+    }
 
     @FXML
     private Label musicName;
@@ -329,7 +351,7 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
                 audiosOfPlaylist.musicName.setText(audio6.getName());
             }
         } else if (HomeScene.audio1IsPlaying) {
-            HomeScene.playButton(mouseEvent);
+            HomeScene.getHomeScene().playButton(mouseEvent);
         } else if (ArtistInfoScene.audio3IsPlaying) {
             ArtistInfoScene.getArtistInfoScene().playButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
@@ -350,7 +372,7 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
             audiosOfPlaylist.songPhoto.setImage(audio6.getImage());
             audiosOfPlaylist.musicName.setText(audio6.getName());
         } else if (HomeScene.audio1IsPlaying) {
-            HomeScene.previousButton(mouseEvent);
+            HomeScene.getHomeScene().previousButton(mouseEvent);
         } else if (ArtistInfoScene.audio3IsPlaying) {
             ArtistInfoScene.getArtistInfoScene().previousButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
@@ -370,7 +392,7 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
             audiosOfPlaylist.songPhoto.setImage(audio6.getImage());
             audiosOfPlaylist.musicName.setText(audio6.getName());
         } else if (HomeScene.audio1IsPlaying) {
-            HomeScene.nextButton(mouseEvent);
+            HomeScene.getHomeScene().nextButton(mouseEvent);
         } else if (ArtistInfoScene.audio3IsPlaying) {
             ArtistInfoScene.getArtistInfoScene().nextButton(mouseEvent);
         } else if (AudiosScene.audio2IsPlaying) {
