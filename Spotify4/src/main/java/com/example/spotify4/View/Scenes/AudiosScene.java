@@ -351,6 +351,17 @@ public class AudiosScene implements Initializable, GeneralOperation {
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setSpacing(15);
         hBox.setOnMouseClicked((e) -> {
+            if(audio2!=null) {
+                audio2.getMediaPlayer().pause();
+            }else if(SearchScene.audio5!=null){
+                SearchScene.audio5.getMediaPlayer().pause();
+            } else if (ArtistInfoScene.audio3!=null) {
+                ArtistInfoScene.audio3.getMediaPlayer().pause();
+            } else if (AudiosOfPlaylist.audio6!=null) {
+                AudiosOfPlaylist.audio6.getMediaPlayer().pause();
+            } else if (HomeScene.audio1!=null) {
+                HomeScene.audio1.getMediaPlayer().pause();
+            }
             audio.getMediaPlayer().play();
             PlayScene.audio4 = audio;
             audio2 = audio;

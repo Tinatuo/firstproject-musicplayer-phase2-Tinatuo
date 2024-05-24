@@ -258,6 +258,17 @@ public class AudiosOfPlaylist implements Initializable, GeneralOperation {
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setSpacing(15);
         hBox.setOnMouseClicked((e) -> {
+            if(audio6!=null) {
+                audio6.getMediaPlayer().pause();
+            }else if(SearchScene.audio5!=null){
+                SearchScene.audio5.getMediaPlayer().pause();
+            } else if (ArtistInfoScene.audio3!=null) {
+                ArtistInfoScene.audio3.getMediaPlayer().pause();
+            } else if (HomeScene.audio1!=null) {
+                HomeScene.audio1.getMediaPlayer().pause();
+            } else if (AudiosScene.audio2!=null) {
+                AudiosScene.audio2.getMediaPlayer().pause();
+            }
             audio.getMediaPlayer().play();
             PlayScene.audio4 = audio;
             songPhoto = audio.getAudioPhoto();

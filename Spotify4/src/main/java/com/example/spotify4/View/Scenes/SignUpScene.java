@@ -194,7 +194,6 @@ public class SignUpScene implements Initializable {
             if (Objects.equals(typeOfUser.getSelectionModel().getSelectedItem(), "Listener")) {
                 try {
                     ListenerController.getListenerController().signUp(usernameBox.getText(), passwordBox.getText(), nameBox.getText(), emailBox.getText(), phonenumberBox.getText(), date.getYear(), date.getMonthValue(), date.getDayOfMonth(), biographyBox.getText(),"IMG_20240409_170754.jpg");
-                    System.out.println(ListenerController.getListenerController().signUp(usernameBox.getText(), passwordBox.getText(), nameBox.getText(), emailBox.getText(), phonenumberBox.getText(), date.getYear(), date.getMonthValue(), date.getDayOfMonth(), biographyBox.getText(),"IMG_20240409_170754.jpg"));
                     ChangeScene.genreScene();
                 } catch (WrongPasswordException | InvalidFormatException e) {
                   Alert alert=new Alert(Alert.AlertType.ERROR);

@@ -10,6 +10,7 @@ import com.example.spotify4.Model.GeneralOperation;
 import com.example.spotify4.Model.PlayList;
 import com.example.spotify4.Model.User.Artist.Artist;
 import com.example.spotify4.Model.User.Listener.FreeListener;
+import com.example.spotify4.Model.User.Listener.Listener;
 import com.example.spotify4.Model.User.Listener.Premium;
 import com.example.spotify4.Model.User.User;
 import javafx.fxml.FXML;
@@ -101,6 +102,13 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
 
     @FXML
     private Button backButton;
+    private Listener listener;
+    public Listener getListener() {
+        if(listener == null) {
+            this.listener=ListenerController.getListenerController().getListener();
+        }
+        return listener;
+    }
 
     @FXML
     void login(MouseEvent event) {
@@ -139,7 +147,7 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
             } catch (IOException ex) {
                 Alert alert=new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
-                alert.setContentText("RunTime exception");
+                alert.setContentText(ex.getMessage());
                 alert.show();
             }finally {
                 System.out.println("Have a good day");
@@ -272,14 +280,15 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ImageView imageView = new ImageView(ListenerController.getListenerController().listener.getImage());
+        getListener();
+        ImageView imageView = new ImageView(this.listener.getImage());
         imageView.setClip(userPhoto);
-        usernameLabel.setText(ListenerController.getListenerController().listener.getUserName());
-        nameLabel.setText(ListenerController.getListenerController().listener.getFirstAndLastname());
-        for (PlayList play : ListenerController.getListenerController().listener.playLists) {
+        usernameLabel.setText(this.listener.getUserName());
+        nameLabel.setText(this.listener.getFirstAndLastname());
+        for (PlayList play : this.listener.playLists) {
             playListChoice.getItems().add(play.getName());
             playListChoice.setOnAction((e) -> {
-                for (PlayList play2 : ListenerController.getListenerController().listener.playLists) {
+                for (PlayList play2 : this.listener.playLists) {
                     if (play2.getName().equals(playListChoice.getSelectionModel().getSelectedItem())) {
                         AudiosOfPlaylist.setPlayList(play2);
                     }
@@ -289,7 +298,7 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
                 } catch (IOException ex) {
                     Alert alert=new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("error");
-                    alert.setContentText("RunTime exception");
+                    alert.setContentText(ex.getMessage());
                     alert.show();
                 }finally {
                     System.out.println("Have a good day");
@@ -298,6 +307,7 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
         }
         for (User artist : ListenerController.getListenerController().arrayFollowing()) {
             VBoxFollowing.getChildren().add(setHBOx((Artist) artist));
+            VBoxFollowing.setSpacing(20);
         }
     }
 }

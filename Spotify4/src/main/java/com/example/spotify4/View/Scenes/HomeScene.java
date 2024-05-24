@@ -374,7 +374,7 @@ public class HomeScene implements Initializable, GeneralOperation {
             } catch (IOException ex) {
                 Alert alert=new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
-                alert.setContentText("RunTime exception");
+                alert.setContentText(ex.getMessage());
                 alert.show();
             }finally {
                 System.out.println("Have a good day");
@@ -418,6 +418,17 @@ public class HomeScene implements Initializable, GeneralOperation {
         hBox.setSpacing(40);
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setOnMouseClicked((e) -> {
+            if(audio1!=null) {
+                audio1.getMediaPlayer().pause();
+            }else if(SearchScene.audio5!=null){
+                SearchScene.audio5.getMediaPlayer().pause();
+            } else if (ArtistInfoScene.audio3!=null) {
+                ArtistInfoScene.audio3.getMediaPlayer().pause();
+            } else if (AudiosOfPlaylist.audio6!=null) {
+                AudiosOfPlaylist.audio6.getMediaPlayer().pause();
+            } else if (AudiosScene.audio2!=null) {
+                AudiosScene.audio2.getMediaPlayer().pause();
+            }
             audio1=audio;
             audio.getMediaPlayer().play();
             PlayScene.audio4=audio;

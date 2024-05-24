@@ -143,8 +143,11 @@ public class ChangeScene {
 //        stage.show();
     }
     public static void ListenerPanelScene() throws IOException {
+        System.out.println("j");
         FXMLLoader loader = new FXMLLoader(Application.class.getResource("ListenerPanel.fxml"));
+        System.out.println("hi");
         Scene scene = new Scene(loader.load(), 747, 529);
+        System.out.println("hi2");
         SceneStack.sceneStack.push(scene);
         String css=Application.class.getResource("Style.css").toExternalForm();
         scene.getStylesheets().add(css);

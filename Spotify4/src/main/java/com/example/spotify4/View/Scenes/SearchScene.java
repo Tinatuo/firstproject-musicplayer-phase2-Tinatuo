@@ -93,6 +93,17 @@ public class SearchScene implements Initializable {
         hBox.setSpacing(15);
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setOnMouseClicked((e) -> {
+            if(audio5!=null) {
+                audio5.getMediaPlayer().pause();
+            }else if(HomeScene.audio1!=null){
+                HomeScene.audio1.getMediaPlayer().pause();
+            } else if (ArtistInfoScene.audio3!=null) {
+                ArtistInfoScene.audio3.getMediaPlayer().pause();
+            } else if (AudiosOfPlaylist.audio6!=null) {
+                AudiosOfPlaylist.audio6.getMediaPlayer().pause();
+            } else if (AudiosScene.audio2!=null) {
+                AudiosScene.audio2.getMediaPlayer().pause();
+            }
             audio.getMediaPlayer().play();
             PlayScene.audio4 = audio;
             audio5 = audio;

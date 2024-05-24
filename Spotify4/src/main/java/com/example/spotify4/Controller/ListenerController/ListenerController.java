@@ -52,7 +52,6 @@ public class ListenerController extends UserController {
         Pattern pattern3 = Pattern.compile(User.phoneNumberRegex);
         Matcher matcher3 = pattern3.matcher(phoneNumber);
         for (User userUserName : DataBase.getDataBase().users) {
-            System.out.println(userUserName.getUserName());
             if (Objects.equals(userUserName.getUserName(), userName)) {
                 flag = false;
                 string = "Duplicate Username";
