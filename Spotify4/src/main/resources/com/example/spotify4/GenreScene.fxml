@@ -113,13 +113,13 @@
          </children>
       </GridPane>
 
-      <Button layoutX="295.0" layoutY="530.0" mnemonicParsing="false" onMouseClicked="#submitButton" prefHeight="32.0" prefWidth="74.0" text="submit">
+      <Button layoutX="295.0" layoutY="545.0" mnemonicParsing="false" onMouseClicked="#submitButton" prefHeight="32.0" prefWidth="74.0" text="submit">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
       <FlowPane prefHeight="200.0" prefWidth="200.0" />
-      <Button layoutX="397.0" layoutY="530.0" mnemonicParsing="false" onMouseClicked="#backTo" prefHeight="32.0" prefWidth="74.0" text="back">
+      <Button layoutX="393.0" layoutY="545.0" mnemonicParsing="false" onMouseClicked="#backTo" prefHeight="32.0" prefWidth="74.0" text="back">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

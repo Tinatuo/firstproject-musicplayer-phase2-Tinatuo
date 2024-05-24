@@ -74,7 +74,7 @@ public class Audio implements Comparable<Audio> {
         audioPhoto = new ImageView(image);
         this.audio = new Media(link);
         this.mediaPlayer = new MediaPlayer(audio);
-        this.ID=makeID();
+        this.ID = makeID();
     }
 
     public void setID(int ID) {
@@ -167,33 +167,38 @@ public class Audio implements Comparable<Audio> {
 
     @Override
     public int compareTo(Audio audio) {
+        boolean flag = false;
         for (int i = 0; i < audio.name.length(); i++) {
             if (this.name.charAt(i) > audio.name.charAt(i)) {
                 return 1;
             } else if (this.name.charAt(i) < audio.name.charAt(i)) {
                 return -1;
             } else if (this.name.charAt(i) == audio.name.charAt(i)) {
-                if (this.numberOfLike > audio.numberOfLike) {
+                    flag = true;
+            }
+        }
+        if (flag) {
+            if (this.numberOfLike > audio.numberOfLike) {
+                return 1;
+            } else if(this.numberOfLike < audio.numberOfLike) {
+                return -1;
+            } else if ((audio instanceof Podcast) && (this instanceof Music)) {
                     return 1;
-                } else if (this.numberOfLike < audio.numberOfLike) {
+                } else if ((audio instanceof Music) && (this instanceof Podcast)) {
                     return -1;
                 } else {
-                    if ((audio instanceof Podcast) && (this instanceof Music)) {
+                    if (this.numberOfPlay > audio.numberOfPlay) {
                         return 1;
-                    } else if ((audio instanceof Music) && (this instanceof Podcast)) {
+                    } else if (audio.numberOfPlay > this.numberOfPlay) {
                         return -1;
-                    } else {
-                        if (this.numberOfPlay > audio.numberOfPlay) {
-                            return 1;
-                        } else if (audio.numberOfPlay > this.numberOfPlay) {
-                            return -1;
-                        } else if (this.numberOfPlay == audio.numberOfPlay) {
-                            return 0;
-                        }
+                    } else if (this.numberOfPlay == audio.numberOfPlay) {
+                        return 0;
                     }
                 }
             }
         }
+
+
         return 0;
     }
 }

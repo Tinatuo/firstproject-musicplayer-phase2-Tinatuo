@@ -20,7 +20,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
+import javax.swing.text.StyledEditorKit;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -249,6 +251,8 @@ public class HomeScene implements Initializable, GeneralOperation {
             for (Audio audio : AdminController.getAdminController().mostPopularAudioFileArray()) {
                 System.out.println(AdminController.getAdminController().mostPopularAudioFileArray().get(0).getName());
                 listsVbox.getChildren().add(fillHBox(audio));
+                listsVbox.setSpacing(20);
+                listsVbox.setAlignment(Pos.TOP_LEFT);
             }
         } else {
             for (Audio audio : ListenerController.getListenerController().getSuggestions()) {
@@ -402,12 +406,13 @@ public class HomeScene implements Initializable, GeneralOperation {
         ImageView imageView2 = new ImageView(image2);
         HBox hBox = new HBox();
         ImageView imageView = audio.getAudioPhoto();
-        imageView.setFitWidth(40);
-        imageView.setFitHeight(40);
-        Circle circle = new Circle(imageView.getFitWidth() / 2);
-        imageView.setClip(circle);
+        imageView.setFitWidth(50);
+        imageView.setFitHeight(50);
+//        Circle circle = new Circle(imageView.getFitWidth() / 2);
+//        imageView.setClip(circle);
         Label label = new Label(audio.getName());
         label.setStyle(".label");
+        label.setFont(new Font(20));
         label.setTextFill(Color.WHITE);
         hBox.getChildren().addAll(imageView, label);
         hBox.setSpacing(40);
@@ -416,7 +421,7 @@ public class HomeScene implements Initializable, GeneralOperation {
             audio1=audio;
             audio.getMediaPlayer().play();
             PlayScene.audio4=audio;
-            songPhoto = audio.getAudioPhoto();
+            songPhoto.setImage(audio.getImage());
             musicName.setText(audio.getName());
             playButton.setImage(image1);
             audio1 = audio;
@@ -508,13 +513,13 @@ public class HomeScene implements Initializable, GeneralOperation {
         System.out.println(String.valueOf(audio1.getMediaPlayer().isMute()));
         if (audio1IsPlaying) {
             if (!audio1.getMediaPlayer().isMute()) {
-                getHomeScene().playButton.setImage(image1);
+                getHomeScene().getPlayButton().setImage(image1);
                 audio1.getMediaPlayer().play();
                 PlayScene.audio4=audio1;
                 homeScene.songPhoto.setImage(audio1.getImage());
                 homeScene.musicName.setText(audio1.getName());
             } else if (audio1.getMediaPlayer().isMute()) {
-                homeScene.playButton.setImage(image2);
+                getHomeScene().getPlayButton().setImage(image2);
                 audio1.getMediaPlayer().pause();
                 homeScene.songPhoto.setImage(audio1.getImage());
                 homeScene.musicName.setText(audio1.getName());
