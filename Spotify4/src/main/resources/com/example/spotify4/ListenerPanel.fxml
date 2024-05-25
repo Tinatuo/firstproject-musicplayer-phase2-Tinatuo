@@ -64,7 +64,7 @@
                               <Insets left="5.0" right="2.0" top="5.0" />
                            </VBox.margin>
                            <font>
-                              <Font name="System Bold" size="84.0" />
+                              <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
                         <Button fx:id="artistButton" blendMode="EXCLUSION" mnemonicParsing="false" onMouseClicked="#playListButton" prefHeight="29.0" prefWidth="89.0" text="Artist">

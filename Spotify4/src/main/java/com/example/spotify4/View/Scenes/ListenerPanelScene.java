@@ -24,6 +24,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
@@ -104,10 +106,19 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
 
     @FXML
     private Button backButton;
+
+    public Circle getUserPhoto() {
+        if (userPhoto == null) {
+            userPhoto = new Circle(66);
+        }
+        return userPhoto;
+    }
+
     private Listener listener;
+
     public ImageView getNextButton() {
-        if(nextButton==null){
-            nextButton=new ImageView("Screenshot 2024-05-12 224220.png");
+        if (nextButton == null) {
+            nextButton = new ImageView(new Image(Application.class.getResource("Screenshot 2024-05-12 224220.png").toExternalForm()));
         }
         return nextButton;
     }
@@ -115,21 +126,22 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
     public ImageView getPlayButton() {
         String path2 = Application.class.getResource("Screenshot 2024-05-12 223937.png").toExternalForm();
         Image image1 = new Image(path2);
-        if(playButton==null){
-            playButton=new ImageView(image1);
+        if (playButton == null) {
+            playButton = new ImageView(image1);
         }
         return playButton;
     }
 
     public ImageView getPreviousButton() {
-        if(previousButton==null){
-            previousButton=new ImageView("Screenshot 2024-05-12 224034.png");
+        if (previousButton == null) {
+            previousButton = new ImageView(new Image(Application.class.getResource("Screenshot 2024-05-12 224034.png").toExternalForm()));
         }
         return previousButton;
     }
+
     public Listener getListener() {
-        if(listener == null) {
-            this.listener=ListenerController.getListenerController().getListener();
+        if (listener == null) {
+            this.listener = ListenerController.getListenerController().getListener();
         }
         return listener;
     }
@@ -148,39 +160,45 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
     void signup(MouseEvent event) throws IOException {
         signup();
     }
+
     @FXML
     void homeButton(MouseEvent event) throws IOException {
         ChangeScene.homeScene();
     }
+
     @FXML
     void search(MouseEvent event) throws IOException {
         search();
     }
+
     @FXML
     void backTo(MouseEvent event) {
         backTo();
     }
+
     @FXML
     void library(MouseEvent event) {
         library();
     }
+
     public void library() {
         libraryButton.setOnMouseClicked((e) -> {
             try {
                 ChangeScene.ListenerPanelScene();
             } catch (IOException ex) {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
                 alert.setContentText(ex.getMessage());
                 alert.show();
-            }finally {
+            } finally {
                 System.out.println("Have a good day");
             }
         });
     }
+
     @FXML
     void addPlayList(MouseEvent event) {
-        if(ListenerController.getListenerController().listener instanceof FreeListener){
+        if (ListenerController.getListenerController().listener instanceof FreeListener) {
             playListNameBox.textProperty().addListener((p, o, n) -> {
                 try {
                     FreeListenerController.getFreeListenerController().makePlayList(playListNameBox.getText());
@@ -189,7 +207,7 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setContentText("You don't have enough free playlists to add playlist");
-                }finally {
+                } finally {
                     System.out.println("Have a good day");
                 }
             });
@@ -218,7 +236,7 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
 
     @Override
     public void backTo() {
-        backButton.setOnMouseClicked((e)->{
+        backButton.setOnMouseClicked((e) -> {
             ChangeScene.stage.setScene(SceneStack.sceneStack.pop());
         });
     }
@@ -233,11 +251,11 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
                 try {
                     ChangeScene.homeScene();
                 } catch (IOException ex) {
-                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("error");
                     alert.setContentText("RunTime exception");
                     alert.show();
-                }finally {
+                } finally {
                     System.out.println("Have a good day");
                 }
             }
@@ -251,11 +269,11 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
                 try {
                     ChangeScene.entryScene();
                 } catch (IOException ex) {
-                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("error");
                     alert.setContentText("RunTime exception");
                     alert.show();
-                }finally {
+                } finally {
                     System.out.println("Have a good day");
                 }
             }
@@ -288,25 +306,30 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
             try {
                 ChangeScene.artistInfoScene();
             } catch (IOException ex) {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("error");
                 alert.setContentText("RunTime exception");
                 alert.show();
-            }finally {
+            } finally {
                 System.out.println("Have a good day");
             }
         });
         return hBox;
     }
+
     @FXML
     void musicName(MouseEvent event) throws IOException {
         ChangeScene.playScene();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getListener();
-        ImageView imageView = new ImageView(this.listener.getImage());
-        imageView.setClip(userPhoto);
+        playListButton.setText("PlayList");
+        buyButton.setText("Subscription");
+//        ImageView imageView = new ImageView(this.listener.getImage());
+//        imageView.setClip(getUserPhoto());
+        userPhoto.setFill(new ImagePattern(this.listener.getImage()));
         usernameLabel.setText(this.listener.getUserName());
         nameLabel.setText(this.listener.getFirstAndLastname());
         for (PlayList play : this.listener.playLists) {
@@ -320,11 +343,11 @@ public class ListenerPanelScene implements GeneralOperation, Initializable {
                 try {
                     ChangeScene.audioOfPlayListScene();
                 } catch (IOException ex) {
-                    Alert alert=new Alert(Alert.AlertType.ERROR);
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("error");
                     alert.setContentText(ex.getMessage());
                     alert.show();
-                }finally {
+                } finally {
                     System.out.println("Have a good day");
                 }
             });

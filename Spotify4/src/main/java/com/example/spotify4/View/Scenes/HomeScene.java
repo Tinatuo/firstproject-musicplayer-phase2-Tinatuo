@@ -391,16 +391,13 @@ public class HomeScene implements Initializable, GeneralOperation {
 
     public void library() {
         libraryButton.setOnMouseClicked((e) -> {
+
             try {
                 ChangeScene.ListenerPanelScene();
             } catch (IOException ex) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("error");
-                alert.setContentText(ex.getMessage());
-                alert.show();
-            } finally {
-                System.out.println("Have a good day");
+                throw new RuntimeException(ex);
             }
+
         });
     }
 

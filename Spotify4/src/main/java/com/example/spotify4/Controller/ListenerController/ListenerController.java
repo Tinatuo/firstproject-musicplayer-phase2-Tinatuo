@@ -204,39 +204,40 @@ public class ListenerController extends UserController {
         return DataBase.getDataBase().audios;
     }
     public ArrayList<Audio> sort2(ArrayList<Audio> audios){
-        Collections.sort(audios, new Comparator<Audio>() {
-            @Override
-            public int compare(Audio o1, Audio o2) {
-                for (int i = 0; i < o2.getName().length(); i++) {
-                    if (o1.getName().charAt(i) > o2.getName().charAt(i)) {
-                        return 1;
-                    } else if (o1.getName().charAt(i) <o2.getName().charAt(i)) {
-                        return -1;
-                    } else if (o1.getName().charAt(i) == o2.getName().charAt(i)) {
-                        if (o1.getNumberOfLike()> o2.getNumberOfLike()) {
-                            return 1;
-                        } else if (o1.getNumberOfLike() < o2.getNumberOfLike()) {
-                            return -1;
-                        } else if (o1.getNumberOfLike() == o2.getNumberOfLike()) {
-                            if ((o2 instanceof Podcast) && (o1 instanceof Music)) {
-                                return 1;
-                            } else if ((o2 instanceof Music) && (o1 instanceof Podcast)) {
-                                return -1;
-                            } else {
-                                if (o1.getNumberOfPlay() > o2.getNumberOfPlay()) {
-                                    return 1;
-                                } else if (o2.getNumberOfPlay() > o1.getNumberOfPlay()) {
-                                    return -1;
-                                } else if (o1.getNumberOfPlay() == o2.getNumberOfPlay()) {
-                                    return 0;
-                                }
-                            }
-                        }
-                    }
-            }
-                return 0;
-        }
-    });
+        Collections.sort(audios);
+ //   } {
+//            @Override
+//            public int compare(Audio o1, Audio o2) {
+//                for (int i = 0; i < o2.getName().length(); i++) {
+//                    if (o1.getName().charAt(i) > o2.getName().charAt(i)) {
+//                        return 1;
+//                    } else if (o1.getName().charAt(i) <o2.getName().charAt(i)) {
+//                        return -1;
+//                    } else if (o1.getName().charAt(i) == o2.getName().charAt(i)) {
+//                        if (o1.getNumberOfLike()> o2.getNumberOfLike()) {
+//                            return 1;
+//                        } else if (o1.getNumberOfLike() < o2.getNumberOfLike()) {
+//                            return -1;
+//                        } else if (o1.getNumberOfLike() == o2.getNumberOfLike()) {
+//                            if ((o2 instanceof Podcast) && (o1 instanceof Music)) {
+//                                return 1;
+//                            } else if ((o2 instanceof Music) && (o1 instanceof Podcast)) {
+//                                return -1;
+//                            } else {
+//                                if (o1.getNumberOfPlay() > o2.getNumberOfPlay()) {
+//                                    return 1;
+//                                } else if (o2.getNumberOfPlay() > o1.getNumberOfPlay()) {
+//                                    return -1;
+//                                } else if (o1.getNumberOfPlay() == o2.getNumberOfPlay()) {
+//                                    return 0;
+//                                }
+//                            }
+//                        }
+//                    }
+//            }
+//                return 0;
+//        }
+//    });
     return audios;
     }
 

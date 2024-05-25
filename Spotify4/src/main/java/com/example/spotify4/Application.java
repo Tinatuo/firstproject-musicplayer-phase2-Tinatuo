@@ -4,6 +4,8 @@ import com.example.spotify4.Controller.AdminController;
 import com.example.spotify4.Model.Audio.Music;
 import com.example.spotify4.Model.DataBase;
 import com.example.spotify4.Model.Genre;
+import com.example.spotify4.Model.User.Artist.Artist;
+import com.example.spotify4.Model.User.Listener.FreeListener;
 import com.example.spotify4.View.Scenes.ChangeScene;
 import javafx.stage.Stage;
 
@@ -84,11 +86,44 @@ public class Application extends javafx.application.Application {
                 "یه وجب خاک مال من، هر چی ميکارم مال من\n" +
                 "بوی گندم مال من، هر چی که دارم مال من\n" +
                 "یه وجب خاک مال من، هر چی میکارم مال من\n", "artworks-000027572578-vwqqj7-t500x500.jpg");
+        Music music2=new Music("Bavar kon","googoosh",1360,5,4,Genre.POP,"https://xx.sahand-music.ir/Archive/G/Googoosh/Googoosh%20-%20Pol/02%20Baavar%20Kon.mp3","","باور کن ، صدامو باور کن\n" +
+                "صدایی که تلخ و خسته ست\n" +
+                "باور کن ، قلبمو باور کن\n" +
+                "قلبی که کوهه اما شکسته ست\n" +
+                "شکسته ست\n" +
+                "باور کن ، دستامو باور کن\n" +
+                "که ساقهء نوازشه\n" +
+                "باور کن ، چشم منو باور کن\n" +
+                "که یک قصیده خواهشه\n" +
+                "وسوسهء عاشق شدن\n" +
+                "التهاب لحظه هامه\n" +
+                "حسرت فریاد کردنه\n" +
+                "اسم کسی با صدامه\n" +
+                "اسم تو هر اسمی که هست\n" +
+                "مثل غزل چه عاشقانه ست\n" +
+                "پر وسوسه مثل سفر\n" +
+                "مثل غربت صادقانه ست\n" +
+                "باور کن اسممو باور کن\n" +
+                "من فصل بارون برگم\n" +
+                "مطرود باغ و گل و شبنم\n" +
+                "درختم درخت خشکی\n" +
+                "تو دست تگرگم\n" +
+                "\n" +
+                "باور کن همیشه باور کن\n" +
+                "که من به عشق صادقم\n" +
+                "باور کن حرف منو باور کن\n" +
+                "که من همیشه عاشقم","Googoosh - Pol.jpg");
+        DataBase.getDataBase().audios.add(music2);
         DataBase.getDataBase().audios.add(music1);
         DataBase.getDataBase().audios.add(music);
         //      ListenerController.getListenerController().getSuggestions().add(music);
         //   AdminController.getAdminController().mostPopularAudioFileArray().add(music);
-
+        Artist artist=new Artist("googoosh","@Googoosh1300","Faeghe Atashin","09877777777",1300,11,5,"googoosh@gmail.com","Iranian Singer","Googoosh - Pol.jpg");
+        Artist artist1=new Artist("Farhad","@Farhad1300","Farhad Mehrad","09876666666",1300,5,4,"farhad@gmail.com","Iranian Singer","ab6761610000e5eb7af76b827df15f2342833123.jpg");
+        Artist artist2=new Artist("Daryosh","@Daryosh1300","Daryosh Eghbali","09999999999",1300,8,2,"Dar@gmail.com","Iranian Singer","artworks-000027572578-vwqqj7-t500x500.jpg");
+        DataBase.getDataBase().users.add(artist);
+        DataBase.getDataBase().users.add(artist1);
+        DataBase.getDataBase().users.add(artist2);
     }
 
     public static void main(String[] args) {

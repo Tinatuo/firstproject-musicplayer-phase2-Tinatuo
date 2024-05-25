@@ -153,6 +153,7 @@ public class ChangeScene {
         scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.setTitle("Listener Panel");
+        stage.show();
 //        stage.show();
     }
 }

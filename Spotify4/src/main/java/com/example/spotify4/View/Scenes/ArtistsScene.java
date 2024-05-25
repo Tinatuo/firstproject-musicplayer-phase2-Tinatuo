@@ -20,7 +20,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.net.URL;
@@ -265,6 +267,7 @@ public class ArtistsScene implements Initializable, GeneralOperation {
         for (User user : DataBase.getDataBase().users) {
             if (user instanceof Artist) {
                 vBox.getChildren().add(setHBOx((Artist) user));
+                vBox.setSpacing(15);
             }
         }
 
@@ -361,11 +364,13 @@ public class ArtistsScene implements Initializable, GeneralOperation {
 
     public HBox setHBOx(Artist artist) {
         ImageView imageView = artist.getUserPhoto();
-        imageView.setFitHeight(40);
-        imageView.setFitWidth(40);
-        Circle circle = new Circle(20, 20, 20);
+        imageView.setFitHeight(60);
+        imageView.setFitWidth(60);
+        Circle circle = new Circle(30, 30, 30);
         imageView.setClip(circle);
         Label artistName = new Label();
+        artistName.setTextFill(Color.WHITE);
+        artistName.setFont(new Font(20));
         artistName.setText(artist.getUserName());
         HBox hBox = new HBox(imageView, artistName);
         hBox.setAlignment(Pos.CENTER_LEFT);
