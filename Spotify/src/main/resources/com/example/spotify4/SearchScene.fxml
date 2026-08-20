@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="559.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify4.View.Scenes.SearchScene">
+   <children>
+      <HBox layoutY="-2.0" prefHeight="50.0" prefWidth="687.0" stylesheets="@Style.css">
+         <children>
+            <TextArea fx:id="searchBox" prefHeight="85.0" prefWidth="747.0" promptText="srearch....">
+               <HBox.margin>
+                  <Insets right="5.0" top="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextArea>
+         </children>
+      </HBox>
+      <ScrollPane hbarPolicy="NEVER" layoutY="75.0" prefHeight="420.0" prefWidth="687.0" styleClass="root" stylesheets="@Style.css">
+         <content>
+            <VBox fx:id="vBox" prefHeight="417.0" prefWidth="686.0" styleClass="root">
+               <children>
+                  <Button fx:id="backButton" mnemonicParsing="false" onMouseClicked="#backButton" prefHeight="25.0" prefWidth="690.0" text="backButton" />
+               </children></VBox>
+         </content>
+      </ScrollPane>
+      <AnchorPane cache="true" cacheHint="SPEED" layoutY="494.0" prefHeight="65.0" prefWidth="687.0" styleClass="root">
+         <children>
+            <ImageView fx:id="playButton" fitHeight="40.0" fitWidth="44.0" layoutX="353.0" layoutY="11.0" onMouseClicked="#playButton" pickOnBounds="true" preserveRatio="true" styleClass="MusicButton">
+               <image>
+                  <Image url="@Screenshot_2024-05-12_223937-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <ImageView id="MusicButton" fx:id="previousButton" cache="true" fitHeight="46.0" fitWidth="37.0" layoutX="310.0" layoutY="14.0" onMouseClicked="#previousButton" pickOnBounds="true" preserveRatio="true" styleClass="MusicButton">
+               <image>
+                  <Image url="@Screenshot_2024-05-12_224034-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="nextButton" fitHeight="40.0" fitWidth="37.0" layoutX="402.0" layoutY="11.0" onMouseClicked="#nextButton" pickOnBounds="true" preserveRatio="true" styleClass="MusicButton" AnchorPane.topAnchor="11.0">
+               <image>
+                  <Image url="@Screenshot_2024-05-12_224220-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="musicName" layoutX="85.0" layoutY="15.0" prefHeight="35.0" prefWidth="109.0" text="Label" />
+            <ImageView fx:id="songPhoto" fitHeight="47.0" fitWidth="47.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

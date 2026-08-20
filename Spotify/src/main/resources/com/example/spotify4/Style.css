@@ -1,0 +1,232 @@
+/* ============================================================
+   Spotify-clone theme — elegant dark UI
+   ============================================================ */
+
+.root {
+    -fx-background-color: #121212;
+    -fx-font-family: "Segoe UI Semibold", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-text-fill: #ffffff;
+    -fx-font-smoothing-type: lcd;
+}
+
+.app-root {
+    -fx-background-color: linear-gradient(to bottom, #1a1a1a 0%, #101010 55%, #090909 100%);
+}
+
+/* ---------- generic text ---------- */
+.label,
+.Label {
+    -fx-text-fill: #e6e6e6;
+    -fx-font-size: 12px;
+}
+
+/* ---------- sidebar ---------- */
+.root > .app-root > .scroll-pane,
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* first VBox in every scene is used as the left navigation rail */
+VBox.root {
+    -fx-background-color: #000000;
+    -fx-background-radius: 0 14 14 0;
+    -fx-padding: 10 6 10 6;
+    -fx-spacing: 4;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 18, 0.15, 4, 0);
+}
+
+/* ---------- buttons ---------- */
+.button {
+    -fx-background-color: #1ed760;
+    -fx-text-fill: #06110a;
+    -fx-font-weight: 700;
+    -fx-font-size: 12px;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-padding: 8 18 8 18;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 6, 0.0, 0, 1);
+    -fx-transition: -fx-background-color 120ms ease-in-out;
+}
+
+.button:hover {
+    -fx-background-color: #2fe578;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+    -fx-effect: dropshadow(gaussian, rgba(30, 215, 96, 0.35), 16, 0.25, 0, 3);
+}
+
+.button:pressed {
+    -fx-background-color: #17a34a;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+.button:focused {
+    -fx-background-insets: 0;
+}
+
+/* sidebar nav buttons (PlayLists / Artist / Audios / etc.) — flatter, pill-hover style */
+VBox.root > .button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #b3b3b3;
+    -fx-font-weight: 700;
+    -fx-font-size: 12px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 8 10 8 10;
+    -fx-background-radius: 8px;
+    -fx-effect: none;
+}
+
+VBox.root > .button:hover {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #ffffff;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+    -fx-effect: none;
+}
+
+VBox.root > .button:pressed {
+    -fx-background-color: #232323;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}
+
+/* primary call-to-action buttons: log in / sign up keep the green pill look */
+#login, #signUpButton, #logout {
+    -fx-background-color: #1ed760;
+    -fx-text-fill: #06110a;
+    -fx-background-radius: 20px;
+    -fx-alignment: CENTER;
+}
+
+/* ---------- inputs ---------- */
+.text-field,
+.password-field,
+.choice-box,
+.date-picker,
+.menu-button,
+.MenuButton {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #8a8a8a;
+    -fx-background-radius: 8px;
+    -fx-border-color: transparent;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-padding: 6 10 6 10;
+    -fx-font-size: 12px;
+}
+
+.text-field:focused,
+.password-field:focused,
+.choice-box:focused,
+.date-picker:focused {
+    -fx-background-color: #333333;
+    -fx-border-color: #1ed760;
+    -fx-effect: dropshadow(gaussian, rgba(30, 215, 96, 0.28), 12, 0.25, 0, 0);
+}
+
+.choice-box .arrow,
+.menu-button .arrow {
+    -fx-background-color: #b3b3b3;
+}
+
+.choice-box .context-menu,
+.menu-button .context-menu {
+    -fx-background-color: #282828;
+}
+
+.choice-box .menu-item:hover,
+.menu-button .menu-item:hover {
+    -fx-background-color: #383838;
+}
+
+/* ---------- scrollbars ---------- */
+.scroll-bar:vertical .track,
+.scroll-bar:horizontal .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #4d4d4d;
+    -fx-background-radius: 8px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #6a6a6a;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+/* ---------- bottom player bar ---------- */
+.PlayMusicBar {
+    -fx-background-color: linear-gradient(to bottom, #181818, #0c0c0c);
+    -fx-border-color: #282828 transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 14, 0.2, 0, -3);
+}
+
+.MusicButton {
+    -fx-cursor: hand;
+    -fx-opacity: 0.82;
+}
+
+.MusicButton:hover {
+    -fx-opacity: 1;
+    -fx-scale-x: 1.08;
+    -fx-scale-y: 1.08;
+    -fx-effect: dropshadow(gaussian, rgba(30, 215, 96, 0.35), 12, 0.25, 0, 1);
+}
+
+/* now-playing track title */
+#musicName {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 700;
+    -fx-font-size: 13px;
+}
+
+/* ---------- misc shapes / accents ---------- */
+.rectangel,
+.rectangle {
+    -fx-fill: #1ed760;
+    -fx-background-color: #1ed760;
+}
+
+.separator *.line {
+    -fx-border-color: #2a2a2a;
+}
+
+/* card-style rows/tiles used for songs, playlists, artists */
+.card {
+    -fx-background-color: #181818;
+    -fx-background-radius: 10px;
+    -fx-padding: 12px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 8, 0.1, 0, 2);
+}
+
+.card:hover {
+    -fx-background-color: #282828;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 14, 0.15, 0, 4);
+}
+
+/* image icons in the sidebar / player controls get a subtle hover glow */
+.image-view {
+    -fx-cursor: hand;
+}
